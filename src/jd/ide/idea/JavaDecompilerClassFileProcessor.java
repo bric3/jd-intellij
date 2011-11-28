@@ -25,9 +25,6 @@ public class JavaDecompilerClassFileProcessor implements ContentBasedClassFilePr
 
     @Override
     public boolean isApplicable(Project project, VirtualFile virtualFile) {
-        if (!jdPluginComponent.isPluginEnabled()) {
-            return false;
-        }
         return virtualFile.getFileType() == StdFileTypes.CLASS;
     }
 

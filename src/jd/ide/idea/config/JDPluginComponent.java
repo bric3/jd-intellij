@@ -27,13 +27,12 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
 
     public static final String DISPLAY_METADATA_ATTRIBUTE = "displayMetadata";
     public static final String DISPLAY_LINE_NUMBERS_ATTRIBUTE = "displayLineNumbers";
-    public static final String PLUGIN_ENABLED_ATTRIBUTE = "pluginEnabled";
     public static final String JD_CONFIGURATION_CONFIG_ELEMENT = "jd-configuration";
     public static final String JD_INTELLIJ_ID = "jd-intellij";
-    JDPluginConfiguration configPane;
+
+    private JDPluginConfiguration configPane;
     private boolean displayLineNumbersEnabled;
     private boolean displayMetadataEnabled;
-    private boolean pluginEnabled = true;
 
     @Override public void initComponent() { } // nop
     @Override public void disposeComponent() { } // nop
@@ -62,7 +61,6 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
         Element jdConfiguration = new Element(JD_CONFIGURATION_CONFIG_ELEMENT);
         jdConfiguration.setAttribute(DISPLAY_LINE_NUMBERS_ATTRIBUTE, String.valueOf(displayLineNumbersEnabled));
         jdConfiguration.setAttribute(DISPLAY_METADATA_ATTRIBUTE, String.valueOf(displayMetadataEnabled));
-        jdConfiguration.setAttribute(PLUGIN_ENABLED_ATTRIBUTE, String.valueOf(pluginEnabled));
         return jdConfiguration;
     }
 
@@ -75,10 +73,6 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
         String displayMetadataStr = jdConfiguration.getAttributeValue(DISPLAY_METADATA_ATTRIBUTE);
         if(StringUtils.isNotBlank(displayMetadataStr)) {
             displayMetadataEnabled = Boolean.valueOf(displayMetadataStr);
-        }
-        String pluginEnabledStr = jdConfiguration.getAttributeValue(PLUGIN_ENABLED_ATTRIBUTE);
-        if(StringUtils.isNotBlank(pluginEnabledStr)) {
-            pluginEnabled = Boolean.valueOf(pluginEnabledStr);
         }
     }
 
@@ -130,11 +124,4 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
         this.displayMetadataEnabled = displayMetadataEnabled;
     }
 
-    public void setPluginEnabled(boolean pluginEnabled) {
-        this.pluginEnabled = pluginEnabled;
-    }
-
-    public boolean isPluginEnabled() {
-        return pluginEnabled;
-    }
 }
