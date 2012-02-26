@@ -51,7 +51,7 @@ public class JavaDecompilerPlugin {
         /**
          * Read the preferences from the intellij Java Decompiler plugin component.
          *
-         * <p>Know preferences to be read :
+         * <p>Known preferences to be read :
          * <ul>
          *     <li><i>jd.ide.eclipse.prefs.DisplayLineNumbers</i> read from {@link jd.ide.idea.config.JDPluginComponent#isDisplayLineNumbersEnabled()}</li>
          *     <li><i>jd.ide.eclipse.prefs.DisplayMetadata</i> read from {@link jd.ide.idea.config.JDPluginComponent#isDisplayMetadataEnabled()}</li>
