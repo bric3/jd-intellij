@@ -9,13 +9,13 @@ import jd.ide.idea.config.JDPluginComponent;
 import java.io.File;
 
 /**
- * Java Decompiler native libs are coupled to their equivalent so they need
+ * Java Decompiler native libs are coupled to their Eclispe equivalent so they need
  * this class in an "eclipse" package to work properly.
  */
 public class JDSourceMapper {
 
     public JDSourceMapper() {
-        File pluginPath = PluginManager.getPlugin(PluginId.getId(JDPluginComponent.JD_INTELLIJ_ID)).getPath();
+        File pluginPath = pluginPath();
         String libPath = new StringBuilder()
                 .append(pluginPath).append("/lib/")
                 .append("nativelib/")
@@ -27,12 +27,28 @@ public class JDSourceMapper {
         try {
             System.load(libPath);
         } catch (Exception e) {
-            throw new IllegalStateException("Something is wrong when loading the Java Decompiler native lib, " +
+            throw new IllegalStateException("Something got wrong when loading the Java Decompiler native lib, " +
                     "\nlookup path : " + libPath +
                     "\nplugin path : " + pluginPath, e);
         }
     }
 
+    /**
+     * Return a File representing the plugin path.
+     *
+     * Trusting IDEA to to not fail there with NPE.
+     *
+     * @return Plugin path.
+     */
+    private File pluginPath() {
+        return PluginManager.getPlugin(PluginId.getId(JDPluginComponent.JD_INTELLIJ_ID)).getPath();
+    }
+
+    /**
+     * Library filename, depending on the OS identifier.
+     *
+     * @return lib filename.
+     */
     private String libFileName() {
         if (SystemInfo.isMac) {
             return "libjd.jnilib";
@@ -44,6 +60,11 @@ public class JDSourceMapper {
         throw new IllegalStateException("OS not supported");
     }
 
+    /**
+     * Architecture, either 32bit or 64bit.
+     *
+     * @return x86 or x86_64 for respectively 32bit 64bit architecture.
+     */
     private String architecture() {
         if (SystemInfo.is32Bit) {
             return "x86";
@@ -53,6 +74,11 @@ public class JDSourceMapper {
         throw new IllegalStateException("Unsupported architecture, only x86 and x86_64 architectures are supported.");
     }
 
+    /**
+     * Identify the OS.
+     *
+     * @return Either macosx, win32, linux
+     */
     private String osIdentifier() {
         if (SystemInfo.isMac) {
             return "macosx";
