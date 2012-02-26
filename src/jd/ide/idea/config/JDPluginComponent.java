@@ -20,7 +20,7 @@ import javax.swing.*;
  * Holds the configuration of the plugin application wise.
  */
 @State(
-        name = JDPluginConfiguration.COMPONENT_NAME,
+        name = JDPluginConfigurationPane.COMPONENT_NAME,
         storages = {@Storage(id = "other", file = "$APP_CONFIG$/java.decompiler.xml")}
 )
 public class JDPluginComponent implements ApplicationComponent, Configurable, PersistentStateComponent<Element> {
@@ -30,7 +30,7 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
     public static final String JD_CONFIGURATION_CONFIG_ELEMENT = "jd-configuration";
     public static final String JD_INTELLIJ_ID = "jd-intellij";
 
-    private JDPluginConfiguration configPane;
+    private JDPluginConfigurationPane configPane;
     private boolean displayLineNumbersEnabled;
     private boolean displayMetadataEnabled;
 
@@ -79,7 +79,7 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
     @Override
     public JComponent createComponent() {
         if (configPane == null) {
-            configPane = new JDPluginConfiguration();
+            configPane = new JDPluginConfigurationPane();
         }
         return configPane.getRootPane();
     }

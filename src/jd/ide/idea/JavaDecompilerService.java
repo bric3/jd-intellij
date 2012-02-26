@@ -11,10 +11,11 @@ import jd.ide.eclipse.editors.JDSourceMapper;
 import java.util.Iterator;
 
 /**
- * Java Decompiler Service
+ * Java Decompiler Service.
  */
 public class JavaDecompilerService {
 
+    // to be replaced b the JavaDecompiler type
     private JDSourceMapper javaDecompiler;
 
     public JavaDecompilerService() {
@@ -47,6 +48,12 @@ public class JavaDecompilerService {
         return ClsFileImpl.decompile(PsiManager.getInstance(project), virtualFile);
     }
 
+    /**
+     * Simple utility class to iterate on possible path arguments
+     * for class files not in standard location inside the project.
+     *
+     * Produces {@link DecompilerPathArgs} types.
+     */
     private class DecompilerPathArgsFinder implements Iterable<DecompilerPathArgs> {
         private final VirtualFile virtualFile;
 
@@ -83,6 +90,11 @@ public class JavaDecompilerService {
         }
     }
 
+    /**
+     * Java Decompiler path arguments.
+     *
+     * Composed of the <em>base name</em> and the <em>qualified name</em>.
+     */
     private class DecompilerPathArgs {
         private final String baseName;
         private final String qualifiedPathName;

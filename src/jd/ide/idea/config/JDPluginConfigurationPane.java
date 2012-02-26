@@ -5,12 +5,12 @@ import javax.swing.*;
 /**
  * Configuration Form for Java Decompiler plugin
  */
-public class JDPluginConfiguration {
+public class JDPluginConfigurationPane {
     protected static final String COMPONENT_NAME = "JDPluginConfiguration";
     private JCheckBox displayLineNumbersCheckBox;
     private JCheckBox displayMetadataCheckBox;
     private JPanel contentPane;
-    private JTextPane usingJDCore0TextPane;
+    private JTextPane usingJDCoreTextPane;
 
     public void storeDataTo(JDPluginComponent jdPluginComponent) {
         jdPluginComponent.setDisplayLineNumbersEnabled(displayLineNumbersCheckBox.isSelected());

@@ -12,6 +12,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
  * @see IPreferenceStore
  * @see JDPluginComponent
  */
+@Deprecated
 public class JavaDecompilerPlugin {
     private static JavaDecompilerPlugin plugin = new JavaDecompilerPlugin();
     private IPreferenceStore iPreferenceStore;
@@ -40,6 +41,7 @@ public class JavaDecompilerPlugin {
      *     Needed to access preferences. Because of this coupling, this class is created, no care is needed
      * </p>
      */
+    @Deprecated
     public static class PreferenceStoreAdapter implements IPreferenceStore {
 
         private final JDPluginComponent jdPluginComponent;
