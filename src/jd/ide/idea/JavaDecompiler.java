@@ -1,4 +1,4 @@
-package jd.ide.eclipse.editors;
+package jd.ide.idea;
 
 
 import com.intellij.ide.plugins.PluginManager;
@@ -9,13 +9,13 @@ import jd.ide.idea.config.JDPluginComponent;
 import java.io.File;
 
 /**
- * Java Decompiler native libs are coupled to their Eclipse equivalent so they need
- * this class in an "eclipse" package to work properly.
+ * Java Decompiler tool, use native libs to achieve decompilation.
+ *
+ * <p>Identify the native lib full path through IntelliJ helpers in {@link SystemInfo}.</p>
  */
-@Deprecated
-public class JDSourceMapper {
+public class JavaDecompiler {
 
-    public JDSourceMapper() {
+    public JavaDecompiler() {
         File pluginPath = pluginPath();
         String libPath = new StringBuilder()
                 .append(pluginPath).append("/lib/")
@@ -90,13 +90,6 @@ public class JDSourceMapper {
         }
         throw new IllegalStateException("Unsupported OS, only windows, linux and mac OSes are supported.");
     }
-
-    public static final boolean loaded = true;
-    public final static String JAVA_CLASS_SUFFIX         = ".class";
-    public final static String JAVA_SOURCE_SUFFIX        = ".java";
-    public final static int    JAVA_SOURCE_SUFFIX_LENGTH = 5;
-    public final static String JAR_SUFFIX                = ".jar";
-    public final static String ZIP_SUFFIX                = ".zip";
 
     /**
      * Actual call to the native lib.
