@@ -4,7 +4,7 @@
     <id>jd-intellij</id>
     <version>1.0</version>
     <vendor>Brice Dutheil</vendor>
-    <idea-version since-build="107.587" until-build="107.587"/>
+    <idea-version since-build="107.587" />
 
     <change-notes><![CDATA[
             <b>Version O.1</b>
