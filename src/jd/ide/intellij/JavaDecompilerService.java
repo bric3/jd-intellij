@@ -1,12 +1,12 @@
-package jd.ide.idea;
+package jd.ide.intellij;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.compiled.ClsFileImpl;
-import jd.ide.eclipse.editors.JDSourceMapper;
 
 import java.util.Iterator;
 
@@ -15,32 +15,37 @@ import java.util.Iterator;
  */
 public class JavaDecompilerService {
 
-    // to be replaced b the JavaDecompiler type
-    private JDSourceMapper javaDecompiler;
+    private JavaDecompiler javaDecompiler;
 
     public JavaDecompilerService() {
-        javaDecompiler = new JDSourceMapper();
+        javaDecompiler = new JavaDecompiler();
     }
 
     public String decompile(Project project, VirtualFile virtualFile) {
         // for jars only
         String filePath = virtualFile.getPath();
-        VirtualFile classRootForFile = ProjectRootManager.getInstance(project).getFileIndex().getClassRootForFile(virtualFile);
+        VirtualFile classRootForFile =
+                ProjectRootManager.getInstance(project).getFileIndex().getClassRootForFile(virtualFile);
 
         if (classRootForFile != null) {
-            String baseName = classRootForFile.getPresentableUrl();
-            String qualifiedName = filePath.substring(filePath.indexOf('!') + 2, filePath.length());
-            return javaDecompiler.decompile(baseName, qualifiedName);
+            String basePath = classRootForFile.getPresentableUrl();
+            String internalClassName = filePath.substring(filePath.indexOf('!') + 2, filePath.length());
+            String decompiled = javaDecompiler.decompile(basePath, internalClassName);
+            if (decompiled != null) {
+                // All text strings passed to document modification methods (setText, insertString, replaceString) must
+                // use only \n as line separators.
+                //   http://confluence.jetbrains.net/display/IDEADEV/IntelliJ+IDEA+Architectural+Overview
+                return StringUtil.convertLineSeparators(decompiled);
+            }
         }
 
         // for other files if possible
-        for(DecompilerPathArgs decompilerPathArgs : new DecompilerPathArgsFinder(virtualFile)) {
+        for (DecompilerPathArgs decompilerPathArgs : new DecompilerPathArgsFinder(virtualFile)) {
             String decompiled = javaDecompiler.decompile(
-                    decompilerPathArgs.baseName(),
-                    decompilerPathArgs.qualifiedPathName()
-            );
+                    decompilerPathArgs.getBasePath(), decompilerPathArgs.getInternalClassName());
             if (decompiled != null) {
-                return decompiled;
+                // Idem
+                return StringUtil.convertLineSeparators(decompiled);
             }
         }
 
@@ -51,10 +56,10 @@ public class JavaDecompilerService {
     /**
      * Simple utility class to iterate on possible path arguments
      * for class files not in standard location inside the project.
-     *
+     * <p/>
      * Produces {@link DecompilerPathArgs} types.
      */
-    private class DecompilerPathArgsFinder implements Iterable<DecompilerPathArgs> {
+    private static class DecompilerPathArgsFinder implements Iterable<DecompilerPathArgs> {
         private final VirtualFile virtualFile;
 
         public DecompilerPathArgsFinder(VirtualFile virtualFile) {
@@ -78,8 +83,8 @@ public class JavaDecompilerService {
                 @Override
                 public DecompilerPathArgs next() {
                     classPathRoot = classPathRoot.getParent();
-                    String qualifiedPathName = VfsUtil.getRelativePath(virtualFile, classPathRoot, '/');
-                    return new DecompilerPathArgs(classPathRoot.getPresentableUrl(), qualifiedPathName);
+                    String internalClassName = VfsUtil.getRelativePath(virtualFile, classPathRoot, '/');
+                    return new DecompilerPathArgs(classPathRoot.getPresentableUrl(), internalClassName);
                 }
 
                 @Override
@@ -92,26 +97,24 @@ public class JavaDecompilerService {
 
     /**
      * Java Decompiler path arguments.
-     *
+     * <p/>
      * Composed of the <em>base name</em> and the <em>qualified name</em>.
      */
-    private class DecompilerPathArgs {
-        private final String baseName;
-        private final String qualifiedPathName;
+    private static class DecompilerPathArgs {
+        private final String basePath;
+        private final String internalClassName;
 
-        public DecompilerPathArgs(String baseName, String qualifiedPathName) {
-            this.baseName = baseName;
-            this.qualifiedPathName = qualifiedPathName;
+        public DecompilerPathArgs(String basePath, String internalClassName) {
+            this.basePath = basePath;
+            this.internalClassName = internalClassName;
         }
 
-        public String baseName() {
-            return baseName;
+        public String getBasePath() {
+            return basePath;
         }
 
-        public String qualifiedPathName() {
-            return qualifiedPathName;
+        public String getInternalClassName() {
+            return internalClassName;
         }
     }
-
-
 }

@@ -1,4 +1,4 @@
-package jd.ide.idea.config;
+package jd.ide.intellij.config;
 
 import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.components.PersistentStateComponent;
@@ -16,7 +16,7 @@ import javax.swing.*;
 
 /**
  * Configuration component for Java Decompiler.
- *
+ * <p/>
  * Holds the configuration of the plugin application wise.
  */
 @State(
@@ -34,8 +34,13 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
     private boolean displayLineNumbersEnabled;
     private boolean displayMetadataEnabled;
 
-    @Override public void initComponent() { } // nop
-    @Override public void disposeComponent() { } // nop
+    @Override
+    public void initComponent() {
+    } // nop
+
+    @Override
+    public void disposeComponent() {
+    } // nop
 
     @NotNull
     @Override
@@ -54,7 +59,10 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
         return IconLoader.getIcon("images/icons/jd_64.png");
     }
 
-    @Override public String getHelpTopic() { return null; } // nop
+    @Override
+    public String getHelpTopic() {
+        return null;
+    } // nop
 
     @Override
     public Element getState() {
@@ -67,11 +75,11 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
     @Override
     public void loadState(Element jdConfiguration) {
         String displayLineNumbersStr = jdConfiguration.getAttributeValue(DISPLAY_LINE_NUMBERS_ATTRIBUTE);
-        if(StringUtils.isNotBlank(displayLineNumbersStr)) {
+        if (StringUtils.isNotBlank(displayLineNumbersStr)) {
             displayLineNumbersEnabled = Boolean.valueOf(displayLineNumbersStr);
         }
         String displayMetadataStr = jdConfiguration.getAttributeValue(DISPLAY_METADATA_ATTRIBUTE);
-        if(StringUtils.isNotBlank(displayMetadataStr)) {
+        if (StringUtils.isNotBlank(displayMetadataStr)) {
             displayMetadataEnabled = Boolean.valueOf(displayMetadataStr);
         }
     }
@@ -86,19 +94,19 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
 
     @Override
     public boolean isModified() {
-        return configPane !=null && configPane.isModified(this);
+        return configPane != null && configPane.isModified(this);
     }
 
     @Override
     public void apply() throws ConfigurationException {
-        if (configPane !=null) {
+        if (configPane != null) {
             configPane.storeDataTo(this);
         }
     }
 
     @Override
     public void reset() {
-        if (configPane !=null) {
+        if (configPane != null) {
             configPane.readDataFrom(this);
         }
     }
