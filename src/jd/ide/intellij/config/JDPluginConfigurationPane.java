@@ -1,4 +1,4 @@
-package jd.ide.idea.config;
+package jd.ide.intellij.config;
 
 import javax.swing.*;
 

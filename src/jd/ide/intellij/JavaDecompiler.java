@@ -1,16 +1,16 @@
-package jd.ide.idea;
+package jd.ide.intellij;
 
 
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.util.SystemInfo;
-import jd.ide.idea.config.JDPluginComponent;
+import jd.ide.intellij.config.JDPluginComponent;
 
 import java.io.File;
 
 /**
  * Java Decompiler tool, use native libs to achieve decompilation.
- *
+ * <p/>
  * <p>Identify the native lib full path through IntelliJ helpers in {@link SystemInfo}.</p>
  */
 public class JavaDecompiler {
@@ -18,8 +18,8 @@ public class JavaDecompiler {
     public JavaDecompiler() {
         File pluginPath = pluginPath();
         String libPath = new StringBuilder()
-                .append(pluginPath).append("/lib/")
-                .append("nativelib/")
+                .append(pluginPath)
+                .append("/nativelib/")
                 .append(osIdentifier()).append('/')
                 .append(architecture()).append('/')
                 .append(libFileName())
@@ -36,7 +36,7 @@ public class JavaDecompiler {
 
     /**
      * Return a File representing the plugin path.
-     *
+     * <p/>
      * Trusting IDEA to to not fail there with NPE.
      *
      * @return Plugin path.
@@ -52,11 +52,11 @@ public class JavaDecompiler {
      */
     private String libFileName() {
         if (SystemInfo.isMac) {
-            return "libjd.jnilib";
+            return "libjd-intellij.jnilib";
         } else if (SystemInfo.isWindows) {
-            return "jd.dll";
-        } else if(SystemInfo.isLinux) {
-            return "libjd.so";
+            return "jd-intellij.dll";
+        } else if (SystemInfo.isLinux) {
+            return "libjd-intellij.so";
         }
         throw new IllegalStateException("OS not supported");
     }
@@ -85,7 +85,7 @@ public class JavaDecompiler {
             return "macosx";
         } else if (SystemInfo.isWindows) {
             return "win32";
-        } else if(SystemInfo.isLinux) {
+        } else if (SystemInfo.isLinux) {
             return "linux";
         }
         throw new IllegalStateException("Unsupported OS, only windows, linux and mac OSes are supported.");
@@ -94,9 +94,9 @@ public class JavaDecompiler {
     /**
      * Actual call to the native lib.
      *
-     * @param baseName Path to the rooth of the classpath, either a path to a directory or a path to a jar file.
-     * @param qualifiedName Qualified path name of the class.
+     * @param basePath          Path to the root of the classpath, either a path to a directory or a path to a jar file.
+     * @param internalClassName internal name of the class.
      * @return Decompiled class text.
      */
-    public native String decompile(String baseName, String qualifiedName);
+    public native String decompile(String basePath, String internalClassName);
 }

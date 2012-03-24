@@ -1,4 +1,4 @@
-package jd.ide.idea;
+package jd.ide.intellij;
 
 import com.intellij.lang.Language;
 import com.intellij.openapi.application.ApplicationManager;
@@ -8,7 +8,7 @@ import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import jd.ide.idea.config.JDPluginComponent;
+import jd.ide.intellij.config.JDPluginComponent;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -17,7 +17,8 @@ import org.jetbrains.annotations.NotNull;
 public class JavaDecompilerClassFileProcessor implements ContentBasedClassFileProcessor {
 
     private JavaDecompilerService javaDecompilerService;
-    private JDPluginComponent jdPluginComponent = ApplicationManager.getApplication().getComponent(JDPluginComponent.class);
+    private JDPluginComponent jdPluginComponent =
+            ApplicationManager.getApplication().getComponent(JDPluginComponent.class);
 
     public JavaDecompilerClassFileProcessor() {
         javaDecompilerService = ServiceManager.getService(JavaDecompilerService.class);
@@ -42,13 +43,11 @@ public class JavaDecompilerClassFileProcessor implements ContentBasedClassFilePr
 
     @Override
     public Language obtainLanguageForFile(VirtualFile virtualFile) {
-        if(virtualFile.getFileType() == StdFileTypes.CLASS) {
+        if (virtualFile.getFileType() == StdFileTypes.CLASS) {
             return null; // weirdly returning null in order to not decompile when source is available.
         } else if (virtualFile.getFileType() == StdFileTypes.JAVA) {
             return Language.findLanguageByID("JAVA");
         }
-
         return Language.ANY;
     }
-
 }
