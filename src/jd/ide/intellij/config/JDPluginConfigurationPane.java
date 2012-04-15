@@ -7,24 +7,24 @@ import javax.swing.*;
  */
 public class JDPluginConfigurationPane {
     protected static final String COMPONENT_NAME = "JDPluginConfiguration";
-    private JCheckBox displayLineNumbersCheckBox;
-    private JCheckBox displayMetadataCheckBox;
+    private JCheckBox showLineNumbersCheckBox;
+    private JCheckBox showMetadataCheckBox;
     private JPanel contentPane;
     private JTextPane usingJDCoreTextPane;
 
     public void storeDataTo(JDPluginComponent jdPluginComponent) {
-        jdPluginComponent.setDisplayLineNumbersEnabled(displayLineNumbersCheckBox.isSelected());
-        jdPluginComponent.setDisplayMetadataEnabled(displayMetadataCheckBox.isSelected());
+        jdPluginComponent.setShowLineNumbersEnabled(showLineNumbersCheckBox.isSelected());
+        jdPluginComponent.setShowMetadataEnabled(showMetadataCheckBox.isSelected());
     }
 
     public void readDataFrom(JDPluginComponent jdPluginComponent) {
-        displayLineNumbersCheckBox.setSelected(jdPluginComponent.isDisplayLineNumbersEnabled());
-        displayMetadataCheckBox.setSelected(jdPluginComponent.isDisplayMetadataEnabled());
+        showLineNumbersCheckBox.setSelected(jdPluginComponent.isShowLineNumbersEnabled());
+        showMetadataCheckBox.setSelected(jdPluginComponent.isShowMetadataEnabled());
     }
 
     public boolean isModified(JDPluginComponent jdPluginComponent) {
-        return displayLineNumbersCheckBox.isSelected() != jdPluginComponent.isDisplayLineNumbersEnabled()
-                || displayMetadataCheckBox.isSelected() != jdPluginComponent.isDisplayMetadataEnabled();
+        return showLineNumbersCheckBox.isSelected() != jdPluginComponent.isShowLineNumbersEnabled()
+                || showMetadataCheckBox.isSelected() != jdPluginComponent.isShowMetadataEnabled();
     }
 
     public JPanel getRootPane() {
