@@ -21,20 +21,20 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="8e7c2" class="javax.swing.JCheckBox" binding="displayLineNumbersCheckBox" default-binding="true">
+          <component id="8e7c2" class="javax.swing.JCheckBox" binding="showLineNumbersCheckBox">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Display &amp;Line Numbers"/>
+              <text value="Show &amp;Line Numbers"/>
             </properties>
           </component>
-          <component id="21a9a" class="javax.swing.JCheckBox" binding="displayMetadataCheckBox" default-binding="true">
+          <component id="21a9a" class="javax.swing.JCheckBox" binding="showMetadataCheckBox">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Display &amp;Metadata"/>
+              <text value="Show &amp;Metadata"/>
             </properties>
           </component>
         </children>

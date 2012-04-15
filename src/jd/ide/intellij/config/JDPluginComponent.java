@@ -25,14 +25,14 @@ import javax.swing.*;
 )
 public class JDPluginComponent implements ApplicationComponent, Configurable, PersistentStateComponent<Element> {
 
-    public static final String DISPLAY_METADATA_ATTRIBUTE = "displayMetadata";
-    public static final String DISPLAY_LINE_NUMBERS_ATTRIBUTE = "displayLineNumbers";
+    public static final String SHOW_METADATA_ATTRIBUTE = "displayMetadata";
+    public static final String SHOW_LINE_NUMBERS_ATTRIBUTE = "displayLineNumbers";
     public static final String JD_CONFIGURATION_CONFIG_ELEMENT = "jd-configuration";
     public static final String JD_INTELLIJ_ID = "jd-intellij";
 
     private JDPluginConfigurationPane configPane;
-    private boolean displayLineNumbersEnabled;
-    private boolean displayMetadataEnabled;
+    private boolean showLineNumbersEnabled;
+    private boolean showMetadataEnabled;
 
     @Override
     public void initComponent() {
@@ -67,20 +67,20 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
     @Override
     public Element getState() {
         Element jdConfiguration = new Element(JD_CONFIGURATION_CONFIG_ELEMENT);
-        jdConfiguration.setAttribute(DISPLAY_LINE_NUMBERS_ATTRIBUTE, String.valueOf(displayLineNumbersEnabled));
-        jdConfiguration.setAttribute(DISPLAY_METADATA_ATTRIBUTE, String.valueOf(displayMetadataEnabled));
+        jdConfiguration.setAttribute(SHOW_LINE_NUMBERS_ATTRIBUTE, String.valueOf(showLineNumbersEnabled));
+        jdConfiguration.setAttribute(SHOW_METADATA_ATTRIBUTE, String.valueOf(showMetadataEnabled));
         return jdConfiguration;
     }
 
     @Override
     public void loadState(Element jdConfiguration) {
-        String displayLineNumbersStr = jdConfiguration.getAttributeValue(DISPLAY_LINE_NUMBERS_ATTRIBUTE);
-        if (StringUtils.isNotBlank(displayLineNumbersStr)) {
-            displayLineNumbersEnabled = Boolean.valueOf(displayLineNumbersStr);
+        String showLineNumbersStr = jdConfiguration.getAttributeValue(SHOW_LINE_NUMBERS_ATTRIBUTE);
+        if (StringUtils.isNotBlank(showLineNumbersStr)) {
+            showLineNumbersEnabled = Boolean.valueOf(showLineNumbersStr);
         }
-        String displayMetadataStr = jdConfiguration.getAttributeValue(DISPLAY_METADATA_ATTRIBUTE);
-        if (StringUtils.isNotBlank(displayMetadataStr)) {
-            displayMetadataEnabled = Boolean.valueOf(displayMetadataStr);
+        String showMetadataStr = jdConfiguration.getAttributeValue(SHOW_METADATA_ATTRIBUTE);
+        if (StringUtils.isNotBlank(showMetadataStr)) {
+            showMetadataEnabled = Boolean.valueOf(showMetadataStr);
         }
     }
 
@@ -116,20 +116,20 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
         configPane = null;
     }
 
-    public boolean isDisplayLineNumbersEnabled() {
-        return displayLineNumbersEnabled;
+    public boolean isShowLineNumbersEnabled() {
+        return showLineNumbersEnabled;
     }
 
-    public void setDisplayLineNumbersEnabled(boolean displayLineNumbersEnabled) {
-        this.displayLineNumbersEnabled = displayLineNumbersEnabled;
+    public void setShowLineNumbersEnabled(boolean showLineNumbersEnabled) {
+        this.showLineNumbersEnabled = showLineNumbersEnabled;
     }
 
-    public boolean isDisplayMetadataEnabled() {
-        return displayMetadataEnabled;
+    public boolean isShowMetadataEnabled() {
+        return showMetadataEnabled;
     }
 
-    public void setDisplayMetadataEnabled(boolean displayMetadataEnabled) {
-        this.displayMetadataEnabled = displayMetadataEnabled;
+    public void setShowMetadataEnabled(boolean showMetadataEnabled) {
+        this.showMetadataEnabled = showMetadataEnabled;
     }
 
 }
