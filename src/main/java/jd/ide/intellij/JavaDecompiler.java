@@ -15,16 +15,21 @@ import java.io.File;
  */
 public class JavaDecompiler {
 
+    public static String JD_LIB_RELATIVE_PATH = "/nativelib/" + osIdentifier() + "/" + architecture() + "/" + libFileName();
+
     public JavaDecompiler() {
         File pluginPath = pluginPath();
-        String libPath = new StringBuilder()
-                .append(pluginPath)
-                .append("/nativelib/")
-                .append(osIdentifier()).append('/')
-                .append(architecture()).append('/')
-                .append(libFileName())
-                .toString();
 
+        String devLibPath = pluginPath + "/classes" + JD_LIB_RELATIVE_PATH;
+        if (new File(devLibPath).exists()) {
+            loadLibrary(pluginPath, devLibPath);
+        } else {
+            String libPath = pluginPath + JD_LIB_RELATIVE_PATH;
+            loadLibrary(pluginPath, libPath);
+        }
+    }
+
+    private void loadLibrary(File pluginPath, String libPath) {
         try {
             System.load(libPath);
         } catch (Exception e) {
@@ -50,7 +55,7 @@ public class JavaDecompiler {
      *
      * @return lib filename.
      */
-    private String libFileName() {
+    private static String libFileName() {
         if (SystemInfo.isMac) {
             return "libjd-intellij.jnilib";
         } else if (SystemInfo.isWindows) {
@@ -66,7 +71,7 @@ public class JavaDecompiler {
      *
      * @return x86 or x86_64 for respectively 32bit 64bit architecture.
      */
-    private String architecture() {
+    private static String architecture() {
         if (SystemInfo.is32Bit) {
             return "x86";
         } else if (SystemInfo.is64Bit) {
@@ -80,7 +85,7 @@ public class JavaDecompiler {
      *
      * @return Either macosx, win32, linux
      */
-    private String osIdentifier() {
+    private static String osIdentifier() {
         if (SystemInfo.isMac) {
             return "macosx";
         } else if (SystemInfo.isWindows) {
