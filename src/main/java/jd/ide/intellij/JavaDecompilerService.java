@@ -1,6 +1,5 @@
 package jd.ide.intellij;
 
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.text.StringUtil;
@@ -23,7 +22,6 @@ public class JavaDecompilerService {
     }
 
     public String decompile(Project project, VirtualFile virtualFile) {
-        ServiceManager.getService(JavaDecompilerRefreshSupportService.class).markDecompiled(virtualFile);
         // for jars only
         String filePath = virtualFile.getPath();
         VirtualFile classRootForFile =

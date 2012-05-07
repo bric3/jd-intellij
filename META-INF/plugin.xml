@@ -34,6 +34,10 @@
                             serviceInterface="jd.ide.intellij.JavaDecompilerService"
                             serviceImplementation="jd.ide.intellij.JavaDecompilerService"/>
 
-        <iconProvider implementation="jd.ide.intellij.JavaDecompilerIconProvider"/>
+        <applicationService id="decompilerRefreshSupportService"
+                            serviceInterface="jd.ide.intellij.JavaDecompilerRefreshSupportService"
+                            serviceImplementation="jd.ide.intellij.JavaDecompilerRefreshSupportService"/>
+
+        <!--<iconProvider implementation="jd.ide.intellij.JavaDecompilerIconProvider"/>-->
     </extensions>
 </idea-plugin>
