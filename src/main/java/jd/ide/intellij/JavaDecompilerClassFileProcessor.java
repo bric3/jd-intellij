@@ -38,6 +38,7 @@ public class JavaDecompilerClassFileProcessor implements ContentBasedClassFilePr
     @NotNull
     @Override
     public String obtainFileText(Project project, VirtualFile virtualFile) {
+        ServiceManager.getService(JavaDecompilerRefreshSupportService.class).markDecompiled(virtualFile);
         return javaDecompilerService.decompile(project, virtualFile);
     }
 
