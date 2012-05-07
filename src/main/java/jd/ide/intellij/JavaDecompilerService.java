@@ -1,5 +1,6 @@
 package jd.ide.intellij;
 
+import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.text.StringUtil;
@@ -22,6 +23,7 @@ public class JavaDecompilerService {
     }
 
     public String decompile(Project project, VirtualFile virtualFile) {
+        ServiceManager.getService(JavaDecompilerRefreshSupportService.class).markDecompiled(virtualFile);
         // for jars only
         String filePath = virtualFile.getPath();
         VirtualFile classRootForFile =
@@ -31,7 +33,7 @@ public class JavaDecompilerService {
             String basePath = classRootForFile.getPresentableUrl();
             String internalClassName = filePath.substring(filePath.indexOf('!') + 2, filePath.length());
             String decompiled = javaDecompiler.decompile(basePath, internalClassName);
-            if (decompiled != null) {
+            if (validContent(decompiled)) {
                 // All text strings passed to document modification methods (setText, insertString, replaceString) must
                 // use only \n as line separators.
                 //   http://confluence.jetbrains.net/display/IDEADEV/IntelliJ+IDEA+Architectural+Overview
@@ -42,8 +44,10 @@ public class JavaDecompilerService {
         // for other files if possible
         for (DecompilerPathArgs decompilerPathArgs : new DecompilerPathArgsFinder(virtualFile)) {
             String decompiled = javaDecompiler.decompile(
-                    decompilerPathArgs.getBasePath(), decompilerPathArgs.getInternalClassName());
-            if (decompiled != null) {
+                    decompilerPathArgs.getBasePath(),
+                    decompilerPathArgs.getInternalClassName()
+            );
+            if (validContent(decompiled)) {
                 // Idem
                 return StringUtil.convertLineSeparators(decompiled);
             }
@@ -51,6 +55,10 @@ public class JavaDecompilerService {
 
         // fallback
         return ClsFileImpl.decompile(PsiManager.getInstance(project), virtualFile);
+    }
+
+    private boolean validContent(String decompiled) {
+        return decompiled != null && !decompiled.matches("(?sm)class\\s*\\{\\s*\\}.*");
     }
 
     /**
