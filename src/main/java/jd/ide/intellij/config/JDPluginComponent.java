@@ -56,7 +56,7 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
 
     @Override
     public Icon getIcon() {
-        return IconLoader.getIcon("images/icons/jd_64.png");
+        return IconLoader.getIcon("main/resources/icons/jd_64.png");
     }
 
     @Override

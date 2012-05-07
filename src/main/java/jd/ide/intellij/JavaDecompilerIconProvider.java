@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 public class JavaDecompilerIconProvider extends IconProvider {
 
-    private static final String JD_ICON_URL = "/images/icons/jd_16.png";
+    private static final String JD_ICON_URL = "/main/resources/icons/jd_16.png";
 
     public Icon getIcon(@NotNull PsiElement psiElement, int flags) {
         PsiFile containingFile = psiElement.getContainingFile();
