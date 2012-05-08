@@ -1,5 +1,6 @@
 package jd.ide.intellij.config;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import jd.ide.intellij.JavaDecompilerRefreshSupportService;
 
@@ -18,7 +19,7 @@ public class JDPluginConfigurationPane {
     private JTextPane usingJDCoreTextPane;
 
     public JDPluginConfigurationPane() {
-        MouseListener itemListener = new OnMouseReleaseRefreshDecompiledFilesListener();
+        MouseListener itemListener = new OnMouseReleaseRefreshDecompiledFilesListener(this);
         showLineNumbersCheckBox.addMouseListener(itemListener);
         showMetadataCheckBox.addMouseListener(itemListener);
     }
@@ -44,8 +45,20 @@ public class JDPluginConfigurationPane {
 
     private static class OnMouseReleaseRefreshDecompiledFilesListener implements MouseListener {
 
+        private final JDPluginConfigurationPane jdPluginConfigurationPane;
+
+        public OnMouseReleaseRefreshDecompiledFilesListener(JDPluginConfigurationPane jdPluginConfigurationPane) {
+            this.jdPluginConfigurationPane = jdPluginConfigurationPane;
+        }
+
         @Override public void mouseReleased(MouseEvent e) {
+            updateJDComponentConfiguration();
             refreshDecompiledFiles();
+        }
+
+        private void updateJDComponentConfiguration() {
+            JDPluginComponent jdPluginComponent = ApplicationManager.getApplication().getComponent(JDPluginComponent.class);
+            jdPluginConfigurationPane.storeDataTo(jdPluginComponent);
         }
 
         private void refreshDecompiledFiles() {
