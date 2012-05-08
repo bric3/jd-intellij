@@ -15,12 +15,12 @@ public class JavaDecompilerConfigurationAccess {
         jdPluginComponent = ApplicationManager.getApplication().getComponent(JDPluginComponent.class);
     }
 
-    public boolean isDisplayLineNumbersEnabled() {
-        return jdPluginComponent.isDisplayLineNumbersEnabled();
+    public boolean isShowLineNumbersEnabled() {
+        return jdPluginComponent.isShowLineNumbersEnabled();
     }
 
-    public boolean isDisplayMetadataEnabled() {
-        return jdPluginComponent.isDisplayMetadataEnabled();
+    public boolean isShowMetadataEnabled() {
+        return jdPluginComponent.isShowMetadataEnabled();
     }
 
 }
