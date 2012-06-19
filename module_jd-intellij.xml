@@ -94,7 +94,7 @@
   
   <!-- Build archive for plugin 'jd-intellij' -->
   <target name="plugin.build.jar.jd-intellij" depends="compile.module.jd-intellij" description="Build plugin archive for module &#39;jd-intellij&#39;">
-    <property name="tmp.dir.jd-intellij" value="${module.jd-intellij.basedir}/../temp"/>
+    <property name="tmp.dir.jd-intellij" value="${module.jd-intellij.basedir}/temp"/>
     <mkdir dir="${tmp.dir.jd-intellij}"/>
     <mkdir dir="${tmp.dir.jd-intellij}/jd-intellij/lib"/>
     <jar destfile="${tmp.dir.jd-intellij}/jd-intellij/lib/jd-intellij.jar" duplicate="preserve">
@@ -113,6 +113,6 @@
     <zip destfile="${jd-intellij.plugin.path.jar}">
       <fileset dir="${tmp.dir.jd-intellij}"/>
     </zip>
-    <!--<delete dir="${tmp.dir.jd-intellij}"/>-->
+    <delete dir="${tmp.dir.jd-intellij}"/>
   </target>
 </project>
