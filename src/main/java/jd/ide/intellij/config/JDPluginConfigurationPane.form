@@ -46,7 +46,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Using : JD-Core 0.5.3&#10;See : http://java.decompiler.free.fr/&#10;&#10;JD-Core Suggestions :&#10;http://java.decompiler.free.fr/jd-eclipse/suggestions&#10;&#10;JD-Core Bugs :&#10;http://java.decompiler.free.fr/jd-eclipse/bugs&#10;&#10;This plugin is not developped by Emmanuel Dupuy, it only use the JD-Core library that HE developped."/>
+          <text value="Using : JD-Core 0.6.1 &#10;&#10;See : http://java.decompiler.free.fr/  &#10;JD-Core Suggestions : http://java.decompiler.free.fr/jd-eclipse/suggestions  &#10;JD-Core Bugs : http://java.decompiler.free.fr/jd-eclipse/bugs  &#10;&#10;This plugin is not developped by Emmanuel Dupuy, it only use the JD-Core library that HE developped."/>
         </properties>
       </component>
     </children>
