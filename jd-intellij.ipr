@@ -6,14 +6,6 @@
   </component>
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
-    <buildFile url="file://$PROJECT_DIR$/module_jd-intellij.xml">
-      <additionalClassPath />
-      <antReference projectDefault="true" />
-      <customJdkName value="" />
-      <maximumHeapSize value="128" />
-      <maximumStackSize value="2" />
-      <properties />
-    </buildFile>
     <buildFile url="file://$PROJECT_DIR$/jd-intellij.xml">
       <additionalClassPath />
       <antReference projectDefault="true" />
