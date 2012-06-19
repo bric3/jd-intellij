@@ -201,10 +201,6 @@
   
   <target name="init" description="Build initialization">
     <!-- Perform any build initialization in this target -->
-      <echo file="jd-intellij.log">
-          yay2:
-          ${jdk.home.idea_iu-111.277}
-      </echo>
   </target>
   
   <target name="clean" depends="clean.module.jd-intellij" description="cleanup all"/>
