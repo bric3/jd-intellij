@@ -14,6 +14,14 @@
       <maximumStackSize value="2" />
       <properties />
     </buildFile>
+    <buildFile url="file://$PROJECT_DIR$/jd-intellij-win32.xml">
+      <additionalClassPath />
+      <antReference projectDefault="true" />
+      <customJdkName value="" />
+      <maximumHeapSize value="128" />
+      <maximumStackSize value="2" />
+      <properties />
+    </buildFile>
   </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="compAPI" />
@@ -575,7 +583,7 @@
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="UnicodeBrowser">
-    <option name="fontName" />
+    <option name="fontName" value="Monospaced" />
   </component>
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="hg4idea" />

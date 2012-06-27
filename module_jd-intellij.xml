@@ -2,9 +2,9 @@
 <project name="module_jd-intellij" default="compile.module.jd-intellij">
   <dirname property="module.jd-intellij.basedir" file="${ant.file.module_jd-intellij}"/>
   
-  <property name="module.jdk.home.jd-intellij" value="${jdk.home.idea_iu-111.277}"/>
-  <property name="module.jdk.bin.jd-intellij" value="${jdk.bin.idea_iu-111.277}"/>
-  <property name="module.jdk.classpath.jd-intellij" value="jdk.classpath.idea_iu-111.277"/>
+  <property name="module.jdk.home.jd-intellij" value="${jdk.home}"/>
+  <property name="module.jdk.bin.jd-intellij" value="${jdk.bin}"/>
+  <property name="module.jdk.classpath.jd-intellij" value="idea.classpath"/>
   
   <property name="compiler.args.jd-intellij" value="${compiler.args}"/>
   
@@ -90,7 +90,7 @@
     <delete dir="${jd-intellij.testoutput.dir}"/>
   </target>
   
-  <property name="jd-intellij.plugin.path.jar" value="${module.jd-intellij.basedir}/jd-intellij.zip"/>
+  <property name="jd-intellij.plugin.path.jar" value="/newrepo/jd-intellij.zip"/>
   
   <!-- Build archive for plugin 'jd-intellij' -->
   <target name="plugin.build.jar.jd-intellij" depends="compile.module.jd-intellij" description="Build plugin archive for module &#39;jd-intellij&#39;">
@@ -110,7 +110,7 @@
         <type type="file"/>
       </fileset>
     </copy>
-    <zip destfile="${jd-intellij.plugin.path.jar}">
+    <zip destfile="${module.jd-intellij.basedir}/newrepo/jd-intellij.zip">
       <fileset dir="${tmp.dir.jd-intellij}"/>
     </zip>
     <delete dir="${tmp.dir.jd-intellij}"/>

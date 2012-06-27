@@ -11,7 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src/main/native" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/resources" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="IDEA IU-111.277" jdkType="IDEA JDK" />
+    <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library" exported="" scope="RUNTIME">
       <library>
