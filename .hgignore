@@ -1,0 +1,4 @@
+syntax: glob
+out
+jd-intellij.iws
+jd-intellij.zip

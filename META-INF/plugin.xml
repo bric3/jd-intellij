@@ -1,0 +1,43 @@
+<idea-plugin version="2">
+    <name>Java Decompiler IntelliJ Plugin</name>
+    <description>IntelliJ plugin to JD-Core. See http://java.decompiler.free.fr/</description>
+    <id>jd-intellij</id>
+    <version>1.0</version>
+    <vendor>Brice Dutheil</vendor>
+    <idea-version since-build="107.587" />
+
+    <change-notes><![CDATA[
+            <b>Version O.1</b>
+            <ul>
+                <li>First release. Using JD-Core 0.6.1</li>
+            </ul>
+    ]]></change-notes>
+
+    <application-components>
+        <component>
+            <implementation-class>jd.ide.intellij.config.JDPluginComponent</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+    </project-components>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <contentBasedClassFileProcessor id="javaDecompiler"
+                                        implementation="jd.ide.intellij.JavaDecompilerClassFileProcessor"/>
+
+        <applicationService id="decompilerService"
+                            serviceInterface="jd.ide.intellij.JavaDecompilerService"
+                            serviceImplementation="jd.ide.intellij.JavaDecompilerService"/>
+
+        <applicationService id="decompilerRefreshSupportService"
+                            serviceInterface="jd.ide.intellij.JavaDecompilerRefreshSupportService"
+                            serviceImplementation="jd.ide.intellij.JavaDecompilerRefreshSupportService"/>
+
+        <!--<iconProvider implementation="jd.ide.intellij.JavaDecompilerIconProvider"/>-->
+    </extensions>
+</idea-plugin>
