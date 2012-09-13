@@ -140,6 +140,14 @@
             description="Make the plugin repository file">
 
          <echo file="${module.jd-intellij.deploydir}/updatePlugins.xml"><![CDATA[
+<!DOCTYPE plugins [
+        <!ELEMENT plugins (plugin)*>
+        <!ELEMENT plugin (#PCDATA)>
+        <!ATTLIST plugin
+                id CDATA #REQUIRED
+                url CDATA #REQUIRED
+                version CDATA #IMPLIED>
+        ]>
 <plugins>
     <plugin id="jd-intellij" url="${plugin.deploy.url}/${jd-intellij.zip.file}" version="${current.version}" />
 </plugins>
