@@ -212,5 +212,5 @@
 
     <target name="clean" depends="clean.module.jd-intellij" description="cleanup all"/>
 
-    <target name="make" depends="init, clean, plugin.build.jar.jd-intellij" description="build all modules"/>
+    <target name="make" depends="init, clean, plugin.build.deploy.jd-intellij" description="build all modules"/>
 </project>
