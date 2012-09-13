@@ -83,6 +83,13 @@
                 <type type="file"/>
             </fileset>
         </copy>
+
+        <copy todir="${jd-intellij.output.dir}/META-INF">
+            <fileset dir="${module.jd-intellij.basedir}/META-INF"/>
+            <filterset>
+                <filter token="CURRENT_VERSION" value="${current.version}" />
+            </filterset>
+        </copy>
     </target>
 
     <target name="compile.module.jd-intellij.tests" depends="register.custom.compilers,compile.module.jd-intellij"
@@ -103,7 +110,7 @@
         <mkdir dir="${tmp.dir.jd-intellij}/jd-intellij/lib"/>
         <jar destfile="${tmp.dir.jd-intellij}/jd-intellij/lib/jd-intellij.jar" duplicate="preserve">
             <zipfileset dir="${module.jd-intellij.basedir}/out/production/jd-intellij"/>
-            <zipfileset file="${module.jd-intellij.basedir}/META-INF/plugin.xml" prefix="META-INF"/>
+            <!--<zipfileset file="${module.jd-intellij.basedir}/META-INF/plugin.xml" prefix="META-INF"/>-->
             <manifest>
                 <attribute name="Created-By" value="IntelliJ IDEA"/>
                 <attribute name="Manifest-Version" value="1.0"/>

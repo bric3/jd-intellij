@@ -2,7 +2,7 @@
     <name>Java Decompiler IntelliJ Plugin</name>
     <description>IntelliJ plugin to JD-Core. See http://java.decompiler.free.fr/</description>
     <id>jd-intellij</id>
-    <version>0.1</version>
+    <version>@CURRENT_VERSION@</version>
     <vendor>Brice Dutheil</vendor>
     <idea-version since-build="107.587" />
 
@@ -10,7 +10,7 @@
             <p>JD-IntelliJ is a plug-in for the IntelliJ IDEA platform. It allows you to display all the Java sources during your debugging process, even if you do not have them all.</p>
 
             <p>JD-IntelliJ is free for non-commercial use. This means that JD-IntelliJ shall not be included or embedded into commercial software products. Nevertheless, this project may be freely used for personal needs in a commercial or non-commercial environments.</p>
-            <b>Version 0.1</b>
+            <b>Version @CURRENT_VERSION@</b>
             <ul>
                 <li>First release. Using JD-Core 0.6.1</li>
             </ul>
