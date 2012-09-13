@@ -57,7 +57,8 @@
     </path>
 
 
-    <target name="compile.module.jd-intellij" depends="register.custom.compilers"
+    <target name="compile.module.jd-intellij"
+            depends="register.custom.compilers"
             description="Compile module jd-intellij; production classes">
         <mkdir dir="${jd-intellij.output.dir}"/>
         <javac2 destdir="${jd-intellij.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
@@ -92,19 +93,25 @@
         </copy>
     </target>
 
-    <target name="compile.module.jd-intellij.tests" depends="register.custom.compilers,compile.module.jd-intellij"
-            description="compile module jd-intellij; test classes" unless="skip.tests"/>
+    <target name="compile.module.jd-intellij.tests"
+            depends="register.custom.compilers,compile.module.jd-intellij"
+            description="compile module jd-intellij; test classes"
+            unless="skip.tests"/>
 
     <target name="clean.module.jd-intellij" description="cleanup module">
         <delete dir="${jd-intellij.output.dir}"/>
         <delete dir="${jd-intellij.testoutput.dir}"/>
     </target>
 
-    <property name="jd-intellij.plugin.path.jar" value="${module.jd-intellij.basedir}/jd-intellij.zip"/>
+    <property name="module.jd-intellij.deploydir" value="${module.jd-intellij.basedir}/deploy"/>
+    <property name="jd-intellij.zip.file" value="jd-intellij-${current.version}.zip"/>
+    <property name="jd-intellij.plugin.path.zip" value="${module.jd-intellij.deploydir}/${jd-intellij.zip.file}"/>
 
     <!-- Build archive for plugin 'jd-intellij' -->
-    <target name="plugin.build.jar.jd-intellij" depends="compile.module.jd-intellij"
+    <target name="plugin.build.zip.jd-intellij"
+            depends="compile.module.jd-intellij"
             description="Build plugin archive for module &#39;jd-intellij&#39;">
+
         <property name="tmp.dir.jd-intellij" value="${module.jd-intellij.basedir}/temp"/>
         <mkdir dir="${tmp.dir.jd-intellij}"/>
         <mkdir dir="${tmp.dir.jd-intellij}/jd-intellij/lib"/>
@@ -116,14 +123,33 @@
                 <attribute name="Manifest-Version" value="1.0"/>
             </manifest>
         </jar>
+
         <copy todir="${tmp.dir.jd-intellij}/jd-intellij">
             <fileset dir="${module.jd-intellij.basedir}/src/main/native">
                 <type type="file"/>
             </fileset>
         </copy>
-        <zip destfile="${jd-intellij.plugin.path.jar}">
+        <zip destfile="${jd-intellij.plugin.path.zip}">
             <fileset dir="${tmp.dir.jd-intellij}"/>
         </zip>
         <delete dir="${tmp.dir.jd-intellij}"/>
     </target>
+
+
+    <target name="plugin.make.deploy-file.jd-intellij"
+            description="Make the plugin repository file">
+
+         <echo file="${module.jd-intellij.deploydir}/updatePlugins.xml"><![CDATA[
+<plugins>
+    <plugin id="jd-intellij" url="${plugin.deploy.url}/${jd-intellij.zip.file}" version="${current.version}" />
+</plugins>
+             ]]></echo>
+
+    </target>
+
+    <target name="plugin.build.deploy.jd-intellij"
+            depends="plugin.make.deploy-file.jd-intellij, plugin.build.zip.jd-intellij"
+            description="Build plugin archive and deploy file for module &#39;jd-intellij&#39;">
+    </target>
+
 </project>
