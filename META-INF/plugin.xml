@@ -10,9 +10,10 @@
             <p>JD-IntelliJ is a plug-in for the IntelliJ IDEA platform. It allows you to display all the Java sources during your debugging process, even if you do not have them all.</p>
 
             <p>JD-IntelliJ is free for non-commercial use. This means that JD-IntelliJ shall not be included or embedded into commercial software products. Nevertheless, this project may be freely used for personal needs in a commercial or non-commercial environments.</p>
-            <b>Version @CURRENT_VERSION@</b>
+            <strong>Version @CURRENT_VERSION@</strong>
             <ul>
                 <li>First release. Using JD-Core 0.6.1</li>
+                <li>There is a known issue that <strong>could</strong> crashes the VM on some 64bit Linux boxes</li>
             </ul>
             <p>Website : <a href="http://java.decompiler.free.fr/?q=jdintellij">http://java.decompiler.free.fr/?q=jdintellij</a></p>
             <p>Sources : <a href="https://bitbucket.org/bric3/jd-intellij">https://bitbucket.org/bric3/jd-intellij</a></p>
