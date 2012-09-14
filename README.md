@@ -42,8 +42,6 @@ The native library, included into JD-Eclipse for Windows, has been built with Mi
 
 To create the plugin zip archive with the custom repository file in the `deploy` folder it by running :
 
-On Mac OSX
-
     ant make
 
 > Note that Linux packaging is not yet available.
