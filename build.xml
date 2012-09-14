@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="jd-intellij (win32 paths)" default="make">
+<project name="jd-intellij" default="make">
 
+    <condition property="isWindows">
+        <os family="windows" />
+    </condition>
+    <condition property="isMac" >
+        <os family="mac" />
+    </condition>
+    <condition property="isUnix" >
+        <os family="unix" />
+    </condition>
 
-    <property file="jd-intellij-win32.properties"/>
+    <condition property="property.filename" value="jd-intellij-win32.properties">
+        <os family="windows" />
+    </condition>
+    <condition property="property.filename" value="jd-intellij-osx.properties">
+        <os family="mac" />
+    </condition>
+
+    <fail if="isUnix" message="Unix/Linux packaging is not yet supported, contribution is welcome." />
+
+    <property file="${property.filename}" />
+
     <!-- Uncomment the following property if no tests compilation is needed -->
     <!--
     <property name="skip.tests" value="true"/>
@@ -57,6 +76,13 @@
         <include name="**/?*.dtd"/>
         <include name="**/?*.tld"/>
         <include name="**/?*.ftl"/>
+
+        <!--
+            native libs are included in the 'Compiler Resources of the IntelliJ project file
+            in order to be deployed on the sandbox (in order to run/debug the plugin).
+
+            But for the purpose of this packaging script we don't want to export the native libs in classpath.
+        -->
         <!--<include name="**/?*.so"/>-->
         <!--<include name="**/?*.dll"/>-->
         <!--<include name="**/?*.jnilib"/>-->
@@ -66,22 +92,51 @@
 
     <property name="jdk.bin" value="${jdk.home}/bin"/>
 
+    <!-- Windows JDK classpath -->
+    <fileset id="windows.jdk.classpath" dir="${jdk.home}" >
+        <include name="jre/lib/charsets.jar" if="isWindows"/>
+        <include name="jre/lib/deploy.jar" if="isWindows" />
+        <include name="jre/lib/javaws.jar" if="isWindows" />
+        <include name="jre/lib/jce.jar" if="isWindows" />
+        <include name="jre/lib/jsse.jar" if="isWindows" />
+        <include name="jre/lib/management-agent.jar" if="isWindows" />
+        <include name="jre/lib/plugin.jar" if="isWindows" />
+        <include name="jre/lib/resources.jar" if="isWindows" />
+        <include name="jre/lib/rt.jar" if="isWindows" />
+        <include name="jre/lib/ext/dnsns.jar" if="isWindows" />
+        <include name="jre/lib/ext/localedata.jar" if="isWindows" />
+        <include name="jre/lib/ext/sunjce_provider.jar" if="isWindows" />
+        <include name="jre/lib/ext/sunmscapi.jar" if="isWindows" />
+        <include name="jre/lib/ext/sunpkcs11.jar" if="isWindows" />
+    </fileset>
+
+    <!-- Mac OSX JDK classpath -->
+    <fileset id="osx.jdk.classpath" dir="${jdk.home}" >
+        <include name="Contents/Home/lib/deploy.jar" if="isMac" />
+        <include name="Contents/Home/lib/dt.jar" if="isMac" />
+        <include name="Contents/Home/lib/javaws.jar" if="isMac" />
+        <include name="Contents/Home/lib/jce.jar" if="isMac" />
+        <include name="Contents/Home/lib/jconsole.jar" if="isMac" />
+        <include name="Contents/Home/lib/management-agent.jar" if="isMac" />
+        <include name="Contents/Home/lib/plugin.jar" if="isMac" />
+        <include name="Contents/Home/lib/sa-jdi.jar" if="isMac" />
+        <include name="Contents/Classes/alt-rt.jar" if="isMac" />
+        <include name="Contents/Classes/alt-string.jar" if="isMac" />
+        <include name="Contents/Classes/charsets.jar" if="isMac" />
+        <include name="Contents/Classes/classes.jar" if="isMac" />
+        <include name="Contents/Classes/jsse.jar" if="isMac" />
+        <include name="Contents/Classes/ui.jar" if="isMac" />
+        <include name="Contents/Home/lib/ext/apple_provider.jar" if="isMac" />
+        <include name="Contents/Home/lib/ext/dnsns.jar" if="isMac" />
+        <include name="Contents/Home/lib/ext/localedata.jar" if="isMac" />
+        <include name="Contents/Home/lib/ext/sunjce_provider.jar" if="isMac" />
+        <include name="Contents/Home/lib/ext/sunpkcs11.jar" if="isMac" />
+    </fileset>
+
     <path id="idea.classpath">
+        <fileset refid="windows.jdk.classpath" />
+        <fileset refid="osx.jdk.classpath" />
         <fileset dir="${idea.home}">
-            <include name="${jdk.home}/jre/lib/charsets.jar"/>
-            <include name="${jdk.home}/jre/lib/deploy.jar"/>
-            <include name="${jdk.home}/jre/lib/javaws.jar"/>
-            <include name="${jdk.home}/jre/lib/jce.jar"/>
-            <include name="${jdk.home}/jre/lib/jsse.jar"/>
-            <include name="${jdk.home}/jre/lib/management-agent.jar"/>
-            <include name="${jdk.home}/jre/lib/plugin.jar"/>
-            <include name="${jdk.home}/jre/lib/resources.jar"/>
-            <include name="${jdk.home}/jre/lib/rt.jar"/>
-            <include name="${jdk.home}/jre/lib/ext/dnsns.jar"/>
-            <include name="${jdk.home}/jre/lib/ext/localedata.jar"/>
-            <include name="${jdk.home}/jre/lib/ext/sunjce_provider.jar"/>
-            <include name="${jdk.home}/jre/lib/ext/sunmscapi.jar"/>
-            <include name="${jdk.home}/jre/lib/ext/sunpkcs11.jar"/>
             <include name="lib/alloy.jar"/>
             <include name="lib/annotations.jar"/>
             <include name="lib/asm-commons.jar"/>

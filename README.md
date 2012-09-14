@@ -34,7 +34,7 @@ The native library, included into JD-Eclipse for Windows, has been built with Mi
 
 1. Download the project from Bitbucket.
 2. Import it on IntelliJ IDEA.
-3. Create a new configuration with the type "plugin".
+3. Create a new configuration with the type "plugin". Don't forget to set up an _IntelliJ IDEA Plugin SDK_.
 4. Run the new configuration.
 5. Copy native library on the sandbox folder if needed.
 
@@ -44,13 +44,9 @@ To create the plugin zip archive with the custom repository file in the `deploy`
 
 On Mac OSX
 
-    ant -f jd-intellij-osx.xml make
+    ant make
 
-
-On Windows
-
-    ant -f jd-intellij-win32.xml make
-
+> Note that Linux packaging is not yet available.
 
 
 Take a look at the properties file `jd-intellij-osx.prperties` or `jd-intellij-win32.properties`, you'll find interesting properties :
