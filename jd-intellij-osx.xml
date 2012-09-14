@@ -2,7 +2,7 @@
 <project name="jd-intellij (osx paths)" default="make">
 
 
-    <property file="jd-intellij.properties"/>
+    <property file="jd-intellij-osx.properties"/>
     <!-- Uncomment the following property if no tests compilation is needed -->
     <!--
     <property name="skip.tests" value="true"/>

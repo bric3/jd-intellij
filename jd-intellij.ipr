@@ -6,7 +6,7 @@
   </component>
   <component name="AntConfiguration">
     <defaultAnt bundledAnt="true" />
-    <buildFile url="file://$PROJECT_DIR$/jd-intellij.xml">
+    <buildFile url="file://$PROJECT_DIR$/jd-intellij-osx.xml">
       <additionalClassPath />
       <antReference projectDefault="true" />
       <customJdkName value="" />
@@ -417,6 +417,12 @@
     <option name="HEAP_SIZE" />
     <option name="LOCALE" />
     <option name="OPEN_IN_BROWSER" value="true" />
+  </component>
+  <component name="LanguageInjectionConfiguration">
+    <injection language="HTML" injector-id="xml">
+      <display-name>change-notes</display-name>
+      <place><![CDATA[xmlTag().withLocalName(string().equalTo("change-notes"))]]></place>
+    </injection>
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="org.jetbrains.annotations.Nullable" />
