@@ -16,6 +16,16 @@
             </ul>
             <p>Website : <a href="http://java.decompiler.free.fr/?q=jdintellij">http://java.decompiler.free.fr/?q=jdintellij</a></p>
             <p>Sources : <a href="https://bitbucket.org/bric3/jd-intellij">https://bitbucket.org/bric3/jd-intellij</a></p>
+
+            <p>
+                <strong>For Windows users, you might need to install the prerequisites.</strong>
+                <p>The native library, included into JD-Eclipse for Windows, has been built with Microsoft Visual C++ 2008 Express Edition. Some runtime components of Visual C++ Libraries are required to run the decompiler. If they are missing you can download and install them from the Microsoft Web site :</p>
+
+                <ul>
+                    <li><a href="http://www.microsoft.com/downloads/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2&displaylang=en">Microsoft Visual C++ 2008 SP1 Redistributable Package (x86)</a></li>
+
+                    <li><a href="http://www.microsoft.com/downloads/details.aspx?familyid=BA9257CA-337F-4B40-8C14-157CFDFFEE4E&displaylang=en">Microsoft Visual C++ 2008 SP1 Redistributable Package (x64)</a></li>
+                </p>
     ]]></change-notes>
 
     <application-components>
