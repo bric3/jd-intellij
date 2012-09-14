@@ -2,6 +2,7 @@ package jd.ide.intellij.config;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.ui.HyperlinkLabel;
 import jd.ide.intellij.JavaDecompilerRefreshSupportService;
 
 import javax.swing.*;
@@ -16,7 +17,9 @@ public class JDPluginConfigurationPane {
     private JCheckBox showLineNumbersCheckBox;
     private JCheckBox showMetadataCheckBox;
     private JPanel contentPane;
-    private JTextPane usingJDCoreTextPane;
+    private HyperlinkLabel jd_hyperlinkLabel;
+    private HyperlinkLabel jdSuggestions_hyperlinkLabel;
+    private HyperlinkLabel jdBugs_hyperlinkLabel;
 
     public JDPluginConfigurationPane() {
         MouseListener itemListener = new OnMouseReleaseRefreshDecompiledFilesListener(this);
@@ -42,6 +45,20 @@ public class JDPluginConfigurationPane {
     public JPanel getRootPane() {
         return contentPane;
     }
+
+    private void createUIComponents() {
+        jd_hyperlinkLabel = createHyperLinkLabelWithURL("http://java.decompiler.free.fr/");
+        jdSuggestions_hyperlinkLabel = createHyperLinkLabelWithURL("http://java.decompiler.free.fr/jd-eclipse/suggestions");
+        jdBugs_hyperlinkLabel = createHyperLinkLabelWithURL("http://java.decompiler.free.fr/jd-eclipse/bugs");
+    }
+
+    private HyperlinkLabel createHyperLinkLabelWithURL(String link) {
+        HyperlinkLabel hyperlinkLabel = new HyperlinkLabel();
+        hyperlinkLabel.setHyperlinkText(link);
+        hyperlinkLabel.setHyperlinkTarget(link);
+        return hyperlinkLabel;
+    }
+
 
     private static class OnMouseReleaseRefreshDecompiledFilesListener implements MouseListener {
 
