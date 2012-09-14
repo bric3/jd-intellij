@@ -64,6 +64,13 @@ Take a look at the properties file `jd-intellij-osx.prperties` or `jd-intellij-w
     # Base URL where the plugin ZIP file will be deployed
     plugin.deploy.url=http://arkey.fr/jd-intellij
 
+##### Interesting IntelliJ Plugin development links #####
+
+For development purpose, you can take a look here :
+
+- [http://tomaszdziurko.pl/2011/09/developing-plugin-intellij-idea-some-tips-and-links/](http://tomaszdziurko.pl/2011/09/developing-plugin-intellij-idea-some-tips-and-links/)
+- [http://confluence.jetbrains.net/display/IDEADEV/PluginDevelopment](http://confluence.jetbrains.net/display/IDEADEV/PluginDevelopment)
+
 
 ## Disclaimer ##
 
