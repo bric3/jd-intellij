@@ -30,7 +30,7 @@ The native library, included into JD-Eclipse for Windows, has been built with Mi
 
 ## Development ##
 
-##### First steps #####
+#### First steps ####
 
 1. Download the project from Bitbucket.
 2. Import it on IntelliJ IDEA.
@@ -38,7 +38,7 @@ The native library, included into JD-Eclipse for Windows, has been built with Mi
 4. Run the new configuration.
 5. Copy native library on the sandbox folder if needed.
 
-##### Building it #####
+#### Building it ####
 
 To create the plugin zip archive with the custom repository file in the `deploy` folder it by running :
 
@@ -63,7 +63,7 @@ To package the archive you should also setup your the properties in your platfor
     # Base URL where the plugin ZIP file will be deployed
     plugin.deploy.url=http://arkey.fr/jd-intellij
 
-##### Interesting IntelliJ Plugin development links #####
+#### Interesting IntelliJ Plugin development links ####
 
 For development purpose, you can take a look here :
 
