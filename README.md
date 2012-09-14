@@ -44,10 +44,11 @@ To create the plugin zip archive with the custom repository file in the `deploy`
 
     ant make
 
-> Note that Linux packaging is not yet available.
+> _Note that Linux packaging is not yet available._
 
 
-Take a look at the properties file `jd-intellij-osx.prperties` or `jd-intellij-win32.properties`, you'll find interesting properties :
+
+To package the archive you should also setup your the properties in your platform related file `jd-intellij-osx.prperties` or `jd-intellij-win32.properties`, you'll find interesting properties :
 
 
     # IntelliJ 11 path
