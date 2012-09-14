@@ -8,14 +8,19 @@
         <os family="mac" />
     </condition>
     <condition property="isUnix" >
-        <os family="unix" />
+        <and>
+            <os family="unix"/>
+            <not>
+                <os family="mac"/>
+            </not>
+        </and>
     </condition>
 
     <condition property="property.filename" value="jd-intellij-win32.properties">
-        <os family="windows" />
+        <istrue value="${isWindows}" />
     </condition>
     <condition property="property.filename" value="jd-intellij-osx.properties">
-        <os family="mac" />
+        <istrue value="${isMac}" />
     </condition>
 
     <fail if="isUnix" message="Unix/Linux packaging is not yet supported, contribution is welcome." />
@@ -111,26 +116,26 @@
     </fileset>
 
     <!-- Mac OSX JDK classpath -->
-    <fileset id="osx.jdk.classpath" dir="${jdk.home}" >
-        <include name="Contents/Home/lib/deploy.jar" if="isMac" />
-        <include name="Contents/Home/lib/dt.jar" if="isMac" />
-        <include name="Contents/Home/lib/javaws.jar" if="isMac" />
-        <include name="Contents/Home/lib/jce.jar" if="isMac" />
-        <include name="Contents/Home/lib/jconsole.jar" if="isMac" />
-        <include name="Contents/Home/lib/management-agent.jar" if="isMac" />
-        <include name="Contents/Home/lib/plugin.jar" if="isMac" />
-        <include name="Contents/Home/lib/sa-jdi.jar" if="isMac" />
-        <include name="Contents/Classes/alt-rt.jar" if="isMac" />
-        <include name="Contents/Classes/alt-string.jar" if="isMac" />
-        <include name="Contents/Classes/charsets.jar" if="isMac" />
-        <include name="Contents/Classes/classes.jar" if="isMac" />
-        <include name="Contents/Classes/jsse.jar" if="isMac" />
-        <include name="Contents/Classes/ui.jar" if="isMac" />
-        <include name="Contents/Home/lib/ext/apple_provider.jar" if="isMac" />
-        <include name="Contents/Home/lib/ext/dnsns.jar" if="isMac" />
-        <include name="Contents/Home/lib/ext/localedata.jar" if="isMac" />
-        <include name="Contents/Home/lib/ext/sunjce_provider.jar" if="isMac" />
-        <include name="Contents/Home/lib/ext/sunpkcs11.jar" if="isMac" />
+    <fileset id="osx.jdk.classpath" dir="${jdk.home}/.." >
+        <include name="Home/lib/deploy.jar" if="isMac" />
+        <include name="Home/lib/dt.jar" if="isMac" />
+        <include name="Home/lib/javaws.jar" if="isMac" />
+        <include name="Home/lib/jce.jar" if="isMac" />
+        <include name="Home/lib/jconsole.jar" if="isMac" />
+        <include name="Home/lib/management-agent.jar" if="isMac" />
+        <include name="Home/lib/plugin.jar" if="isMac" />
+        <include name="Home/lib/sa-jdi.jar" if="isMac" />
+        <include name="Classes/alt-rt.jar" if="isMac" />
+        <include name="Classes/alt-string.jar" if="isMac" />
+        <include name="Classes/charsets.jar" if="isMac" />
+        <include name="Classes/classes.jar" if="isMac" />
+        <include name="Classes/jsse.jar" if="isMac" />
+        <include name="Classes/ui.jar" if="isMac" />
+        <include name="Home/lib/ext/apple_provider.jar" if="isMac" />
+        <include name="Home/lib/ext/dnsns.jar" if="isMac" />
+        <include name="Home/lib/ext/localedata.jar" if="isMac" />
+        <include name="Home/lib/ext/sunjce_provider.jar" if="isMac" />
+        <include name="Home/lib/ext/sunpkcs11.jar" if="isMac" />
     </fileset>
 
     <path id="idea.classpath">
@@ -254,6 +259,7 @@
     </path>
 
     <target name="register.custom.compilers">
+        <echo message="${toString:idea.classpath}"/>
         <taskdef name="javac2"
                  classname="com.intellij.ant.Javac2"
                  classpathref="javac2.classpath"
