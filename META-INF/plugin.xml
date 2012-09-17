@@ -1,22 +1,25 @@
 <idea-plugin version="2">
     <name>Java Decompiler IntelliJ Plugin</name>
-    <description>IntelliJ plugin to JD-Core. See http://java.decompiler.free.fr/</description>
+    <description>JD-IntelliJ is a plug-in for the IntelliJ IDEA platform. It allows you to display all the Java sources during your debugging process, even if you do not have them all.</description>
     <id>jd-intellij</id>
     <version>@CURRENT_VERSION@</version>
-    <vendor>Brice Dutheil</vendor>
+    <vendor>Brice Dutheil, Emmanuel Dupuy</vendor>
     <idea-version since-build="107.587" />
 
     <change-notes><![CDATA[
-            <p>JD-IntelliJ is a plug-in for the IntelliJ IDEA platform. It allows you to display all the Java sources during your debugging process, even if you do not have them all.</p>
-
-            <p>JD-IntelliJ is free for non-commercial use. This means that JD-IntelliJ shall not be included or embedded into commercial software products. Nevertheless, this project may be freely used for personal needs in a commercial or non-commercial environments.</p>
-            <strong>Version @CURRENT_VERSION@</strong>
-            <ul>
-                <li>First release. Using JD-Core 0.6.1</li>
-                <li>There is a known issue that <strong>could</strong> crashes the VM on some 64bit Linux boxes</li>
-            </ul>
-            <p>Website : <a href="http://java.decompiler.free.fr/?q=jdintellij">http://java.decompiler.free.fr/?q=jdintellij</a></p>
-            <p>Sources : <a href="https://bitbucket.org/bric3/jd-intellij">https://bitbucket.org/bric3/jd-intellij</a></p>
+            <p>
+                <strong>Version @CURRENT_VERSION@</strong>
+                <ul>
+                    <li>First release. Using JD-Core 0.6.1</li>
+                    <li>There is a known issue that <strong>could</strong> crashes the VM on some 64bit Linux boxes</li>
+                </ul>
+            </p>
+            <p>
+                <strong>Legal Stuff</strong>
+                <p>JD-IntelliJ is free for non-commercial use. This means that JD-IntelliJ shall not be included or embedded into commercial software products. Nevertheless, this project may be freely used for personal needs in a commercial or non-commercial environments.</p>
+                <p>Website : <a href="http://java.decompiler.free.fr/?q=jdintellij">http://java.decompiler.free.fr/?q=jdintellij</a></p>
+                <p>Sources : <a href="https://bitbucket.org/bric3/jd-intellij">https://bitbucket.org/bric3/jd-intellij</a></p>
+            </p>
 
             <p>
                 <strong>For Windows users, you might need to install the prerequisites.</strong>
@@ -26,7 +29,8 @@
                     <li><a href="http://www.microsoft.com/downloads/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2&displaylang=en">Microsoft Visual C++ 2008 SP1 Redistributable Package (x86)</a></li>
 
                     <li><a href="http://www.microsoft.com/downloads/details.aspx?familyid=BA9257CA-337F-4B40-8C14-157CFDFFEE4E&displaylang=en">Microsoft Visual C++ 2008 SP1 Redistributable Package (x64)</a></li>
-                </p>
+                </ul>
+            </p>
     ]]></change-notes>
 
     <application-components>
