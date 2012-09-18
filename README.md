@@ -22,7 +22,9 @@ Last but not the least, all the credit for decompilation stuff must go to **Emma
 
 ##### Windows Platform Prerequisites #####
 
-The native library, included into JD-Eclipse for Windows, has been built with Microsoft Visual C++ 2008 Express Edition. Some runtime components of Visual C++ Libraries are required to run the decompiler. You can download and install them from the Microsoft Web site :
+The native library, included into JD-Eclipse for Windows, has been built with Microsoft Visual C++ 2008 Express Edition.
+Some runtime components of Visual C++ Libraries are required to run the decompiler. You can download and install them
+from the Microsoft Web site :
 
 [Microsoft Visual C++ 2008 SP1 Redistributable Package (x86)](http://www.microsoft.com/downloads/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2&displaylang=en)
 
@@ -36,19 +38,27 @@ The native library, included into JD-Eclipse for Windows, has been built with Mi
 2. Import it on IntelliJ IDEA.
 3. Create a new configuration with the type "plugin". Don't forget to set up an _IntelliJ IDEA Plugin SDK_.
 4. Run the new configuration.
-5. Copy native library on the sandbox folder if needed.
+5. Copy native library on the sandbox folder if needed. _(It shouldn't be necessary anymore, as the loading code and
+   the IntelliJ project file `jd-intellij.ipr` has been tweaked to copy over the native binaries, see Resource
+   Patterns in the Compiler settings)_
 
 #### Building it ####
 
-To create the plugin zip archive with the custom repository file in the `deploy` folder it by running :
+Don't use the IntelliJ internal plugin deployment feature _Prepare plugin module 'jd-intellij' for deployment_, it
+doesn't deal well we have native binaries. in order to deal properly with this matter an ant build script has
+been created.
+
+So, to create the plugin zip archive (with the custom repository file) in the `deploy` folder, enter the following at
+root of the project :
 
     ant make
 
-> _Note that Linux packaging is not yet available._
+> _Note that Linux packaging is not yet available. Contributions are welcome._
 
 
 
-To package the archive you should also setup your the properties in your platform related file `jd-intellij-osx.prperties` or `jd-intellij-win32.properties`, you'll find interesting properties :
+To package the archive you should also setup your the properties in your platform related file
+`jd-intellij-osx.prperties` or `jd-intellij-win32.properties`, you'll find interesting properties :
 
 
     # IntelliJ 11 path
@@ -75,4 +85,10 @@ For development purpose, you can take a look here :
 
 Copyright © 2008-2012 Emmanuel Dupuy.
 
-THIS SOFTWARE IS PROVIDED “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE IS PROVIDED “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR
+CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
