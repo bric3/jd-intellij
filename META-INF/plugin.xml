@@ -10,8 +10,14 @@
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
+                    <li>Now fallback to IntelliJ decompiler when JD cannot decompile normally some very rare class file. Before an assertion error was reported in IntelliJ. </li>
+                    <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
+                </ul>
+
+                <strong>Version 0.1</strong>
+                <ul>
                     <li>First release. Using JD-Core 0.6.1</li>
-                    <li>There is a known issue that <strong>could</strong> crashes the VM on some 64bit Linux boxes</li>
+                    <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
                 </ul>
             </p>
             <p>
