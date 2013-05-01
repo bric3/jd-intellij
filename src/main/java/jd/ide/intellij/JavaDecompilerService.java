@@ -39,7 +39,7 @@ public class JavaDecompilerService {
             }
         }
 
-        // for other files if possible
+        // discover root and path for other files if possible
         for (DecompilerPathArgs decompilerPathArgs : new DecompilerPathArgsFinder(virtualFile)) {
             String decompiled = javaDecompiler.decompile(
                     decompilerPathArgs.getBasePath(),
@@ -56,6 +56,8 @@ public class JavaDecompilerService {
     }
 
     private boolean validContent(String decompiled) {
+        // note when java decompiler encounter an internal error on some very rare occasion, then it can output null
+        // strings.
         return decompiled != null && !decompiled.matches("(?sm)class\\s*\\{\\s*\\}.*");
     }
 
@@ -83,12 +85,15 @@ public class JavaDecompilerService {
                 }
 
                 private boolean classPathRootIsNotRootDirectory() {
-                    return classPathRoot != null;
+                    return classPathRoot != null
+                            && classPathRoot.getParent() != null;
                 }
 
                 @Override
                 public DecompilerPathArgs next() {
                     classPathRoot = classPathRoot.getParent();
+                    assert classPathRoot != null : "classPathRoot cannot be null";
+
                     String internalClassName = VfsUtil.getRelativePath(virtualFile, classPathRoot, '/');
                     return new DecompilerPathArgs(classPathRoot.getPresentableUrl(), internalClassName);
                 }
