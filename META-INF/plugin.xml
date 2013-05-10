@@ -3,7 +3,7 @@
     <description>JD-IntelliJ is a plug-in for the IntelliJ IDEA platform. It allows you to display all the Java sources during your debugging process, even if you do not have them all.</description>
     <id>jd-intellij</id>
     <version>@CURRENT_VERSION@</version>
-    <vendor>Brice Dutheil, Emmanuel Dupuy</vendor>
+    <vendor url="https://bitbucket.org/bric3/jd-intellij">Brice Dutheil, Emmanuel Dupuy</vendor>
     <idea-version since-build="107.587" />
 
     <change-notes><![CDATA[
