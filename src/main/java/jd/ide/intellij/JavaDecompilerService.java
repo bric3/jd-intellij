@@ -1,5 +1,6 @@
 package jd.ide.intellij;
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.util.text.StringUtil;
@@ -14,6 +15,7 @@ import java.util.Iterator;
  * Java Decompiler Service.
  */
 public class JavaDecompilerService {
+    private static Logger LOGGER = Logger.getInstance(JavaDecompilerService.class);
 
     private JavaDecompiler javaDecompiler;
 
@@ -24,6 +26,9 @@ public class JavaDecompilerService {
     public String decompile(Project project, VirtualFile virtualFile) {
         // for jars only
         String filePath = virtualFile.getPath();
+        LOGGER.info(new StringBuilder().append("Decompiling + '").append(filePath).append("'").toString());
+
+        // TODO CoR
         VirtualFile classRootForFile =
                 ProjectRootManager.getInstance(project).getFileIndex().getClassRootForFile(virtualFile);
 
