@@ -25,6 +25,7 @@
 
     <fail if="isUnix" message="Unix/Linux packaging is not yet supported, contribution is welcome." />
 
+    <property file="jd-intellij.properties" />
     <property file="${property.filename}" />
 
     <!-- Uncomment the following property if no tests compilation is needed -->
