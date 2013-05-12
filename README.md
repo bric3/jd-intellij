@@ -45,6 +45,11 @@ from the Microsoft Web site :
 
 #### First steps ####
 
+> _Note that the source code is compiled against the IntelliJ 11 API, the JetBrains introduced a few backward incompatible changes in later
+versions that would require changes and incompatibilities for earlier verison of IntelliJ. In order to maintain this compitibility for
+the time being the plugin will still be compiled against IntelliJ 11, compilation should work against a community edition of IntelliJ 11._
+
+
 1. Download the project from Bitbucket.
 2. Import it on IntelliJ IDEA.
 3. Create a new configuration with the type "plugin". Don't forget to set up an _IntelliJ IDEA Plugin SDK_.
