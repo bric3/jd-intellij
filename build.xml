@@ -145,7 +145,6 @@
         <fileset refid="windows.jdk.classpath" />
         <fileset refid="osx.jdk.classpath" />
         <fileset dir="${idea.home}">
-            <include name="lib/alloy.jar"/>
             <include name="lib/annotations.jar"/>
             <include name="lib/boot.jar"/>
             <include name="lib/bootstrap.jar"/>
@@ -178,7 +177,7 @@
 
 
 
-    <!-- Register Custom Compiler Taskdefs -->
+    <!-- Register Custom Compiler Taskdefs note that classpath matches IntelliJ 11 dependencies -->
     <property name="javac2.home" value="${idea.home}/lib"/>
     <path id="javac2.classpath">
         <pathelement location="${javac2.home}/javac2.jar"/>
