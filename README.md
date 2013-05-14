@@ -22,13 +22,11 @@ Last but not the least, all the credit for decompilation stuff must go to **Emma
 
 ##### From the JetBrains repository #####
 
-The plugin is deployed on the publin JetBrains IntelliJ repository, to install it go to the _Settings_ dialog window
- > _Plugins_ pane > _Browse Repositories_ dialog window, then search for _Java Decompiler_.
+The plugin is deployed on the publin JetBrains IntelliJ repository, to install it go to the _Settings_ dialog window > _Plugins_ pane > _Browse Repositories_ dialog window, then search for _Java Decompiler_.
 
 ##### From the zip archive #####
 
-It is also possible to install JD-IntelliJ from a file, to the _Settings_ dialog window > _Plugins_ pane >
-_Install Plugin from disk..._
+It is also possible to install JD-IntelliJ from a file, to the _Settings_ dialog window > _Plugins_ pane > _Install Plugin from disk..._
 
 
 ##### Windows Platform Prerequisites #####
