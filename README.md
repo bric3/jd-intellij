@@ -47,7 +47,8 @@ from the Microsoft Web site :
 
 > _Note that the source code is compiled against the IntelliJ 11 API, the JetBrains introduced a few backward incompatible changes in later
 versions that would require changes and incompatibilities for earlier verison of IntelliJ. In order to maintain this compitibility for
-the time being the plugin will still be compiled against IntelliJ 11, compilation should work against a community edition of IntelliJ 11._
+the time being the plugin will still be compiled against IntelliJ 11, compilation should work against a community edition of IntelliJ 11
+(which can be found [here](http://devnet.jetbrains.com/docs/DOC-1228))._
 
 
 1. Download the project from Bitbucket.
