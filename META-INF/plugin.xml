@@ -10,7 +10,13 @@
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
-                    <li>Now fallback to IntelliJ decompiler when JD cannot decompile normally some very rare class file. Before an assertion error was reported in IntelliJ. </li>
+                    <li>Attempt to fix an undesirable effect for people using the Flex SDK, see <a href="http://youtrack.jetbrains.com/issue/IDEA-93429">IDEA-93429</a></li>
+                    <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
+                </ul>
+
+                <strong>Version 0.2</strong>
+                <ul>
+                    <li>Now fallback to IntelliJ decompiler when JD cannot decompile normally some very rare class file. Before an assertion error was reported in IntelliJ.</li>
                     <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
                 </ul>
 
