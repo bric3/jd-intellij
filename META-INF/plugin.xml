@@ -10,7 +10,11 @@
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
-                    <li>Attempt to fix an undesirable effect for people using the Flex SDK, see <a href="http://youtrack.jetbrains.com/issue/IDEA-93429">IDEA-93429</a></li>
+                    <li>Fixes an undesirable effect for people using the Flex SDK, see <a href="http://youtrack.jetbrains.com/issue/IDEA-93429">IDEA-93429</a></li>
+                    <li>
+                      Note that references in the editor are not correctly clickable (<kbd>ctrl</kbd>-<kbd>click</kbd> / <kbd>cmd</kbd>-<kbd>click</kbd>),
+                      this does seem to be a bug in IntelliJ IDEA itself; see <a href="http://youtrack.jetbrains.com/issue/IDEA-100029">IDEA-100029</a>
+                    </li>
                     <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
                 </ul>
 
