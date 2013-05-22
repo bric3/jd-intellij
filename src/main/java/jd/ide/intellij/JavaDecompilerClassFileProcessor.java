@@ -50,6 +50,6 @@ public class JavaDecompilerClassFileProcessor implements ContentBasedClassFilePr
         } else if (virtualFile.getFileType() == StdFileTypes.JAVA) {
             return Language.findLanguageByID("JAVA");
         }
-        return Language.ANY;
+        return null;
     }
 }
