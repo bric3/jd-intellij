@@ -10,6 +10,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import jd.ide.intellij.config.JDPluginComponent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Extension processor needed to decompile the class with a custom decompiler.
@@ -29,14 +30,14 @@ public class JavaDecompilerClassFileProcessor implements ContentBasedClassFilePr
         return virtualFile.getFileType() == StdFileTypes.CLASS;
     }
 
-    @NotNull
     @Override
+    @NotNull
     public SyntaxHighlighter createHighlighter(Project project, VirtualFile vFile) {
         return SyntaxHighlighter.PROVIDER.create(StdFileTypes.JAVA, project, vFile);
     }
 
-    @NotNull
     @Override
+    @NotNull
     public String obtainFileText(Project project, VirtualFile virtualFile) {
         ServiceManager.getService(JavaDecompilerRefreshSupportService.class).markDecompiled(virtualFile);
         String intermediary_var_of_decompiledFile = javaDecompilerService.decompile(project, virtualFile);
@@ -44,6 +45,7 @@ public class JavaDecompilerClassFileProcessor implements ContentBasedClassFilePr
     }
 
     @Override
+    @Nullable
     public Language obtainLanguageForFile(VirtualFile virtualFile) {
         if (virtualFile.getFileType() == StdFileTypes.CLASS) {
             return null; // weirdly returning null in order to not decompile when source is available.
