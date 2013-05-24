@@ -12,7 +12,7 @@
                 <ul>
                     <li>
                       Fixes the wrong clickable references (<kbd>ctrl</kbd>-<kbd>click</kbd> / <kbd>cmd</kbd>-<kbd>click</kbd>).<br/>
-                      For more development info see <a href="http://youtrack.jetbrains.com/issue/IDEA-100029">IDEA-100029</a>,
+                      For more development information about the issue, see <a href="http://youtrack.jetbrains.com/issue/IDEA-100029">IDEA-100029</a>,
                       <a href="https://bitbucket.org/bric3/jd-intellij/issue/6">JD-IntelliJ Issue 6</a>
                     </li>
                     <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
@@ -77,12 +77,12 @@
                             serviceInterface="jd.ide.intellij.CachingJavaDecompilerService"
                             serviceImplementation="jd.ide.intellij.CachingJavaDecompilerService"/>
 
-        <contentBasedClassFileProcessor implementation="jd.ide.intellij.JavaDecompilerClassFileProcessor" />
-        <psi.clsDecompiledFileProvider implementation="jd.ide.intellij.JavaClassDecompiledPsiFileProvider"/>
+      <applicationService id="decompilerRefreshSupportService"
+                          serviceInterface="jd.ide.intellij.JavaDecompilerRefreshSupportService"
+                          serviceImplementation="jd.ide.intellij.JavaDecompilerRefreshSupportService"/>
 
-        <applicationService id="decompilerRefreshSupportService"
-                            serviceInterface="jd.ide.intellij.JavaDecompilerRefreshSupportService"
-                            serviceImplementation="jd.ide.intellij.JavaDecompilerRefreshSupportService"/>
+        <contentBasedClassFileProcessor implementation="jd.ide.intellij.JavaDecompilerClassFileProcessor"/>
+        <psi.clsDecompiledFileProvider implementation="jd.ide.intellij.JavaClassDecompiledPsiFileProvider"/>
 
         <!--<iconProvider implementation="jd.ide.intellij.JavaDecompilerIconProvider"/>-->
     </extensions>
