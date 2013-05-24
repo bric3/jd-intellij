@@ -2,6 +2,7 @@ package jd.ide.intellij;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
+import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -19,6 +20,21 @@ import static jd.ide.intellij.JavaDecompilerRefreshSupportService.JavaDecompiler
 /**
  * Caching decorator for the decompilation service.
  *
+ * <p>
+ *     Note this service provides two method for decompilation that are consumed by two different extension points :
+ *     <ul>
+ *         <li>{@link JavaDecompilerClassFileProcessor} which gives the actual decompiled text to be displayed.</li>
+ *         <li>{@link JavaClassDecompiledPsiFileProvider} which gives IDEA the PsiFile needed to build the AST, for
+ *             references, etc.</li>
+ *     </ul>
+ * </p>
+ *
+ * <p>
+ *     As both these services need to use the same decompiled text, the decompilation is cached in this class. Aside of
+ *     that the decompiled text can change in regard of the activated options of the plugin. For this reason
+ *     the cache need to listen to refresh requests.
+ * </p>
+ *
  * @see #decompile(Project, VirtualFile)
  * @see #decompile(PsiJavaFile)
  */
@@ -26,7 +42,7 @@ public class CachingJavaDecompilerService {
     private static Logger LOGGER = Logger.getInstance(CachingJavaDecompilerService.class);
 
     private final JavaDecompilerService javaDecompilerService;
-    private final LoadingCache<DecompiledFileKey, String> decompiledCache;
+    private final Cache<DecompiledFileKey, String> decompiledCache;
 
 
     public CachingJavaDecompilerService() {
@@ -34,7 +50,7 @@ public class CachingJavaDecompilerService {
         decompiledCache = makeDecompiledCache();
         ServiceManager.getService(JavaDecompilerRefreshSupportService.class).registerRefreshListener(
                 new JavaDecompilerRefreshListener() {
-                    public void onRefresh() {
+                    public void onRefreshDecompiledFiles() {
                         decompiledCache.invalidateAll();
                     }
                 }

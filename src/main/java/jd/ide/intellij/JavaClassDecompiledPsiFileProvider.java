@@ -9,8 +9,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Provider extension that builds a PsiFile from the JD decompiled text, other wise IDEA uses
- * the default decompiled text to build the PsiFile which results in wrong references.
+ * Provider extension that builds a {@link com.intellij.psi.PsiFile} from the JD decompiled text, otherwise IDEA uses
+ * the default decompiled text to build the PsiFile which results in wrong text sections to be highlighted and wrong
+ * references.
  *
  * @see <a href="http://youtrack.jetbrains.com/issue/IDEA-100029">http://youtrack.jetbrains.com/issue/IDEA-100029</a>
  *

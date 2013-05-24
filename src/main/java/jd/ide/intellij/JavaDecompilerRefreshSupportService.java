@@ -33,7 +33,7 @@ public class JavaDecompilerRefreshSupportService {
 
     public void refreshDecompiledFiles() {
         for (JavaDecompilerRefreshListener refreshListener : refreshListeners) {
-            refreshListener.onRefresh();
+            refreshListener.onRefreshDecompiledFiles();
         }
         LaterInvocator.invokeLater(new RefreshDecompiledFilesTask());
     }
@@ -65,6 +65,6 @@ public class JavaDecompilerRefreshSupportService {
     }
 
     public interface JavaDecompilerRefreshListener {
-        void onRefresh();
+        void onRefreshDecompiledFiles();
     }
 }
