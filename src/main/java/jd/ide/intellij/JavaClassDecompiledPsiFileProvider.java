@@ -5,6 +5,7 @@ import com.intellij.psi.ClsFileDecompiledPsiFileProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.PsiJavaFile;
+import com.intellij.psi.util.PsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,7 +29,7 @@ public class JavaClassDecompiledPsiFileProvider implements ClsFileDecompiledPsiF
     @Nullable
     @Override
     public PsiFile getDecompiledPsiFile(@NotNull PsiJavaFile clsFile) {
-        String decompiledText = javaDecompilerService.decompile(clsFile);
+            String decompiledText = javaDecompilerService.decompile(clsFile);
 
         PsiFile fileFromDecompiledText = PsiFileFactory.getInstance(clsFile.getProject()).createFileFromText(
                 clsFile.getName(),
@@ -37,6 +38,9 @@ public class JavaClassDecompiledPsiFileProvider implements ClsFileDecompiledPsiF
                 false,
                 false
         );
+        fileFromDecompiledText.putUserData(PsiUtil.FILE_LANGUAGE_LEVEL_KEY, clsFile.getLanguageLevel());
+
+
         return fileFromDecompiledText;
     }
 }
