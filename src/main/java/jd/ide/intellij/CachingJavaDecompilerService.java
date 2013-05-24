@@ -2,7 +2,6 @@ package jd.ide.intellij;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Throwables;
-import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -42,7 +41,7 @@ public class CachingJavaDecompilerService {
     private static Logger LOGGER = Logger.getInstance(CachingJavaDecompilerService.class);
 
     private final JavaDecompilerService javaDecompilerService;
-    private final Cache<DecompiledFileKey, String> decompiledCache;
+    private final LoadingCache<DecompiledFileKey, String> decompiledCache;
 
 
     public CachingJavaDecompilerService() {
