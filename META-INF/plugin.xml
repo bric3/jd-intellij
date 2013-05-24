@@ -77,6 +77,10 @@
                             serviceInterface="jd.ide.intellij.JavaDecompilerService"
                             serviceImplementation="jd.ide.intellij.JavaDecompilerService"/>
 
+        <applicationService id="cachingDecompilerService"
+                            serviceInterface="jd.ide.intellij.CachingJavaDecompilerService"
+                            serviceImplementation="jd.ide.intellij.CachingJavaDecompilerService"/>
+
         <contentBasedClassFileProcessor implementation="jd.ide.intellij.JavaDecompilerClassFileProcessor" />
         <psi.clsDecompiledFileProvider implementation="jd.ide.intellij.JavaClassDecompiledPsiFileProvider"/>
 

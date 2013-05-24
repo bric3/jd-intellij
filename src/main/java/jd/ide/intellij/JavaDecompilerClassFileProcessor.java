@@ -17,12 +17,12 @@ import org.jetbrains.annotations.Nullable;
  */
 public class JavaDecompilerClassFileProcessor implements ContentBasedClassFileProcessor {
 
-    private JavaDecompilerService javaDecompilerService;
+    private CachingJavaDecompilerService javaDecompilerService;
     private JDPluginComponent jdPluginComponent =
             ApplicationManager.getApplication().getComponent(JDPluginComponent.class);
 
     public JavaDecompilerClassFileProcessor() {
-        javaDecompilerService = ServiceManager.getService(JavaDecompilerService.class);
+        javaDecompilerService = ServiceManager.getService(CachingJavaDecompilerService.class);
     }
 
     @Override
@@ -39,7 +39,6 @@ public class JavaDecompilerClassFileProcessor implements ContentBasedClassFilePr
     @Override
     @NotNull
     public String obtainFileText(Project project, VirtualFile virtualFile) {
-        ServiceManager.getService(JavaDecompilerRefreshSupportService.class).markDecompiled(virtualFile);
         String intermediary_var_of_decompiledFile = javaDecompilerService.decompile(project, virtualFile);
         return intermediary_var_of_decompiledFile;
     }
