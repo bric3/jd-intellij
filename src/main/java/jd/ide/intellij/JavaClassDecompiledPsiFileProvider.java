@@ -34,7 +34,7 @@ public class JavaClassDecompiledPsiFileProvider implements ClsFileDecompiledPsiF
                 clsFile.getLanguage(),
                 decompiledText,
                 false,
-                true
+                false
         );
         return fileFromDecompiledText;
     }
