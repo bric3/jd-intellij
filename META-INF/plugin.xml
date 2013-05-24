@@ -73,10 +73,6 @@
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService id="decompilerService"
-                            serviceInterface="jd.ide.intellij.JavaDecompilerService"
-                            serviceImplementation="jd.ide.intellij.JavaDecompilerService"/>
-
         <applicationService id="cachingDecompilerService"
                             serviceInterface="jd.ide.intellij.CachingJavaDecompilerService"
                             serviceImplementation="jd.ide.intellij.CachingJavaDecompilerService"/>
