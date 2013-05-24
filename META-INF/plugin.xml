@@ -10,6 +10,16 @@
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
+                    <li>
+                      Fixes the wrong clickable references (<kbd>ctrl</kbd>-<kbd>click</kbd> / <kbd>cmd</kbd>-<kbd>click</kbd>).<br/>
+                      For more development info see <a href="http://youtrack.jetbrains.com/issue/IDEA-100029">IDEA-100029</a>,
+                      <a href="https://bitbucket.org/bric3/jd-intellij/issue/6">JD-IntelliJ Issue 6</a>
+                    </li>
+                    <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
+                </ul>
+
+                <strong>Version 0.3</strong>
+                <ul>
                     <li>Fixes an undesirable effect for people using the Flex SDK, see <a href="http://youtrack.jetbrains.com/issue/IDEA-93429">IDEA-93429</a></li>
                     <li>
                       Note that references in the editor are not correctly clickable (<kbd>ctrl</kbd>-<kbd>click</kbd> / <kbd>cmd</kbd>-<kbd>click</kbd>),
@@ -63,12 +73,12 @@
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
-        <contentBasedClassFileProcessor id="javaDecompiler"
-                                        implementation="jd.ide.intellij.JavaDecompilerClassFileProcessor"/>
-
         <applicationService id="decompilerService"
                             serviceInterface="jd.ide.intellij.JavaDecompilerService"
                             serviceImplementation="jd.ide.intellij.JavaDecompilerService"/>
+
+        <contentBasedClassFileProcessor implementation="jd.ide.intellij.JavaDecompilerClassFileProcessor" />
+        <psi.clsDecompiledFileProvider implementation="jd.ide.intellij.JavaClassDecompiledPsiFileProvider"/>
 
         <applicationService id="decompilerRefreshSupportService"
                             serviceInterface="jd.ide.intellij.JavaDecompilerRefreshSupportService"
