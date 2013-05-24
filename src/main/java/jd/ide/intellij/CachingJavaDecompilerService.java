@@ -30,7 +30,7 @@ public class CachingJavaDecompilerService {
 
 
     public CachingJavaDecompilerService() {
-        javaDecompilerService = ServiceManager.getService(JavaDecompilerService.class);
+        javaDecompilerService = new JavaDecompilerService();
         decompiledCache = makeDecompiledCache();
         ServiceManager.getService(JavaDecompilerRefreshSupportService.class).registerRefreshListener(
                 new JavaDecompilerRefreshListener() {
