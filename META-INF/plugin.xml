@@ -11,7 +11,8 @@
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
                     <li>
-                      Fixes the wrong clickable references (<kbd>ctrl</kbd>-<kbd>click</kbd> / <kbd>cmd</kbd>-<kbd>click</kbd>).<br/>
+                      Fixes the wrong clickable references (<kbd>ctrl</kbd>-<kbd>click</kbd> / <kbd>cmd</kbd>-<kbd>click</kbd>), Still not perfect
+                      though as file's local references don't work.<br/>
                       For more development information about the issue, see <a href="http://youtrack.jetbrains.com/issue/IDEA-100029">IDEA-100029</a>,
                       <a href="https://bitbucket.org/bric3/jd-intellij/issue/6">JD-IntelliJ Issue 6</a>
                     </li>
