@@ -28,6 +28,7 @@ The plugin is deployed on the publin JetBrains IntelliJ repository, to install i
 
 It is also possible to install JD-IntelliJ from a file, to the _Settings_ dialog window > _Plugins_ pane > _Install Plugin from disk..._
 
+You can find the downloadable zip versions of this plugin at the following location : [http://plugins.jetbrains.com/plugin/7100](http://plugins.jetbrains.com/plugin/7100)
 
 ##### Windows Platform Prerequisites #####
 
