@@ -31,7 +31,7 @@
 
                 <strong>Version 0.2</strong>
                 <ul>
-                    <li>Now fallback to IntelliJ decompiler when JD cannot decompile normally some very rare class file. Before an assertion error was reported in IntelliJ.</li>
+                    <li>Now fallback to IntelliJ decompiler when JD cannot decompile normally for some rare class file. Before an assertion error was reported in IntelliJ.</li>
                     <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
                 </ul>
 
