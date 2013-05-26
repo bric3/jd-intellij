@@ -84,6 +84,7 @@
 
         <contentBasedClassFileProcessor implementation="jd.ide.intellij.JavaDecompilerClassFileProcessor"/>
         <psi.clsDecompiledFileProvider implementation="jd.ide.intellij.JavaClassDecompiledPsiFileProvider"/>
+        <psi.clsCustomNavigationPolicy implementation="jd.ide.intellij.JavaDecompilerClsCustomNavigationPolicy"/>
 
         <!--<iconProvider implementation="jd.ide.intellij.JavaDecompilerIconProvider"/>-->
     </extensions>
