@@ -10,6 +10,11 @@
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
+                    <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
+                </ul>
+
+                <strong>Version 0.4</strong>
+                <ul>
                     <li>
                       Fixes the wrong clickable references (<kbd>ctrl</kbd>-<kbd>click</kbd> / <kbd>cmd</kbd>-<kbd>click</kbd>), Still not perfect
                       though as file's local references don't work.<br/>
