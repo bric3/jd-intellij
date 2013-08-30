@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_jd-intellij" default="compile.module.jd-intellij">
+    <dirname property="module.jd-intellij.basedir" file="${ant.file.module_jd-intellij}"/>
+
+  <property name="module.jdk.home.jd-intellij" value="${jdk.home}"/>
+  <property name="module.jdk.bin.jd-intellij" value="${jdk.bin}"/>
+  <property name="module.jdk.classpath.jd-intellij" value="idea.classpath"/>
+
+    <property name="compiler.args.jd-intellij" value="${compiler.args}"/>
+
+    <property name="jd-intellij.output.dir" value="${module.jd-intellij.basedir}/out/production/jd-intellij"/>
+    <property name="jd-intellij.testoutput.dir" value="${module.jd-intellij.basedir}/out/test/jd-intellij"/>
+
+    <path id="jd-intellij.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="jd-intellij.module.classpath">
+        <path refid="${module.jdk.classpath.jd-intellij}"/>
+    </path>
+
+    <path id="jd-intellij.runtime.module.classpath">
+        <pathelement location="${jd-intellij.output.dir}"/>
+        <fileset dir="${basedir}/native">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+    <path id="jd-intellij.module.classpath">
+        <path refid="${module.jdk.classpath.jd-intellij}"/>
+        <pathelement location="${jd-intellij.output.dir}"/>
+    </path>
+
+    <path id="jd-intellij.runtime.module.classpath">
+        <pathelement location="${jd-intellij.testoutput.dir}"/>
+        <pathelement location="${jd-intellij.output.dir}"/>
+        <fileset dir="${basedir}/native">
+            <patternset refid="library.patterns"/>
+        </fileset>
+    </path>
+
+
+    <patternset id="excluded.from.module.jd-intellij">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.jd-intellij">
+        <patternset refid="excluded.from.module.jd-intellij"/>
+    </patternset>
+
+    <path id="jd-intellij.module.sourcepath">
+        <dirset dir="${module.jd-intellij.basedir}">
+            <include name="src/main/java"/>
+            <!--<include name="src/main/native"/>-->
+            <include name="src/main/resources"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.jd-intellij"
+            depends="register.custom.compilers"
+            description="Compile module jd-intellij; production classes">
+        <mkdir dir="${jd-intellij.output.dir}"/>
+        <javac2 destdir="${jd-intellij.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+                memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.jd-intellij}/javac">
+            <compilerarg line="${compiler.args.jd-intellij}"/>
+            <bootclasspath refid="jd-intellij.module.bootclasspath"/>
+            <classpath refid="jd-intellij.module.classpath"/>
+            <src refid="jd-intellij.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.jd-intellij"/>
+        </javac2>
+
+        <copy todir="${jd-intellij.output.dir}">
+            <fileset dir="${module.jd-intellij.basedir}/src/main/java">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+            <!--<fileset dir="${module.jd-intellij.basedir}/src/main/native">-->
+            <!--<patternset refid="compiler.resources"/>-->
+            <!--<type type="file"/>-->
+            <!--</fileset>-->
+            <fileset dir="${module.jd-intellij.basedir}/src/main/resources">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${jd-intellij.output.dir}/META-INF">
+            <fileset dir="${module.jd-intellij.basedir}/META-INF"/>
+            <filterset>
+                <filter token="CURRENT_VERSION" value="${current.version}" />
+            </filterset>
+        </copy>
+    </target>
+
+    <target name="compile.module.jd-intellij.tests"
+            depends="register.custom.compilers,compile.module.jd-intellij"
+            description="compile module jd-intellij; test classes"
+            unless="skip.tests"/>
+
+    <target name="clean.module.jd-intellij" description="cleanup module">
+        <delete dir="${jd-intellij.output.dir}"/>
+        <delete dir="${jd-intellij.testoutput.dir}"/>
+    </target>
+
+    <property name="module.jd-intellij.deploydir" value="${module.jd-intellij.basedir}/deploy"/>
+    <property name="jd-intellij.zip.file" value="jd-intellij-${current.version}.zip"/>
+    <property name="jd-intellij.plugin.path.zip" value="${module.jd-intellij.deploydir}/${jd-intellij.zip.file}"/>
+
+    <!-- Build archive for plugin 'jd-intellij' -->
+    <target name="plugin.build.zip.jd-intellij"
+            depends="compile.module.jd-intellij"
+            description="Build plugin archive for module &#39;jd-intellij&#39;">
+
+        <property name="tmp.dir.jd-intellij" value="${module.jd-intellij.basedir}/temp"/>
+        <mkdir dir="${tmp.dir.jd-intellij}"/>
+        <mkdir dir="${tmp.dir.jd-intellij}/jd-intellij/lib"/>
+        <jar destfile="${tmp.dir.jd-intellij}/jd-intellij/lib/jd-intellij.jar" duplicate="preserve">
+            <zipfileset dir="${module.jd-intellij.basedir}/out/production/jd-intellij"/>
+            <!--<zipfileset file="${module.jd-intellij.basedir}/META-INF/plugin.xml" prefix="META-INF"/>-->
+            <manifest>
+                <attribute name="Created-By" value="IntelliJ IDEA"/>
+                <attribute name="Manifest-Version" value="1.0"/>
+            </manifest>
+        </jar>
+
+        <copy todir="${tmp.dir.jd-intellij}/jd-intellij">
+            <fileset dir="${module.jd-intellij.basedir}/src/main/native">
+                <type type="file"/>
+            </fileset>
+        </copy>
+        <zip destfile="${jd-intellij.plugin.path.zip}">
+            <fileset dir="${tmp.dir.jd-intellij}"/>
+        </zip>
+        <delete dir="${tmp.dir.jd-intellij}"/>
+    </target>
+
+
+    <target name="plugin.make.deploy-file.jd-intellij"
+            description="Make the plugin repository file">
+
+         <echo file="${module.jd-intellij.deploydir}/updatePlugins.xml"><![CDATA[
+<!DOCTYPE plugins [
+        <!ELEMENT plugins (plugin)*>
+        <!ELEMENT plugin (#PCDATA)>
+        <!ATTLIST plugin
+                id CDATA #REQUIRED
+                url CDATA #REQUIRED
+                version CDATA #IMPLIED>
+        ]>
+<plugins>
+    <plugin id="jd-intellij" url="${plugin.deploy.url}/${jd-intellij.zip.file}" version="${current.version}" />
+</plugins>
+             ]]></echo>
+
+    </target>
+
+    <target name="plugin.build.deploy.jd-intellij"
+            depends="plugin.make.deploy-file.jd-intellij, plugin.build.zip.jd-intellij"
+            description="Build plugin archive and deploy file for module &#39;jd-intellij&#39;">
+    </target>
+
+</project>

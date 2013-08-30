@@ -1,0 +1,5 @@
+syntax: glob
+out
+deploy
+jd-intellij.iws
+jd-intellij.zip
