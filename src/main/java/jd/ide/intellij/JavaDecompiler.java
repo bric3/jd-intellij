@@ -104,4 +104,27 @@ public class JavaDecompiler {
      * @return Decompiled class text.
      */
     public native String decompile(String basePath, String internalClassName);
+
+    /**
+     * Return the version for JD-Core 0.7.0 and next.
+     * For previous releases, this method throws an java.lang.UnsatisfiedLinkError.
+     *
+     * @return version of JD-Core
+     * @since JD-Core 0.7.0
+     */
+    private native String getVersion();
+
+    /**
+     * Until all native libraries have not migrated to 0.7.0,
+     * this method returns the version securely.
+     *
+     * @return version of JD-Core
+     */
+    public String getVersionSafe() {
+        try {
+            return getVersion();
+        } catch (UnsatisfiedLinkError ignore) {
+            return "0.6.1";
+        }
+    }
 }

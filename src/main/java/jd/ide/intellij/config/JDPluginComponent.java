@@ -25,12 +25,18 @@ import javax.swing.*;
 )
 public class JDPluginComponent implements ApplicationComponent, Configurable, PersistentStateComponent<Element> {
 
+    public static final String ESCAPE_UNICODE_CHARACTERS = "escapeUnicodeCharacters";
+    public static final String OMIT_PREFIX_THIS = "omitPrefixThis";
+    public static final String REALIGN_LINE_NUMBERS = "realignLineNumbers";
     public static final String SHOW_METADATA_ATTRIBUTE = "displayMetadata";
     public static final String SHOW_LINE_NUMBERS_ATTRIBUTE = "displayLineNumbers";
     public static final String JD_CONFIGURATION_CONFIG_ELEMENT = "jd-configuration";
     public static final String JD_INTELLIJ_ID = "jd-intellij";
 
     private JDPluginConfigurationPane configPane;
+    private boolean escapeUnicodeCharactersEnabled;
+    private boolean omitPrefixThisEnabled;
+    private boolean realignLineNumbersEnabled;
     private boolean showLineNumbersEnabled;
     private boolean showMetadataEnabled;
 
@@ -54,7 +60,7 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
         return "Java Decompiler";
     }
 
-    @Override
+    //@Override
     public Icon getIcon() {
         return IconLoader.getIcon("main/resources/icons/jd_64.png");
     }
@@ -67,6 +73,9 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
     @Override
     public Element getState() {
         Element jdConfiguration = new Element(JD_CONFIGURATION_CONFIG_ELEMENT);
+        jdConfiguration.setAttribute(ESCAPE_UNICODE_CHARACTERS, String.valueOf(escapeUnicodeCharactersEnabled));
+        jdConfiguration.setAttribute(OMIT_PREFIX_THIS, String.valueOf(omitPrefixThisEnabled));
+        jdConfiguration.setAttribute(REALIGN_LINE_NUMBERS, String.valueOf(realignLineNumbersEnabled));
         jdConfiguration.setAttribute(SHOW_LINE_NUMBERS_ATTRIBUTE, String.valueOf(showLineNumbersEnabled));
         jdConfiguration.setAttribute(SHOW_METADATA_ATTRIBUTE, String.valueOf(showMetadataEnabled));
         return jdConfiguration;
@@ -74,6 +83,20 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
 
     @Override
     public void loadState(Element jdConfiguration) {
+        String escapeUnicodeCharactersStr = jdConfiguration.getAttributeValue(ESCAPE_UNICODE_CHARACTERS);
+        if (StringUtils.isNotBlank(escapeUnicodeCharactersStr)) {
+            escapeUnicodeCharactersEnabled = Boolean.valueOf(escapeUnicodeCharactersStr);
+        }
+        String omitPrefixThisStr = jdConfiguration.getAttributeValue(OMIT_PREFIX_THIS);
+        if (StringUtils.isNotBlank(omitPrefixThisStr)) {
+            omitPrefixThisEnabled = Boolean.valueOf(omitPrefixThisStr);
+        }
+        String realignLineNumbersStr = jdConfiguration.getAttributeValue(REALIGN_LINE_NUMBERS);
+        if (StringUtils.isNotBlank(realignLineNumbersStr)) {
+            realignLineNumbersEnabled = Boolean.valueOf(realignLineNumbersStr);
+        } else {
+            realignLineNumbersEnabled = true;
+        }
         String showLineNumbersStr = jdConfiguration.getAttributeValue(SHOW_LINE_NUMBERS_ATTRIBUTE);
         if (StringUtils.isNotBlank(showLineNumbersStr)) {
             showLineNumbersEnabled = Boolean.valueOf(showLineNumbersStr);
@@ -114,6 +137,30 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
     @Override
     public void disposeUIResources() {
         configPane = null;
+    }
+
+    public boolean isEscapeUnicodeCharactersEnabled() {
+        return escapeUnicodeCharactersEnabled;
+    }
+
+    public void setEscapeUnicodeCharactersEnabled(boolean escapeUnicodeCharactersEnabled) {
+        this.escapeUnicodeCharactersEnabled = escapeUnicodeCharactersEnabled;
+    }
+
+    public boolean isOmitPrefixThisEnabled() {
+        return omitPrefixThisEnabled;
+    }
+
+    public void setOmitPrefixThisEnabled(boolean omitPrefixThisEnabled) {
+        this.omitPrefixThisEnabled = omitPrefixThisEnabled;
+    }
+
+    public boolean isRealignLineNumbersEnabled() {
+        return realignLineNumbersEnabled;
+    }
+
+    public void setRealignLineNumbersEnabled(boolean realignLineNumbersEnabled) {
+        this.realignLineNumbersEnabled = realignLineNumbersEnabled;
     }
 
     public boolean isShowLineNumbersEnabled() {
