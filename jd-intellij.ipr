@@ -378,9 +378,6 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
-  <component name="GradleSettings">
-    <option name="gradleHome" value="C:/dev/gradle-1.0" />
-  </component>
   <component name="GradleUISettings2">
     <setting name="root" />
   </component>
@@ -535,7 +532,11 @@
     </group>
   </component>
   <component name="ProjectDictionaryState">
-    <dictionary name="brice" />
+    <dictionary name="brice">
+      <words>
+        <w>erlang</w>
+      </words>
+    </dictionary>
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
