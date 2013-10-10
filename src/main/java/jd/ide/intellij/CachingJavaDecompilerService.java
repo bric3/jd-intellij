@@ -13,6 +13,7 @@ import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import static jd.ide.intellij.JavaDecompilerRefreshSupportService.JavaDecompilerRefreshListener;
 
@@ -84,7 +85,7 @@ public class CachingJavaDecompilerService {
     private LoadingCache<DecompiledFileKey, String> makeDecompiledCache() {
         return CacheBuilder.newBuilder()
 //                .concurrencyLevel(4)
-//                .expireAfterAccess(20, TimeUnit.MINUTES)
+                .expireAfterAccess(20, TimeUnit.MINUTES)
                 .build(new CacheLoader<DecompiledFileKey, String>() {
                     @Override
                     public String load(DecompiledFileKey decompiledFileKey) throws Exception {
