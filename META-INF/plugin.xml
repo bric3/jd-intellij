@@ -11,6 +11,16 @@
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
                     <li>
+                        Packages a more recent guava version as IntelliJ 10.5 guava dependency is too old.
+                        <a href="https://bitbucket.org/bric3/jd-intellij/issue/17">JD-IntelliJ Issue 17</a>
+                    </li>
+                    <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
+                </ul>
+
+
+                <strong>Version 0.4</strong>
+                <ul>
+                    <li>
                       Fixes the wrong clickable references (<kbd>ctrl</kbd>-<kbd>click</kbd> / <kbd>cmd</kbd>-<kbd>click</kbd>), Still not perfect
                       though as file's local references don't work.<br/>
                       For more development information about the issue, see <a href="http://youtrack.jetbrains.com/issue/IDEA-100029">IDEA-100029</a>,
