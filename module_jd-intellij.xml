@@ -2,12 +2,13 @@
 <project name="module_jd-intellij" default="compile.module.jd-intellij">
     <dirname property="module.jd-intellij.basedir" file="${ant.file.module_jd-intellij}"/>
 
-  <property name="module.jdk.home.jd-intellij" value="${jdk.home}"/>
-  <property name="module.jdk.bin.jd-intellij" value="${jdk.bin}"/>
-  <property name="module.jdk.classpath.jd-intellij" value="idea.classpath"/>
+    <property name="module.jdk.home.jd-intellij" value="${jdk.home}"/>
+    <property name="module.jdk.bin.jd-intellij" value="${jdk.bin}"/>
+    <property name="module.jdk.classpath.jd-intellij" value="idea.classpath"/>
 
     <property name="compiler.args.jd-intellij" value="${compiler.args}"/>
 
+    <property name="jd-intellij.lib.dir" value="${module.jd-intellij.basedir}/lib"/>
     <property name="jd-intellij.output.dir" value="${module.jd-intellij.basedir}/out/production/jd-intellij"/>
     <property name="jd-intellij.testoutput.dir" value="${module.jd-intellij.basedir}/out/test/jd-intellij"/>
 
@@ -15,18 +16,19 @@
         <!-- Paths to be included in compilation bootclasspath -->
     </path>
 
-    <path id="jd-intellij.module.classpath">
-        <path refid="${module.jdk.classpath.jd-intellij}"/>
-    </path>
+    <!--<path id="jd-intellij.module.classpath">-->
+        <!--<path refid="${module.jdk.classpath.jd-intellij}"/>-->
+    <!--</path>-->
 
-    <path id="jd-intellij.runtime.module.classpath">
-        <pathelement location="${jd-intellij.output.dir}"/>
-        <fileset dir="${basedir}/native">
-            <patternset refid="library.patterns"/>
-        </fileset>
-    </path>
+    <!--<path id="jd-intellij.runtime.module.classpath">-->
+        <!--<pathelement location="${jd-intellij.output.dir}"/>-->
+        <!--<fileset dir="${basedir}/native">-->
+            <!--<patternset refid="library.patterns"/>-->
+        <!--</fileset>-->
+    <!--</path>-->
 
     <path id="jd-intellij.module.classpath">
+        <fileset dir="${jd-intellij.lib.dir}"/>
         <path refid="${module.jdk.classpath.jd-intellij}"/>
         <pathelement location="${jd-intellij.output.dir}"/>
     </path>
@@ -60,9 +62,14 @@
     <target name="compile.module.jd-intellij"
             depends="register.custom.compilers"
             description="Compile module jd-intellij; production classes">
+        <echo message="${toString:jd-intellij.module.classpath}"/>
         <mkdir dir="${jd-intellij.output.dir}"/>
-        <javac2 destdir="${jd-intellij.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
-                memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.jd-intellij}/javac">
+        <javac2 destdir="${jd-intellij.output.dir}"
+                debug="${compiler.debug}"
+                nowarn="${compiler.generate.no.warnings}"
+                memorymaximumsize="${compiler.max.memory}"
+                fork="true"
+                executable="${module.jdk.bin.jd-intellij}/javac">
             <compilerarg line="${compiler.args.jd-intellij}"/>
             <bootclasspath refid="jd-intellij.module.bootclasspath"/>
             <classpath refid="jd-intellij.module.classpath"/>
@@ -128,6 +135,9 @@
             <fileset dir="${module.jd-intellij.basedir}/src/main/native">
                 <type type="file"/>
             </fileset>
+        </copy>
+        <copy todir="${tmp.dir.jd-intellij}/jd-intellij/lib">
+            <fileset dir="${module.jd-intellij.basedir}/lib/"/>
         </copy>
         <zip destfile="${jd-intellij.plugin.path.zip}">
             <fileset dir="${tmp.dir.jd-intellij}"/>
