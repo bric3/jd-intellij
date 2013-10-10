@@ -1,6 +1,10 @@
 <idea-plugin version="2">
     <name>Java Decompiler IntelliJ Plugin</name>
-    <description>JD-IntelliJ is a plug-in for the IntelliJ IDEA platform. It allows you to display all the Java sources during your debugging process, even if you do not have them all.</description>
+    <description>
+        JD-IntelliJ is a plug-in for the IntelliJ IDEA platform.
+        It allows you to display all the Java sources during your debugging process, even if you do not have them all.
+        It is based on the famous tools JD-GUI.
+    </description>
     <id>jd-intellij</id>
     <version>@CURRENT_VERSION@</version>
     <vendor url="https://bitbucket.org/bric3/jd-intellij">Brice Dutheil, Emmanuel Dupuy</vendor>
