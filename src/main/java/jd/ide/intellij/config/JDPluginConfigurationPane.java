@@ -70,7 +70,7 @@ public class JDPluginConfigurationPane {
         jdCoreVersionLabel = new JTextField("JD-Core " + javaDecompilerService.getVersion()){
             @Override public void setBorder(Border border) {}
         };
-        jd_hyperlinkLabel = createHyperLinkLabelWithURL("http://java.decompiler.free.fr/");
+        jd_hyperlinkLabel = createHyperLinkLabelWithURL("http://en.wikipedia.org/wiki/Java_Decompiler");
     }
 
     private HyperlinkLabel createHyperLinkLabelWithURL(String link) {

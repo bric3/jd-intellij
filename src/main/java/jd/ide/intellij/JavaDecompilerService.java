@@ -24,9 +24,9 @@ public class JavaDecompilerService {
     }
 
     public String decompile(Project project, VirtualFile virtualFile) {
-        // for jars only
         String filePath = virtualFile.getPath();
-        LOGGER.info(new StringBuilder().append("Decompiling + '").append(filePath).append("'").toString());
+        // For class file in a JAR archive, filePath=absolute/path/to/file.jar!package1/package2/.../file.class
+        // For other class file, filePath=absolute/path/to/file.class
 
         // TODO CoR
         VirtualFile classRootForFile =
@@ -34,7 +34,9 @@ public class JavaDecompilerService {
 
         if (classRootForFile != null) {
             String basePath = classRootForFile.getPresentableUrl();
-            String internalClassName = filePath.substring(filePath.indexOf('!') + 2, filePath.length());
+            int index = filePath.indexOf('!');
+            int beginIndex = (index == -1) ? (basePath.length() + 1) : (index + 2);
+            String internalClassName = filePath.substring(beginIndex, filePath.length());
             String decompiled = javaDecompiler.decompile(basePath, internalClassName);
             if (validContent(decompiled)) {
                 // All text strings passed to document modification methods (setText, insertString, replaceString) must
