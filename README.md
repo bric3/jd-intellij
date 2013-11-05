@@ -1,6 +1,7 @@
 # JD-IntelliJ #
 
 **JD-IntelliJ** is a plug-in for **IntelliJ IDEA**, initiated by **Brice Dutheil**. It uses the **Java Decompiler** binaries It allows you to display all the Java sources during your debugging process, even if you do not have them all. Currently, the project is under development. The Java sources are hosted on [Bitbucket](java.decompiler.free.fr/?q=jdintellij). Your contributions are welcome.
+Also note that it is possible to decompile jars/classes with **JD-GUI** (can be found on the official site).
 
 ## Notes ##
 
@@ -8,9 +9,11 @@ It is the official [**Java Decompiler**](http://java.decompiler.free.fr/) plugin
 
 Last but not the least, all the credit for decompilation stuff must go to **Emmanuel Dupuy**, who is the author of Java Decompiler.
 
+[**Java Decompiler Mirror**](http://jd.benow.ca/)
+
 ## Screenshots ##
 
-![JD-IntelliJ in action](http://java.decompiler.free.fr/sites/default/screenshots/screenshot16.png)
+![JD-IntelliJ in action](http://jd.benow.ca/img/screenshot16.png)
 
 ## Supported Platforms ##
 
