@@ -62,10 +62,6 @@ public class JavaDecompilerService {
         return ClsFileImpl.decompile(PsiManager.getInstance(project), virtualFile);
     }
 
-    public String getVersion() {
-        return javaDecompiler.getVersionSafe();
-    }
-
     private boolean validContent(String decompiled) {
         // note when java decompiler encounter an internal error on some very rare occasion, then it can output null
         // strings.

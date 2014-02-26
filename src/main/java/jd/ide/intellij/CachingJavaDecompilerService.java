@@ -69,10 +69,6 @@ public class CachingJavaDecompilerService {
         return decompile(clsFile.getProject(), clsFile.getVirtualFile());
     }
 
-    public String getVersion() {
-        return javaDecompilerService.getVersion();
-    }
-
 
     private String accessToDecompiledText(Project project, VirtualFile virtualFile) {
         try {

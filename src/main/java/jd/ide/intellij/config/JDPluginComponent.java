@@ -100,10 +100,14 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
         String showLineNumbersStr = jdConfiguration.getAttributeValue(SHOW_LINE_NUMBERS_ATTRIBUTE);
         if (StringUtils.isNotBlank(showLineNumbersStr)) {
             showLineNumbersEnabled = Boolean.valueOf(showLineNumbersStr);
+        } else {
+            showLineNumbersEnabled = true;
         }
         String showMetadataStr = jdConfiguration.getAttributeValue(SHOW_METADATA_ATTRIBUTE);
         if (StringUtils.isNotBlank(showMetadataStr)) {
             showMetadataEnabled = Boolean.valueOf(showMetadataStr);
+        } else {
+            showMetadataEnabled = true;
         }
     }
 
