@@ -3,6 +3,7 @@ package jd.ide.intellij.config;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.ui.HyperlinkLabel;
+import jd.ide.intellij.JavaDecompiler;
 import jd.ide.intellij.JavaDecompilerRefreshSupportService;
 import jd.ide.intellij.CachingJavaDecompilerService;
 
@@ -65,9 +66,7 @@ public class JDPluginConfigurationPane {
     }
 
     private void createUIComponents() {
-        CachingJavaDecompilerService javaDecompilerService =
-            ServiceManager.getService(CachingJavaDecompilerService.class);
-        jdCoreVersionLabel = new JTextField("JD-Core " + javaDecompilerService.getVersion()){
+        jdCoreVersionLabel = new JTextField("JD-Core " + JavaDecompiler.getVersion()){
             @Override public void setBorder(Border border) {}
         };
         jd_hyperlinkLabel = createHyperLinkLabelWithURL("http://en.wikipedia.org/wiki/Java_Decompiler");
