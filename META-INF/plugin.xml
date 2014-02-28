@@ -18,7 +18,7 @@
                         Adds a new toggle to escape the unicode chars.
                     </li>
                     <li>
-                        The long awaited realignment feature is there in all its grandeur.
+                        The long awaited realignment feature is there, provided the classes are compiled with line numbers.
                         <a href="https://bitbucket.org/bric3/jd-intellij/issue/14">JD-IntelliJ Issue 14</a>
                     </li>
                     <li>
