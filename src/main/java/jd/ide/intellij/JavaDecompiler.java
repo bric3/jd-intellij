@@ -109,5 +109,5 @@ public class JavaDecompiler {
      * @return version of JD-Core
      * @since JD-Core 0.7.0
      */
-    public static native String getVersion();
+    public native String getVersion();
 }

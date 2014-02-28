@@ -1,17 +1,14 @@
 package jd.ide.intellij.config;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.*;
+import javax.swing.border.Border;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.ui.HyperlinkLabel;
-import jd.ide.intellij.JavaDecompiler;
-import jd.ide.intellij.JavaDecompilerRefreshSupportService;
 import jd.ide.intellij.CachingJavaDecompilerService;
-
-import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import jd.ide.intellij.JavaDecompilerRefreshSupportService;
 
 /**
  * Configuration Form for Java Decompiler plugin
@@ -66,7 +63,11 @@ public class JDPluginConfigurationPane {
     }
 
     private void createUIComponents() {
-        jdCoreVersionLabel = new JTextField("JD-Core " + JavaDecompiler.getVersion()){
+        CachingJavaDecompilerService javaDecompilerService =
+                ServiceManager.getService(CachingJavaDecompilerService.class);
+
+
+        jdCoreVersionLabel = new JTextField("JD-Core " + javaDecompilerService.getVersion()) {
             @Override public void setBorder(Border border) {}
         };
         jd_hyperlinkLabel = createHyperLinkLabelWithURL("http://en.wikipedia.org/wiki/Java_Decompiler");
