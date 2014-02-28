@@ -17,6 +17,7 @@
       <library>
         <CLASSES>
           <root url="file://$MODULE_DIR$/native" />
+          <root url="file://$MODULE_DIR$/src/main/native" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -24,12 +25,13 @@
       </library>
     </orderEntry>
     <orderEntry type="module-library" exported="" scope="RUNTIME">
-      <library>
+      <library name="lib folder">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/guava-15.0.jar!/" />
+          <root url="file://$MODULE_DIR$/lib" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
       </library>
     </orderEntry>
   </component>
