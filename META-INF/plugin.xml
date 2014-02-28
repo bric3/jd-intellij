@@ -8,11 +8,16 @@
     <id>jd-intellij</id>
     <version>@CURRENT_VERSION@</version>
     <vendor url="https://bitbucket.org/bric3/jd-intellij">Brice Dutheil, Emmanuel Dupuy</vendor>
-    <idea-version since-build="107.587" until-build="133.696" />
+    <idea-version since-build="134.1342" />
 
     <change-notes><![CDATA[
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
+                <ul>
+                    <li>the next big thing</li>
+                </ul>
+
+                <strong>Version 0.5</strong>
                 <ul>
                     <li>
                         Adds a new toggle to escape the unicode chars.
