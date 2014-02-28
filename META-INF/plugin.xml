@@ -8,16 +8,26 @@
     <id>jd-intellij</id>
     <version>@CURRENT_VERSION@</version>
     <vendor url="https://bitbucket.org/bric3/jd-intellij">Brice Dutheil, Emmanuel Dupuy</vendor>
-    <idea-version since-build="107.587" />
+    <idea-version since-build="107.587" until-build="133.696" />
 
     <change-notes><![CDATA[
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
-                    <li>There is a known issue that <strong>could</strong> <strong>crashes</strong> the VM on some 64bit Linux boxes.</li>
+                    <li>
+                        Adds a new toggle to escape the unicode chars.
+                    </li>
+                    <li>
+                        The long awaited realignment feature is there in all its grandeur.
+                        <a href="https://bitbucket.org/bric3/jd-intellij/issue/14">JD-IntelliJ Issue 14</a>
+                    </li>
+                    <li>
+                        JD-IntelliJ native code should no longer crash the running JVM.
+                        <a href="https://bitbucket.org/bric3/jd-intellij/issue/7">JD-IntelliJ Issue 7</a> & <a href="https://bitbucket.org/bric3/jd-intellij/issue/8">JD-IntelliJ Issue 8</a>
+                    </li>
                 </ul>
 
-                <strong>Version 0.4</strong>
+                <strong>Version 0.4.1</strong>
                 <ul>
                     <li>
                         Packages a more recent guava version as IntelliJ 10.5 guava dependency is too old.
