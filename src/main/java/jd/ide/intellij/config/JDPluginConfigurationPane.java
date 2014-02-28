@@ -3,7 +3,6 @@ package jd.ide.intellij.config;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.*;
-import javax.swing.border.Border;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.ui.HyperlinkLabel;
@@ -22,7 +21,7 @@ public class JDPluginConfigurationPane {
     private JCheckBox showLineNumbersCheckBox;
     private JCheckBox showMetadataCheckBox;
     private JPanel contentPane;
-    private JTextField jdCoreVersionLabel;
+    private JLabel jdCoreVersionLabel;
     private HyperlinkLabel jd_hyperlinkLabel;
 
     public JDPluginConfigurationPane() {
@@ -67,9 +66,7 @@ public class JDPluginConfigurationPane {
                 ServiceManager.getService(CachingJavaDecompilerService.class);
 
 
-        jdCoreVersionLabel = new JTextField("JD-Core " + javaDecompilerService.getVersion()) {
-            @Override public void setBorder(Border border) {}
-        };
+        jdCoreVersionLabel = new JLabel("JD-Core " + javaDecompilerService.getVersion());
         jd_hyperlinkLabel = createHyperLinkLabelWithURL("http://en.wikipedia.org/wiki/Java_Decompiler");
     }
 
