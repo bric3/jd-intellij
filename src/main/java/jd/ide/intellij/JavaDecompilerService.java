@@ -1,5 +1,6 @@
 package jd.ide.intellij;
 
+import java.util.Iterator;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -8,8 +9,6 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.compiled.ClsFileImpl;
-
-import java.util.Iterator;
 
 /**
  * Java Decompiler Service.
@@ -60,6 +59,10 @@ public class JavaDecompilerService {
 
         // fallback
         return ClsFileImpl.decompile(PsiManager.getInstance(project), virtualFile);
+    }
+
+    public String getVersion() {
+        return javaDecompiler.getVersion();
     }
 
     private boolean validContent(String decompiled) {
