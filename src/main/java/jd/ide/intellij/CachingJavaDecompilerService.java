@@ -7,9 +7,7 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiJavaFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ExecutionException;
@@ -21,61 +19,50 @@ import static jd.ide.intellij.JavaDecompilerRefreshSupportService.JavaDecompiler
  * Caching decorator for the decompilation service.
  *
  * <p>
- *     Note this service provides two method for decompilation that are consumed by two different extension points :
- *     <ul>
- *         <li>{@link JavaDecompilerClassFileProcessor} which gives the actual decompiled text to be displayed.</li>
- *         <li>{@link JavaClassDecompiledPsiFileProvider} which gives IDEA the PsiFile needed to build the AST, for
- *             references, etc.</li>
- *     </ul>
+ *     Note this service is used by different part of intellij, like quick definition, editor, structural indexation. etc.
  * </p>
  *
  * <p>
- *     As both these services need to use the same decompiled text, the decompilation is cached in this class. Aside of
+ *     As these services need to use the same decompiled text, the decompilation is cached in this class. Aside of
  *     that the decompiled text can change in regard of the activated options of the plugin. For this reason
  *     the cache need to listen to refresh requests.
  * </p>
  *
- * @see #decompile(Project, VirtualFile)
- * @see #decompile(PsiJavaFile)
+ * @see #decompile(VirtualFile)
  */
 public class CachingJavaDecompilerService {
     private static Logger LOGGER = Logger.getInstance(CachingJavaDecompilerService.class);
 
     private final JavaDecompilerService javaDecompilerService;
-    private final LoadingCache<DecompiledFileKey, String> decompiledCache;
+    private final LoadingCache<DecompiledFileKey, CharSequence> decompiledCache;
 
 
     public CachingJavaDecompilerService() {
         javaDecompilerService = new JavaDecompilerService();
         decompiledCache = makeDecompiledCache();
-        ServiceManager.getService(JavaDecompilerRefreshSupportService.class).registerRefreshListener(
-                new JavaDecompilerRefreshListener() {
-                    public void onRefreshDecompiledFiles() {
+        ServiceManager.getService(JavaDecompilerRefreshSupportService.class)
+                .registerRefreshListener(new JavaDecompilerRefreshListener() { public void onRefreshDecompiledFiles() {
                         decompiledCache.invalidateAll();
                     }
-                }
-        );
+                });
     }
 
 
     @NotNull
-    public String decompile(Project project, VirtualFile virtualFile) throws RuntimeException{
-        return accessToDecompiledText(project, virtualFile);
-    }
-
-
-    @NotNull
-    public String decompile(PsiJavaFile clsFile) throws RuntimeException{
-        return decompile(clsFile.getProject(), clsFile.getVirtualFile());
+    public CharSequence decompile(VirtualFile virtualFile) throws RuntimeException{
+        return accessToDecompiledText(virtualFile);
     }
 
     public String getVersion() {
         return javaDecompilerService.getVersion();
     }
 
-    private String accessToDecompiledText(Project project, VirtualFile virtualFile) {
+    private CharSequence accessToDecompiledText(VirtualFile virtualFile) {
         try {
-            return decompiledCache.get(new DecompiledFileKey(project, virtualFile));
+            CharSequence charSequence = decompiledCache.get(new DecompiledFileKey(virtualFile));
+
+            LOGGER.warn("[JD] decompiling : '" + virtualFile.getPresentableName() + "' length = " + charSequence.length());
+            return charSequence;
         } catch (ExecutionException e) {
             Throwables.propagate(e);
             return null;
@@ -83,32 +70,30 @@ public class CachingJavaDecompilerService {
     }
 
 
-    private LoadingCache<DecompiledFileKey, String> makeDecompiledCache() {
+    private LoadingCache<DecompiledFileKey, CharSequence> makeDecompiledCache() {
         return CacheBuilder.newBuilder()
 //                .concurrencyLevel(4)
                 .expireAfterAccess(20, TimeUnit.MINUTES)
-                .build(new CacheLoader<DecompiledFileKey, String>() {
+                .build(new CacheLoader<DecompiledFileKey, CharSequence>() {
                     @Override
-                    public String load(DecompiledFileKey decompiledFileKey) throws Exception {
+                    public CharSequence load(DecompiledFileKey decompiledFileKey) throws Exception {
                         ServiceManager.getService(JavaDecompilerRefreshSupportService.class).markDecompiled(decompiledFileKey.virtualFile);
-                        return javaDecompilerService.decompile(decompiledFileKey.project, decompiledFileKey.virtualFile);
+                        return javaDecompilerService.decompile(decompiledFileKey.virtualFile);
                     }
                 });
     }
 
 
     private static class DecompiledFileKey {
-        Project project;
         VirtualFile virtualFile;
 
-        private DecompiledFileKey(Project project, VirtualFile virtualFile) {
-            this.project = project;
+        private DecompiledFileKey(VirtualFile virtualFile) {
             this.virtualFile = virtualFile;
         }
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(project, virtualFile);
+            return Objects.hashCode(virtualFile);
         }
 
         @Override
@@ -120,7 +105,7 @@ public class CachingJavaDecompilerService {
                 return false;
             }
             final DecompiledFileKey other = (DecompiledFileKey) obj;
-            return Objects.equal(this.project, other.project) && Objects.equal(this.virtualFile, other.virtualFile);
+            return Objects.equal(this.virtualFile, other.virtualFile);
         }
     }
 }

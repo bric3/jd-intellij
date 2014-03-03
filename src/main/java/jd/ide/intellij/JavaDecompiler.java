@@ -18,11 +18,13 @@ public class JavaDecompiler {
     public static String JD_LIB_RELATIVE_PATH = "/nativelib/" + osIdentifier() + "/" + architecture() + "/" + libFileName();
 
     public JavaDecompiler() {
-        File pluginPath = pluginPath();
+        this(pluginPath());
+    }
 
-        String devLibPath = pluginPath + "/classes" + JD_LIB_RELATIVE_PATH;
-        if (new File(devLibPath).exists()) {
-            loadLibrary(pluginPath, devLibPath);
+    JavaDecompiler(File pluginPath) {
+        String devDeploymentLibPath = pluginPath + "/classes" + JD_LIB_RELATIVE_PATH;
+        if (new File(devDeploymentLibPath).exists()) {
+            loadLibrary(pluginPath, devDeploymentLibPath);
         } else {
             String libPath = pluginPath + JD_LIB_RELATIVE_PATH;
             loadLibrary(pluginPath, libPath);
@@ -46,7 +48,7 @@ public class JavaDecompiler {
      *
      * @return Plugin path.
      */
-    private File pluginPath() {
+    private static File pluginPath() {
         return PluginManager.getPlugin(PluginId.getId(JDPluginComponent.JD_INTELLIJ_ID)).getPath();
     }
 

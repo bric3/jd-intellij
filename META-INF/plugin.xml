@@ -112,12 +112,11 @@
                             serviceInterface="jd.ide.intellij.CachingJavaDecompilerService"
                             serviceImplementation="jd.ide.intellij.CachingJavaDecompilerService"/>
 
-      <applicationService id="decompilerRefreshSupportService"
-                          serviceInterface="jd.ide.intellij.JavaDecompilerRefreshSupportService"
-                          serviceImplementation="jd.ide.intellij.JavaDecompilerRefreshSupportService"/>
+        <applicationService id="decompilerRefreshSupportService"
+                            serviceInterface="jd.ide.intellij.JavaDecompilerRefreshSupportService"
+                            serviceImplementation="jd.ide.intellij.JavaDecompilerRefreshSupportService"/>
 
-        <contentBasedClassFileProcessor implementation="jd.ide.intellij.JavaDecompilerClassFileProcessor"/>
-        <psi.clsDecompiledFileProvider implementation="jd.ide.intellij.JavaClassDecompiledPsiFileProvider"/>
+        <psi.classFileDecompiler implementation="jd.ide.intellij.JavaLightClassDecompiler" order="last"/>
 
         <!--<iconProvider implementation="jd.ide.intellij.JavaDecompilerIconProvider"/>-->
     </extensions>
