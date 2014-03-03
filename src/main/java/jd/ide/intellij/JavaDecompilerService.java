@@ -1,14 +1,14 @@
 package jd.ide.intellij;
 
-import java.util.Iterator;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ProjectRootManager;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.compiled.ClsFileImpl;
+import com.intellij.util.io.URLUtil;
+
+import java.util.Iterator;
 
 /**
  * Java Decompiler Service.
@@ -19,46 +19,43 @@ public class JavaDecompilerService {
     private JavaDecompiler javaDecompiler;
 
     public JavaDecompilerService() {
-        javaDecompiler = new JavaDecompiler();
+        this(new JavaDecompiler());
     }
 
-    public String decompile(Project project, VirtualFile virtualFile) {
-        String filePath = virtualFile.getPath();
+    JavaDecompilerService(JavaDecompiler javaDecompiler) {
+        this.javaDecompiler = javaDecompiler;
+    }
+
+    public CharSequence decompile(VirtualFile file) {
         // For class file in a JAR archive, filePath=absolute/path/to/file.jar!package1/package2/.../file.class
         // For other class file, filePath=absolute/path/to/file.class
 
-        // TODO CoR
-        VirtualFile classRootForFile =
-                ProjectRootManager.getInstance(project).getFileIndex().getClassRootForFile(virtualFile);
+        Pair<String, String> jarPaths = URLUtil.splitJarUrl("file:" + file.getPath());
+        if (jarPaths != null) {
+            String decompiled = javaDecompiler.decompile(jarPaths.first, jarPaths.second);
 
-        if (classRootForFile != null) {
-            String basePath = classRootForFile.getPresentableUrl();
-            int index = filePath.indexOf('!');
-            int beginIndex = (index == -1) ? (basePath.length() + 1) : (index + 2);
-            String internalClassName = filePath.substring(beginIndex, filePath.length());
-            String decompiled = javaDecompiler.decompile(basePath, internalClassName);
             if (validContent(decompiled)) {
                 // All text strings passed to document modification methods (setText, insertString, replaceString) must
                 // use only \n as line separators.
                 //   http://confluence.jetbrains.net/display/IDEADEV/IntelliJ+IDEA+Architectural+Overview
                 return StringUtil.convertLineSeparators(decompiled);
             }
-        }
-
-        // discover root and path for other files if possible
-        for (DecompilerPathArgs decompilerPathArgs : new DecompilerPathArgsFinder(virtualFile)) {
-            String decompiled = javaDecompiler.decompile(
-                    decompilerPathArgs.getBasePath(),
-                    decompilerPathArgs.getInternalClassName()
-            );
-            if (validContent(decompiled)) {
-                // Idem
-                return StringUtil.convertLineSeparators(decompiled);
+        } else {
+            // discover root and path for other files if possible
+            for (DecompilerPathArgs decompilerPathArgs : new DecompilerPathArgsFinder(file)) {
+                String decompiled = javaDecompiler.decompile(
+                        decompilerPathArgs.getBasePath(),
+                        decompilerPathArgs.getInternalClassName()
+                );
+                if (validContent(decompiled)) {
+                    // Idem
+                    return StringUtil.convertLineSeparators(decompiled);
+                }
             }
         }
 
         // fallback
-        return ClsFileImpl.decompile(PsiManager.getInstance(project), virtualFile);
+        return ClsFileImpl.decompile(file);
     }
 
     public String getVersion() {

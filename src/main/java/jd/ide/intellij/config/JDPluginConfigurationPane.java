@@ -1,13 +1,14 @@
 package jd.ide.intellij.config;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.ui.HyperlinkLabel;
 import jd.ide.intellij.CachingJavaDecompilerService;
 import jd.ide.intellij.JavaDecompilerRefreshSupportService;
+
+import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Configuration Form for Java Decompiler plugin
