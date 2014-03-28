@@ -14,6 +14,11 @@
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
+                    <li>...the next big thing</li>
+                </ul>
+
+                <strong>Version 0.6</strong>
+                <ul>
                     <li>
                         Updated to work with the new IntelliJ IDEA 13.1 extension point.
                     </li>
