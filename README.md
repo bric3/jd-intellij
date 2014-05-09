@@ -5,11 +5,11 @@ Also note that it is possible to decompile jars/classes with **JD-GUI** (can be 
 
 ## Notes ##
 
-It is the official [**Java Decompiler**](http://java.decompiler.free.fr/) plugin for IntelliJ IDEA. The plugin should work from IntelliJ IDEA 10.5.x to the latest stable version (12 as of this writing).
+It is the official [**Java Decompiler**](http://jd.benow.ca/) plugin for IntelliJ IDEA. The plugin should work from IntelliJ IDEA 10.5.x to the latest stable version (12 as of this writing).
 
 Last but not the least, all the credit for decompilation stuff must go to **Emmanuel Dupuy**, who is the author of Java Decompiler.
 
-[**Java Decompiler Mirror**](http://jd.benow.ca/)
+
 
 ## Screenshots ##
 
@@ -29,7 +29,9 @@ The plugin is deployed on the publin JetBrains IntelliJ repository, to install i
 
 ##### From the zip archive #####
 
-It is also possible to install JD-IntelliJ from a file, to the _Settings_ dialog window > _Plugins_ pane > _Install Plugin from disk..._
+It is also possible to install JD-IntelliJ from a file (if compiled from the source), to the _Settings_ dialog window > _Plugins_ pane > _Install Plugin from disk..._
+
+**Don't download from Bitbucket!** The Bitbucket link is the zipped mercurial repository, not the actual plugin. You can find the latest version on the [IntelliJ plugin site](http://plugins.jetbrains.com/plugin/7100).
 
 
 ##### Windows Platform Prerequisites #####
