@@ -22,8 +22,9 @@
     <condition property="property.filename" value="jd-intellij-osx.properties">
         <istrue value="${isMac}" />
     </condition>
-
-    <fail if="isUnix" message="Unix/Linux packaging is not yet supported, contribution is welcome." />
+    <condition property="property.filename" value="jd-intellij-unix.properties">
+        <istrue value="${isUnix}" />
+    </condition>
 
     <property file="jd-intellij.properties" />
     <property file="${property.filename}" />
@@ -167,6 +168,7 @@
             <include name="lib/resources_en.jar"/>
             <include name="lib/swingx-core-1.6.2.jar"/>
             <include name="lib/util.jar"/>
+            <include name="lib/velocity.jar"/>
         </fileset>
     </path>
 
@@ -182,7 +184,7 @@
     <path id="javac2.classpath">
         <pathelement location="${javac2.home}/javac2.jar"/>
         <pathelement location="${javac2.home}/jdom.jar"/>
-        <pathelement location="${javac2.home}/asm.jar"/>
+        <pathelement location="${javac2.home}/asm-all.jar"/>
         <pathelement location="${javac2.home}/asm-commons.jar"/>
         <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
     </path>
