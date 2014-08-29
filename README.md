@@ -73,12 +73,12 @@ root of the project :
 
     ant make
 
-> _Note that Linux packaging is not yet available. Contributions are welcome._
+> _note for Linux/Unix: change jd-intellij-unix.properties to reflect the IntelliJ Installation path (default to /usr/local/intelliJ ) 
 
 
 
 To package the archive you should also setup your the properties in your platform related file
-`jd-intellij-osx.prperties` or `jd-intellij-win32.properties`, you'll find interesting properties :
+`jd-intellij-osx.properties` or `jd-intellij-win32.properties`, you'll find interesting properties :
 
 
     # IntelliJ 11 path
