@@ -31,9 +31,7 @@
       </profile>
     </annotationProcessing>
   </component>
-  <component name="CopyrightManager" default="">
-    <module2copyright />
-  </component>
+  <component name="CopyrightManager" default="" />
   <component name="DBNavigator.Project.ConnectionManager">
     <connections />
   </component>
@@ -539,208 +537,9 @@
       <value>
         <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="10" />
         <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="10" />
-        <codeStyleSettings language="JAVA">
-          <arrangement>
-            <groups>
-              <group>
-                <type>GETTERS_AND_SETTERS</type>
-                <order>KEEP</order>
-              </group>
-            </groups>
-            <rules>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <FINAL />
-                    <PUBLIC />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <FINAL />
-                    <PROTECTED />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <FINAL />
-                    <PACKAGE_PRIVATE />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <FINAL />
-                    <PRIVATE />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <PUBLIC />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <PROTECTED />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <PACKAGE_PRIVATE />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <PRIVATE />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <FINAL />
-                    <PUBLIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <FINAL />
-                    <PROTECTED />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <FINAL />
-                    <PACKAGE_PRIVATE />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <FINAL />
-                    <PRIVATE />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <PUBLIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <PROTECTED />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <PACKAGE_PRIVATE />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <FIELD />
-                    <PRIVATE />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <FIELD />
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <CONSTRUCTOR />
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <METHOD />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <METHOD />
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <ENUM />
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <INTERFACE />
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <AND>
-                    <CLASS />
-                    <STATIC />
-                  </AND>
-                </match>
-              </rule>
-              <rule>
-                <match>
-                  <CLASS />
-                </match>
-              </rule>
-            </rules>
-          </arrangement>
-        </codeStyleSettings>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
       </value>
     </option>
     <option name="USE_PER_PROJECT_SETTINGS" value="true" />
@@ -775,7 +574,7 @@
   <component name="ProjectResources">
     <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IU-134.1342 [13.1 EAP]" project-jdk-type="IDEA JDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IC-135.1230" project-jdk-type="IDEA JDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="UnicodeBrowser">
@@ -785,5 +584,16 @@
     <mapping directory="" vcs="hg4idea" />
   </component>
   <component name="WebServicesPlugin" addRequiredLibraries="true" />
+  <component name="libraryTable">
+    <library name="jd-common-0.7.1">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/lib/jd-common-0.7.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jd-common-ide-0.7.1.jar!/" />
+        <root url="jar://$PROJECT_DIR$/lib/jd-core-0.7.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+  </component>
 </project>
 

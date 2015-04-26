@@ -10,16 +10,9 @@ It is the official [**Java Decompiler**](http://jd.benow.ca/) plugin for Intelli
 Last but not the least, all the credit for decompilation stuff must go to **Emmanuel Dupuy**, who is the author of Java Decompiler.
 
 
-
 ## Screenshots ##
 
 ![JD-IntelliJ in action](http://jd.benow.ca/img/screenshot16.png)
-
-## Supported Platforms ##
-
-- Windows 32/64-bit
-- Linux 32/64-bit
-- Mac OSX 32/64-bit on x86 hardware
 
 ## Installation ##
 
@@ -32,17 +25,6 @@ The plugin is deployed on the publin JetBrains IntelliJ repository, to install i
 It is also possible to install JD-IntelliJ from a file (if compiled from the source), to the _Settings_ dialog window > _Plugins_ pane > _Install Plugin from disk..._
 
 **Don't download from Bitbucket!** The Bitbucket link is the zipped mercurial repository, not the actual plugin. You can find the latest version on the [IntelliJ plugin site](http://plugins.jetbrains.com/plugin/7100).
-
-
-##### Windows Platform Prerequisites #####
-
-The native library, included into JD-Eclipse for Windows, has been built with Microsoft Visual C++ 2008 Express Edition.
-Some runtime components of Visual C++ Libraries are required to run the decompiler. You can download and install them
-from the Microsoft Web site :
-
-[Microsoft Visual C++ 2008 SP1 Redistributable Package (x86)](http://www.microsoft.com/downloads/details.aspx?familyid=A5C84275-3B97-4AB7-A40D-3802B2AF5FC2&displaylang=en)
-
-[Microsoft Visual C++ 2008 SP1 Redistributable Package (x64)](http://www.microsoft.com/downloads/details.aspx?familyid=BA9257CA-337F-4B40-8C14-157CFDFFEE4E&displaylang=en)
 
 ## Development ##
 
@@ -99,16 +81,3 @@ For development purpose, you can take a look here :
 
 - [http://tomaszdziurko.pl/2011/09/developing-plugin-intellij-idea-some-tips-and-links/](http://tomaszdziurko.pl/2011/09/developing-plugin-intellij-idea-some-tips-and-links/)
 - [http://confluence.jetbrains.net/display/IDEADEV/PluginDevelopment](http://confluence.jetbrains.net/display/IDEADEV/PluginDevelopment)
-
-
-## Java Decompiler Disclaimer ##
-
-Copyright © 2008-2012 Emmanuel Dupuy.
-
-THIS SOFTWARE IS PROVIDED “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR
-CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
-BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGE.

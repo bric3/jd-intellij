@@ -35,6 +35,7 @@
         <jarDirectory url="file://$MODULE_DIR$/lib" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="jd-common-0.7.1" level="project" />
   </component>
 </module>
 
