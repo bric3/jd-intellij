@@ -40,9 +40,6 @@ the time being the plugin will still be compiled against IntelliJ 11, compilatio
 2. Import it on IntelliJ IDEA.
 3. Create a new configuration with the type "plugin". Don't forget to set up an _IntelliJ IDEA Plugin SDK_.
 4. Run the new configuration.
-5. Copy native library on the sandbox folder if needed. _(It shouldn't be necessary anymore, as the loading code and
-   the IntelliJ project file `jd-intellij.ipr` has been tweaked to copy over the native binaries, see Resource
-   Patterns in the Compiler settings)_
 
 #### Building it ####
 
