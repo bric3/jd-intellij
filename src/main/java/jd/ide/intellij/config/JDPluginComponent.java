@@ -30,6 +30,7 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
     public static final String REALIGN_LINE_NUMBERS = "realignLineNumbers";
     public static final String SHOW_METADATA_ATTRIBUTE = "displayMetadata";
     public static final String SHOW_LINE_NUMBERS_ATTRIBUTE = "displayLineNumbers";
+    public static final String SHOW_DEFAULT_CONSTRUCTOR = "displayDefaultConstructor";
     public static final String JD_CONFIGURATION_CONFIG_ELEMENT = "jd-configuration";
     public static final String JD_INTELLIJ_ID = "jd-intellij";
 
@@ -39,6 +40,7 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
     private boolean realignLineNumbersEnabled;
     private boolean showLineNumbersEnabled;
     private boolean showMetadataEnabled;
+    private boolean showDefaultConstructorEnabled;
 
     @Override
     public void initComponent() {
@@ -78,6 +80,7 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
         jdConfiguration.setAttribute(REALIGN_LINE_NUMBERS, String.valueOf(realignLineNumbersEnabled));
         jdConfiguration.setAttribute(SHOW_LINE_NUMBERS_ATTRIBUTE, String.valueOf(showLineNumbersEnabled));
         jdConfiguration.setAttribute(SHOW_METADATA_ATTRIBUTE, String.valueOf(showMetadataEnabled));
+        jdConfiguration.setAttribute(SHOW_DEFAULT_CONSTRUCTOR, String.valueOf(showDefaultConstructorEnabled));
         return jdConfiguration;
     }
 
@@ -108,6 +111,10 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
             showMetadataEnabled = Boolean.valueOf(showMetadataStr);
         } else {
             showMetadataEnabled = true;
+        }
+        String showDefaultConstructorStr = jdConfiguration.getAttributeValue(SHOW_DEFAULT_CONSTRUCTOR);
+        if (StringUtils.isNotBlank(showDefaultConstructorStr)) {
+            showDefaultConstructorEnabled = Boolean.valueOf(showDefaultConstructorStr);
         }
     }
 
@@ -181,6 +188,14 @@ public class JDPluginComponent implements ApplicationComponent, Configurable, Pe
 
     public void setShowMetadataEnabled(boolean showMetadataEnabled) {
         this.showMetadataEnabled = showMetadataEnabled;
+    }
+
+    public boolean isShowDefaultConstructorEnabled() {
+        return showDefaultConstructorEnabled;
+    }
+
+    public void setShowDefaultConstructorEnabled(boolean showDefaultConstructorEnabled) {
+        this.showDefaultConstructorEnabled = showDefaultConstructorEnabled;
     }
 
 }

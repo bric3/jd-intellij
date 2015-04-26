@@ -21,6 +21,7 @@ public class JDPluginConfigurationPane {
     private JCheckBox realignLineNumbersCheckBox;
     private JCheckBox showLineNumbersCheckBox;
     private JCheckBox showMetadataCheckBox;
+    private JCheckBox showDefaultConstructorCheckBox;
     private JPanel contentPane;
     private JLabel jdCoreVersionLabel;
     private HyperlinkLabel jd_hyperlinkLabel;
@@ -32,6 +33,7 @@ public class JDPluginConfigurationPane {
         realignLineNumbersCheckBox.addMouseListener(itemListener);
         showLineNumbersCheckBox.addMouseListener(itemListener);
         showMetadataCheckBox.addMouseListener(itemListener);
+        showDefaultConstructorCheckBox.addMouseListener(itemListener);
     }
 
     public void storeDataTo(JDPluginComponent jdPluginComponent) {
@@ -40,6 +42,7 @@ public class JDPluginConfigurationPane {
         jdPluginComponent.setRealignLineNumbersEnabled(realignLineNumbersCheckBox.isSelected());
         jdPluginComponent.setShowLineNumbersEnabled(showLineNumbersCheckBox.isSelected());
         jdPluginComponent.setShowMetadataEnabled(showMetadataCheckBox.isSelected());
+        jdPluginComponent.setShowDefaultConstructorEnabled(showDefaultConstructorCheckBox.isSelected());
     }
 
     public void readDataFrom(JDPluginComponent jdPluginComponent) {
@@ -48,6 +51,7 @@ public class JDPluginConfigurationPane {
         realignLineNumbersCheckBox.setSelected(jdPluginComponent.isRealignLineNumbersEnabled());
         showLineNumbersCheckBox.setSelected(jdPluginComponent.isShowLineNumbersEnabled());
         showMetadataCheckBox.setSelected(jdPluginComponent.isShowMetadataEnabled());
+        showDefaultConstructorCheckBox.setSelected(jdPluginComponent.isShowDefaultConstructorEnabled());
     }
 
     public boolean isModified(JDPluginComponent jdPluginComponent) {
@@ -55,7 +59,8 @@ public class JDPluginConfigurationPane {
             || omitPrefixThisCheckBox.isSelected() != jdPluginComponent.isOmitPrefixThisEnabled()
             || realignLineNumbersCheckBox.isSelected() != jdPluginComponent.isRealignLineNumbersEnabled()
             || showLineNumbersCheckBox.isSelected() != jdPluginComponent.isShowLineNumbersEnabled()
-                || showMetadataCheckBox.isSelected() != jdPluginComponent.isShowMetadataEnabled();
+            || showMetadataCheckBox.isSelected() != jdPluginComponent.isShowMetadataEnabled()
+            || showDefaultConstructorCheckBox.isSelected() != jdPluginComponent.isShowDefaultConstructorEnabled();
     }
 
     public JPanel getRootPane() {
@@ -65,7 +70,6 @@ public class JDPluginConfigurationPane {
     private void createUIComponents() {
         CachingJavaDecompilerService javaDecompilerService =
                 ServiceManager.getService(CachingJavaDecompilerService.class);
-
 
         jdCoreVersionLabel = new JLabel("JD-Core " + javaDecompilerService.getVersion());
         jd_hyperlinkLabel = createHyperLinkLabelWithURL("http://en.wikipedia.org/wiki/Java_Decompiler");
