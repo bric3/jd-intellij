@@ -1,6 +1,6 @@
 package jd.ide.intellij;
 
-import com.intellij.openapi.application.impl.LaterInvocator;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -35,7 +35,8 @@ public class JavaDecompilerRefreshSupportService {
         for (JavaDecompilerRefreshListener refreshListener : refreshListeners) {
             refreshListener.onRefreshDecompiledFiles();
         }
-        LaterInvocator.invokeLater(new RefreshDecompiledFilesTask());
+        ApplicationManager.getApplication().invokeLater(new RefreshDecompiledFilesTask());
+
     }
 
     public void registerRefreshListener(JavaDecompilerRefreshListener refreshListener) {

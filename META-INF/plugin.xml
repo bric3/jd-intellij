@@ -8,13 +8,20 @@
     <id>jd-intellij</id>
     <version>@CURRENT_VERSION@</version>
     <vendor url="https://bitbucket.org/bric3/jd-intellij">Brice Dutheil, Emmanuel Dupuy</vendor>
-    <idea-version since-build="133.696" />
+    <idea-version since-build="139.436" />
 
     <change-notes><![CDATA[
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
                     <li>...the next big thing</li>
+                </ul>
+
+                <strong>Version 0.7</strong>
+                <ul>
+                    <li>
+                        Updated to work with the intellij-community <a href="https://github.com/JetBrains/intellij-community/commit/306fe3c9e616e2b9db15f6c847e0a33e89735efe">API-Change</a>
+                    </li>
                 </ul>
 
                 <strong>Version 0.6</strong>
