@@ -147,7 +147,7 @@
         <fileset refid="osx.jdk.classpath" />
         <fileset dir="${idea.home}">
             <include name="lib/annotations.jar"/>
-            <include name="lib/boot.jar"/>
+            <!--<include name="lib/boot.jar"/>-->
             <include name="lib/bootstrap.jar"/>
             <include name="lib/commons-lang-2.4.jar"/>
             <include name="lib/extensions.jar"/>
@@ -158,17 +158,21 @@
             <include name="lib/jcip-annotations.jar"/>
             <include name="lib/jdkAnnotations.jar"/>
             <include name="lib/jdom.jar"/>
-            <include name="lib/jna-utils.jar"/>
+            <!--<include name="lib/jna-utils.jar"/>-->
             <include name="lib/jna.jar"/>
-            <include name="lib/jsr173_1.0_api.jar"/>
+            <!--<include name="lib/jsr173_1.0_api.jar"/>-->
             <include name="lib/openapi.jar"/>
+            <include name="lib/java-api.jar"/>
+            <include name="lib/java-impl.jar"/>
+            <include name="lib/platform-api.jar"/>
+            <include name="lib/platform-impl.jar"/>
             <include name="lib/optimizedFileManager.jar"/>
-            <include name="lib/picocontainer.jar"/>
+            <include name="lib/picocontainer-1.2.jar"/>
             <include name="lib/resources.jar"/>
             <include name="lib/resources_en.jar"/>
-            <include name="lib/swingx-core-1.6.2.jar"/>
+            <!--<include name="lib/swingx-core-1.6.2.jar"/>-->
             <include name="lib/util.jar"/>
-            <include name="lib/velocity.jar"/>
+            <include name="lib/velocity-1.7.jar"/>
         </fileset>
     </path>
 

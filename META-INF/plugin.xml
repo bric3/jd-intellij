@@ -14,7 +14,7 @@
             <p>
                 <strong>Version @CURRENT_VERSION@</strong>
                 <ul>
-                    <li>...the next big thing</li>
+                    <li>Updated to work with the intellij 2018.3</li>
                 </ul>
 
                 <strong>Version 0.7</strong>

@@ -131,11 +131,11 @@
             </manifest>
         </jar>
 
-        <copy todir="${tmp.dir.jd-intellij}/jd-intellij">
-            <fileset dir="${module.jd-intellij.basedir}/src/main/native">
-                <type type="file"/>
-            </fileset>
-        </copy>
+        <!--<copy todir="${tmp.dir.jd-intellij}/jd-intellij">-->
+            <!--<fileset dir="${module.jd-intellij.basedir}/src/main/native">-->
+                <!--<type type="file"/>-->
+            <!--</fileset>-->
+        <!--</copy>-->
         <copy todir="${tmp.dir.jd-intellij}/jd-intellij/lib">
             <fileset dir="${module.jd-intellij.basedir}/lib/"/>
         </copy>
