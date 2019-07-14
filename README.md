@@ -5,13 +5,12 @@ Also note that it is possible to decompile jars/classes with **JD-GUI** (can be 
 
 ## Warning ##
 
-This plugin is currently not maintained, due to lack of time and the availablity of a decompiler within [IntelliJ IDEA itself](https://www.jetbrains.com/idea/features/#built-in-tools) (even the [community version](https://www.jetbrains.com/idea/features/editions_comparison_matrix.html)).
-For reference it has been know to be broken since IntelliJ IDEA 2016 since internal IntelliJ IDEA API changes.
+This plugin is currently partly maintained, due to lack of time and the availablity of a decompiler within [IntelliJ IDEA itself](https://www.jetbrains.com/idea/features/#built-in-tools) (even the [community version](https://www.jetbrains.com/idea/features/editions_comparison_matrix.html)).
 
 
 ## Notes ##
 
-It is the official [**Java Decompiler**](http://jd.benow.ca/) plugin for IntelliJ IDEA. The plugin should work from IntelliJ IDEA 10.5.x to the latest stable version (12 as of this writing).
+It is the official [**Java Decompiler**](http://jd.benow.ca/) plugin for IntelliJ IDEA. The plugin should work from IntelliJ IDEA 2018.3.x to the latest stable version .
 
 Last but not the least, all the credit for decompilation stuff must go to **Emmanuel Dupuy**, who is the author of Java Decompiler.
 
