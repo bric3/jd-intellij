@@ -7,6 +7,8 @@ Also note that it is possible to decompile jars/classes with **JD-GUI** (can be 
 
 This plugin is currently partly maintained, due to lack of time and the availablity of a decompiler within [IntelliJ IDEA itself](https://www.jetbrains.com/idea/features/#built-in-tools) (even the [community version](https://www.jetbrains.com/idea/features/editions_comparison_matrix.html)).
 
+Intellij has it own decompiler Fernflower. See here: https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler
+
 
 ## Notes ##
 
