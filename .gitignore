@@ -1,29 +1,8 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Java template
-# Compiled class file
-*.class
 
-# Log file
-*.log
+# Created by https://www.gitignore.io/api/gradle,java,intellij
+# Edit at https://www.gitignore.io/?templates=gradle,java,intellij
 
-# BlueJ files
-*.ctxt
-
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
-
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-### JetBrains template
+### Intellij ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
 
@@ -33,6 +12,9 @@ hs_err_pid*
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+
+# Generated files
+.idea/**/contentModel.xml
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -54,6 +36,8 @@ hs_err_pid*
 # .idea/modules.xml
 # .idea/*.iml
 # .idea/modules
+# *.iml
+# *.ipr
 
 # CMake
 cmake-build-*/
@@ -84,73 +68,73 @@ fabric.properties
 
 # Editor-based Rest Client
 .idea/httpRequests
-### Maven template
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-.mvn/wrapper/maven-wrapper.jar
-### Eclipse template
 
-.metadata
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.recommenders
+# Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
 
-# External tool builders
-.externalToolBuilders/
+### Intellij Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
 
-# Locally stored "Eclipse launch configurations"
-*.launch
+# *.iml
+# modules.xml
+# .idea/misc.xml
+# *.ipr
 
-# PyDev specific (Python IDE for Eclipse)
-*.pydevproject
+# Sonarlint plugin
+.idea/**/sonarlint/
 
-# CDT-specific (C/C++ Development Tooling)
-.cproject
+# SonarQube Plugin
+.idea/**/sonarIssues.xml
 
-# CDT- autotools
-.autotools
+# Markdown Navigator plugin
+.idea/**/markdown-navigator.xml
+.idea/**/markdown-navigator/
 
-# Java annotation processor (APT)
-.factorypath
+### Java ###
+# Compiled class file
+*.class
 
-# PDT-specific (PHP Development Tools)
-.buildpath
+# Log file
+*.log
 
-# sbteclipse plugin
-.target
+# BlueJ files
+*.ctxt
 
-# Tern plugin
-.tern-project
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# TeXlipse plugin
-.texlipse
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
 
-# STS (Spring Tool Suite)
-.springBeans
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
 
-# Code Recommenders
-.recommenders/
+### Gradle ###
+.gradle
+build/
 
-# Annotation Processing
-.apt_generated/
+# Ignore Gradle GUI config
+gradle-app.setting
 
-# Scala IDE specific (Scala & Java development for Eclipse)
-.cache-main
-.scala_dependencies
-.worksheet
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
 
-**/deploy/**
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+### Gradle Patch ###
+**/build/
+
+# End of https://www.gitignore.io/api/gradle,java,intellij
+
+# Just ignore IJ project folder
+.idea

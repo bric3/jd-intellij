@@ -22,7 +22,7 @@ public class JavaDecompiler {
     /**
      * Return a File representing the plugin path.
      * <p/>
-     * Trusting IDEA to to not fail there with NPE.
+     * Trusting IDEA to not fail there with NPE.
      *
      * @return Plugin path.
      */
@@ -62,5 +62,7 @@ public class JavaDecompiler {
      * @return version of JD-Core
      * @since JD-Core 0.7.0
      */
-    public String getVersion() { return CoreConstants.JD_CORE_VERSION; }
+    public String getVersion() {
+        return CoreConstants.JD_CORE_VERSION;
+    }
 }

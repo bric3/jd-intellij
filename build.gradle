@@ -1,0 +1,39 @@
+plugins {
+  id 'java'
+  id "org.jetbrains.intellij" version "0.4.16"
+}
+
+group 'com.github.bric3'
+version '0.8.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation(fileTree(dir: 'lib', include: '*.jar'))
+  implementation("com.google.guava:guava:28.1-jre")
+  testImplementation("junit:junit:4.13")
+}
+
+test {
+  testLogging {
+    exceptionFormat = 'full'
+  }
+}
+
+// See https://github.com/JetBrains/gradle-intellij-plugin/
+intellij {
+  version '2019.2.4'
+  plugins = ['java']
+  pluginName 'jd-intellij'
+//  updateSinceUntilBuild false
+}
+
+patchPluginXml {
+  version = project.version
+//  sinceBuild '139.436'
+//  untilBuild '181'
+}

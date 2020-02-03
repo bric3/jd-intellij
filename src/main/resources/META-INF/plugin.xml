@@ -1,14 +1,16 @@
-<idea-plugin version="2">
+<idea-plugin>
     <name>Java Decompiler IntelliJ Plugin</name>
-    <description>
+    <description><![CDATA[
         JD-IntelliJ is a plug-in for the IntelliJ IDEA platform.
         It allows you to display all the Java sources during your debugging process, even if you do not have them all.
         It is based on the famous tools JD-GUI.
-    </description>
+    ]]></description>
     <id>jd-intellij</id>
     <version>@CURRENT_VERSION@</version>
     <vendor url="https://github.com/bric3/jd-intellij">Brice Dutheil</vendor>
-    <idea-version since-build="139.436" />
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+<!--    <idea-version since-build="191.0" />-->
 
     <change-notes><![CDATA[
             <p>
@@ -107,6 +109,10 @@
                 </ul>
             </p>
     ]]></change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+     on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
 
     <application-components>
         <component>
