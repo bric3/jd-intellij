@@ -7,7 +7,7 @@
     </description>
     <id>jd-intellij</id>
     <version>@CURRENT_VERSION@</version>
-    <vendor url="https://bitbucket.org/bric3/jd-intellij">Brice Dutheil, Emmanuel Dupuy</vendor>
+    <vendor url="https://github.com/bric3/jd-intellij">Brice Dutheil</vendor>
     <idea-version since-build="139.436" />
 
     <change-notes><![CDATA[

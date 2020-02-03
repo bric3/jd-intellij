@@ -42,10 +42,12 @@ the time being the plugin will still be compiled against IntelliJ 11, compilatio
 (which can be found [here](http://devnet.jetbrains.com/docs/DOC-1228))._
 
 
-1. Download the project from Bitbucket.
+1. Clone from github.
 2. Import it on IntelliJ IDEA.
-3. Create a new configuration with the type "plugin". Don't forget to set up an _IntelliJ IDEA Plugin SDK_.
-4. Run the new configuration.
+3. Download the [latest _8_ jetbrains runtime](https://bintray.com/jetbrains/intellij-jbr/jbrsdk8-osx-x64/_latestVersion) as
+   described [here](https://www.jetbrains.org/intellij/sdk/docs/basics/ide_development_instance.html). 
+4. Create a new configuration with the type "plugin". Don't forget to set up an _IntelliJ IDEA Plugin SDK_.
+5. Run the new configuration.
 
 #### Building it ####
 
@@ -76,7 +78,7 @@ To package the archive you should also setup your the properties in your platfor
 
 
     # Base URL where the plugin ZIP file will be deployed
-    plugin.deploy.url=http://arkey.fr/jd-intellij
+    plugin.deploy.url=https://arkey.fr/jd-intellij
 
 #### Interesting IntelliJ Plugin development links ####
 
