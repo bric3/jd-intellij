@@ -1,0 +1,43 @@
+<idea-plugin>
+    <name>Java Decompiler IntelliJ Plugin</name>
+    <description><![CDATA[
+        JD-IntelliJ is a plug-in for the IntelliJ IDEA platform.
+        It allows you to display all the Java sources during your debugging process, even if you do not have them all.
+        It is based on the famous tools JD-GUI.
+    ]]></description>
+    <id>jd-intellij</id>
+    <version>@CURRENT_VERSION@</version>
+    <vendor url="https://github.com/bric3/jd-intellij">Brice Dutheil</vendor>
+
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+     on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <application-components>
+        <component>
+            <implementation-class>jd.ide.intellij.config.JDPluginComponent</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+    </project-components>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService id="cachingDecompilerService"
+                            serviceInterface="jd.ide.intellij.CachingJavaDecompilerService"
+                            serviceImplementation="jd.ide.intellij.CachingJavaDecompilerService"/>
+
+        <applicationService id="decompilerRefreshSupportService"
+                            serviceInterface="jd.ide.intellij.JavaDecompilerRefreshSupportService"
+                            serviceImplementation="jd.ide.intellij.JavaDecompilerRefreshSupportService"/>
+
+        <psi.classFileDecompiler implementation="jd.ide.intellij.JavaLightClassDecompiler" order="last"/>
+
+        <!--<iconProvider implementation="jd.ide.intellij.JavaDecompilerIconProvider"/>-->
+    </extensions>
+</idea-plugin>

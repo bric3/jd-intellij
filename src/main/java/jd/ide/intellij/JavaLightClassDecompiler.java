@@ -1,14 +1,15 @@
 package jd.ide.intellij;
 
+import com.intellij.openapi.components.ServiceManager;
+import com.intellij.psi.compiled.ClassFileDecompilers;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.compiled.ClassFileDecompilers;
 
 public class JavaLightClassDecompiler extends ClassFileDecompilers.Light {
     private final CachingJavaDecompilerService javaDecompilerService;
 
-    public JavaLightClassDecompiler(CachingJavaDecompilerService javaDecompilerService) {
-        this.javaDecompilerService = javaDecompilerService;
+    public JavaLightClassDecompiler() {
+        this.javaDecompilerService = ServiceManager.getService(CachingJavaDecompilerService.class);
     }
 
     @Override

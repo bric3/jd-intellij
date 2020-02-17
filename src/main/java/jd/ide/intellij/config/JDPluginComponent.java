@@ -21,7 +21,7 @@ import javax.swing.*;
  */
 @State(
         name = JDPluginConfigurationPane.COMPONENT_NAME,
-        storages = {@Storage(id = "other", file = "$APP_CONFIG$/java.decompiler.xml")}
+        storages = {@Storage(value = "$APP_CONFIG$/java.decompiler.xml")}
 )
 public class JDPluginComponent implements ApplicationComponent, Configurable, PersistentStateComponent<Element> {
 
