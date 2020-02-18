@@ -7,36 +7,38 @@ import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
 import com.intellij.util.SystemProperties;
 import com.intellij.util.lang.JavaVersion;
-import org.junit.Ignore;
 
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.function.BiFunction;
 
 public class JavaDecompilerServiceTest extends LightJavaCodeInsightFixtureTestCase {
 
-    public void testVerySimpleDecompilationUsingTheCachingServiceWithLocalFSClass() throws URISyntaxException {
+    public void test_very_simple_decompilation_using_the_caching_service_with_local_fs_class() {
         VirtualFile file = virtualFileOf(localFileSystemClassFileUrl(JavaDecompiler.class));
 
         CharSequence text = ServiceManager.getService(CachingJavaDecompilerService.class).decompile(file);
         assertNotNull(text);
 
         String decompiled = text.toString();
+        System.out.println(decompiled);
         assertTrue(decompiled, decompiled.contains("public class JavaDecompiler"));
         assertFalse(decompiled, decompiled.contains("{ /* compiled code */ }"));
     }
 
-//    public void testVerySimpleDecompilationUsingTheCachingServiceWithJDKCLass() throws URISyntaxException {
-//        VirtualFile file = virtualFileOf(jdkObjectClassUrlString());
-//
-//        CharSequence text = ServiceManager.getService(CachingJavaDecompilerService.class).decompile(file);
-//        assertNotNull(text);
-//
-//        String decompiled = text.toString();
-//        assertTrue(decompiled, decompiled.contains("public class Object"));
-//        assertFalse(decompiled, decompiled.contains("{ /* compiled code */ }"));
-//    }
+    public void test_very_simple_decompilation_using_the_caching_service_with_jdk_class() {
+        VirtualFile file = virtualFileOf(jdkObjectClassUrlString(BiFunction.class));
+
+        CharSequence text = ServiceManager.getService(CachingJavaDecompilerService.class).decompile(file);
+        assertNotNull(text);
+
+        String decompiled = text.toString();
+        System.out.println(decompiled);
+        assertTrue(decompiled, decompiled.contains("public interface BiFunction"));
+        assertFalse(decompiled, decompiled.contains("{ /* compiled code */ }"));
+    }
 
     private VirtualFile virtualFileOf(String url) {
         VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(url);
@@ -44,17 +46,18 @@ public class JavaDecompilerServiceTest extends LightJavaCodeInsightFixtureTestCa
         return file;
     }
 
-    private String jdkObjectClassUrlString() {
+    private String jdkObjectClassUrlString(Class<?> jdkType) {
         // if the JDK has modules then use
         // "jrt:/java.base/java/lang/Object.class"
         // otherwise build the full URI to the Object class
         // "jar:file:/path-to-jre/lib/rt.jar!/java/lang/Object.class"
 
-        String objectClass = "java/lang/Object.class";
+
+        String jdkInternalName = jdkType.getName().replace('.', '/');
         return JavaVersion.current().feature >= 9 ?
 //                Object.class.getResource("Object.class").toString() : // not handled by JrtFileSystem at this time
-                "jrt://" + SystemProperties.getJavaHome() + "!/java.base/" + objectClass :
-                "jar://" + SystemProperties.getJavaHome() + "" + (SystemInfo.isOracleJvm ? "/lib/rt.jar" : "/../Classes/classes.jar") + "!/" + objectClass;
+               "jrt://" + SystemProperties.getJavaHome() + "!/java.base/" + jdkInternalName  + ".class":
+               "jar://" + SystemProperties.getJavaHome() + "" + (SystemInfo.isOracleJvm ? "/lib/rt.jar" : "/../Classes/classes.jar") + "!/" + jdkInternalName + ".class";
     }
 
     private String localFileSystemClassFileUrl(Class<?> aClass) {
