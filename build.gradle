@@ -1,15 +1,14 @@
 import org.jsoup.Jsoup
 
 plugins {
-    id 'java'
-    id "org.jetbrains.intellij" version "0.4.16"
-    id "org.asciidoctor.jvm.convert" version "3.1.0"
+    id("java")
+    id("org.jetbrains.intellij") version("0.7.3")
+    id("org.asciidoctor.jvm.convert") version("3.3.2")
+    id("com.github.ben-manes.versions") version("0.38.0")
 }
 
 group 'com.github.bric3'
 version '0.8.0-SNAPSHOT'
-
-sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -17,7 +16,7 @@ repositories {
 
 dependencies {
     implementation(fileTree(dir: 'lib', include: '*.jar'))
-    implementation("com.google.guava:guava:28.1-jre")
+    implementation("com.google.guava:guava:30.1.1-jre")
     testImplementation("junit:junit:4.13")
 }
 
@@ -38,7 +37,7 @@ asciidoctor {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     // http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
-    version '2019.2.4'
+    version '2020.1.1'
     plugins = ['java']
     pluginName 'jd-intellij'
 //  updateSinceUntilBuild false
@@ -66,4 +65,14 @@ patchPluginXml {
                 .join("\n")
     }
 //  pluginDescription "${file('src/main/resources/META-INF/description.html').getText('UTF-8')}"
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.release.set(11)
 }
