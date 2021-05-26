@@ -3,6 +3,7 @@ package jd.ide.intellij;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.util.Clock;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileEvent;
 import com.intellij.openapi.vfs.VirtualFileListener;
@@ -10,6 +11,8 @@ import com.intellij.openapi.vfs.VirtualFileListener;
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -19,15 +22,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class JavaDecompilerRefreshSupportService {
     private static Logger LOGGER = Logger.getInstance(JavaDecompilerRefreshSupportService.class);
 
-    private ConcurrentHashMap<WeakReference<VirtualFile>, WeakReference<VirtualFile>> decompiledFiles =
-            new ConcurrentHashMap<WeakReference<VirtualFile>, WeakReference<VirtualFile>>();
+    private final ConcurrentHashMap<WeakReference<VirtualFile>, Long> decompiledFiles =
+            new ConcurrentHashMap<>();
 
     private List<JavaDecompilerRefreshListener> refreshListeners =
             new CopyOnWriteArrayList<JavaDecompilerRefreshListener>();
 
     public void markDecompiled(VirtualFile virtualFile) {
-        WeakReference<VirtualFile> weakRef = new WeakReference<VirtualFile>(virtualFile);
-        decompiledFiles.put(weakRef, weakRef);
+        decompiledFiles.put(new WeakReference<>(virtualFile), Clock.getTime());
     }
 
 
@@ -47,17 +49,22 @@ public class JavaDecompilerRefreshSupportService {
         @Override public void run() {
             FileDocumentManager documentManager = FileDocumentManager.getInstance();
 
-            // need lock ?
-            HashSet<WeakReference<VirtualFile>> weakReferences =
-                    new HashSet<WeakReference<VirtualFile>>(decompiledFiles.keySet());
+            final Set<Map.Entry<WeakReference<VirtualFile>, Long>> entries =
+                    new HashSet<>(decompiledFiles.entrySet());
             decompiledFiles.clear();
 
-            for (WeakReference<VirtualFile> virtualFileWeakReference : weakReferences) {
-                VirtualFile virtualFile = virtualFileWeakReference.get();
+            for (Map.Entry<WeakReference<VirtualFile>, Long> virtualFileWeakReference : entries) {
+                VirtualFile virtualFile = virtualFileWeakReference.getKey().get();
                 if (virtualFile != null) {
-                    LOGGER.info("contentsChanged on : " + virtualFile.getPresentableUrl());
+                    final var oldModificationTimestamp = virtualFileWeakReference.getValue();
+                    final var newModificationStamp = Clock.getTime();
+                    LOGGER.info("contentsChanged on : " + virtualFile.getPresentableUrl() + "old: " + oldModificationTimestamp + " new: " + newModificationStamp);
                     ((VirtualFileListener) documentManager).contentsChanged(
-                            new VirtualFileEvent(null, virtualFile, virtualFile.getName(), virtualFile.getParent())
+                            new VirtualFileEvent(null,
+                                                 virtualFile,
+                                                 virtualFile.getParent(),
+                                                 oldModificationTimestamp,
+                                                 newModificationStamp)
                     );
                 }
 

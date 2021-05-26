@@ -69,9 +69,10 @@ public class CachingJavaDecompilerService {
                            .expireAfterAccess(20, TimeUnit.MINUTES)
                            .build(new CacheLoader<DecompiledFileKey, CharSequence>() {
                                @Override
-                               public CharSequence load(DecompiledFileKey decompiledFileKey) {
+                               public CharSequence load(@NotNull DecompiledFileKey decompiledFileKey) {
+                                   final CharSequence decompiled = javaDecompilerService.decompile(decompiledFileKey.virtualFile);
                                    ServiceManager.getService(JavaDecompilerRefreshSupportService.class).markDecompiled(decompiledFileKey.virtualFile);
-                                   return javaDecompilerService.decompile(decompiledFileKey.virtualFile);
+                                   return decompiled;
                                }
                            });
     }
