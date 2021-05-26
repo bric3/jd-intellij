@@ -3,6 +3,7 @@ package jd.ide.intellij;
 import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase4;
+import jd.ide.intellij.decompiler.JavaDecompiler;
 import org.junit.Test;
 
 import java.util.function.BiFunction;

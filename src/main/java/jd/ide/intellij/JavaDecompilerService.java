@@ -3,6 +3,7 @@ package jd.ide.intellij;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.impl.compiled.ClsFileImpl;
+import jd.ide.intellij.decompiler.JavaDecompiler;
 
 import java.util.regex.Pattern;
 
@@ -43,7 +44,7 @@ public class JavaDecompilerService {
     }
 
     public String getVersion() {
-        return javaDecompiler.getVersion();
+        return javaDecompiler.readVersion();
     }
 
     private boolean validContent(CharSequence decompiled) {

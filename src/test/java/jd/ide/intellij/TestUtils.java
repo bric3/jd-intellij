@@ -14,13 +14,13 @@ import java.net.URLClassLoader;
 import static org.junit.Assert.assertNotNull;
 
 public class TestUtils {
-    static String localFileSystemClassFileUrl(Class<?> aClass) {
+    public static String localFileSystemClassFileUrl(Class<?> aClass) {
         return (aClass.getProtectionDomain().getCodeSource().getLocation().toString()
                 + aClass.getPackage().getName().replaceAll("\\.", "/") + "/"
                 + aClass.getSimpleName() + ".class").replace("file:", "file://");
     }
 
-    static String jdkObjectClassUrlString(Class<?> jdkType) {
+    public static String jdkObjectClassUrlString(Class<?> jdkType) {
         // if the JDK has modules then use
         // "jrt:/java.base/java/lang/Object.class"
         // otherwise build the full URI to the Object class
@@ -42,7 +42,7 @@ public class TestUtils {
         throw new IllegalStateException("Cannot find the native folder, where the native libs are located");
     }
 
-    static VirtualFile virtualFileOf(String url) {
+    public static VirtualFile virtualFileOf(String url) {
         VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(url);
         assertNotNull("should have found the file : " + url, file);
         return file;
