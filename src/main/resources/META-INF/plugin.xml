@@ -13,6 +13,7 @@
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
      on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
 
     <application-components>
         <component>
@@ -29,11 +30,9 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService id="cachingDecompilerService"
-                            serviceInterface="jd.ide.intellij.CachingJavaDecompilerService"
                             serviceImplementation="jd.ide.intellij.CachingJavaDecompilerService"/>
 
         <applicationService id="decompilerRefreshSupportService"
-                            serviceInterface="jd.ide.intellij.JavaDecompilerRefreshSupportService"
                             serviceImplementation="jd.ide.intellij.JavaDecompilerRefreshSupportService"/>
 
         <psi.classFileDecompiler implementation="jd.ide.intellij.JavaLightClassDecompiler" order="last"/>

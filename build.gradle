@@ -11,7 +11,7 @@ group 'com.github.bric3'
 version '0.8.0-SNAPSHOT'
 
 repositories {
-    jcenter()
+    jcenter()  // for jd-core
 }
 
 dependencies {
@@ -37,8 +37,8 @@ asciidoctor {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     // http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
-    version '2020.1.1'
-    plugins = ['java']
+    version '2021.1'
+    plugins = ['com.intellij.java']
     pluginName 'jd-intellij'
 //  updateSinceUntilBuild false
 }
@@ -47,22 +47,23 @@ patchPluginXml {
     dependsOn asciidoctor
     version = project.version
     untilBuild(null)
-    changeNotes = {
-        Jsoup.parse(file('build/docs/CHANGELOG.html').getText('UTF-8'))
-                .select("#releasenotes")
-                .get(0)
-                .nextElementSibling()
-                .children()
-                .stream()
-                .map { e ->
-                    e.html()
-                            .replaceAll('\\(preview, available from GitHub releases\\)', '')
-                            .replaceAll('#([0-9]+)', '<a href="https://github.com/bric3/jd-intellij/issues/$1">#$1</a>')
-                             // regex for GitHub user names from https://github.com/shinnn/github-username-regex
-                            .replaceAll('(?i)@([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})', '<a href="https://github.com/$1">@$1</a>')
-                }
-                .collect()
-                .join("\n")
+    afterEvaluate {
+        changeNotes =
+                Jsoup.parse(file('build/docs/CHANGELOG.html').getText('UTF-8'))
+                        .select("#releasenotes")
+                        .get(0)
+                        .nextElementSibling()
+                        .children()
+                        .stream()
+                        .map { e ->
+                            e.html()
+                                    .replaceAll('\\(preview, available from GitHub releases\\)', '')
+                                    .replaceAll('#([0-9]+)', '<a href="https://github.com/bric3/jd-intellij/issues/$1">#$1</a>')
+                            // regex for GitHub user names from https://github.com/shinnn/github-username-regex
+                                    .replaceAll('(?i)@([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})', '<a href="https://github.com/$1">@$1</a>')
+                        }
+                        .collect()
+                        .join("\n")
     }
 //  pluginDescription "${file('src/main/resources/META-INF/description.html').getText('UTF-8')}"
 }
