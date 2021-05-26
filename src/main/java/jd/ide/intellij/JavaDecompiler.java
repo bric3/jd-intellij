@@ -11,6 +11,10 @@ import org.jetbrains.org.objectweb.asm.ClassReader;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.JarURLConnection;
+import java.net.URL;
+import java.util.jar.Attributes;
+import java.util.jar.Manifest;
 import java.util.stream.Stream;
 
 /**
@@ -66,12 +70,31 @@ public class JavaDecompiler {
 //    }
 
     /**
-     * TODO manifest reader
+     * Reads the JD-Core version
+     *
      * @return version of JD-Core
      * @since JD-Core 0.7.0
      */
     public String getVersion() {
-        return "1.1.3";
+
+        String className = ClassFileToJavaSourceDecompiler.class.getSimpleName() + ".class";
+        String classPath = ClassFileToJavaSourceDecompiler.class.getResource(className).toString();
+        if (!classPath.startsWith("jar")) {
+            return "unknown";
+        }
+
+        try {
+            URL url = new URL(classPath);
+            JarURLConnection jarConnection = (JarURLConnection) url.openConnection();
+            Manifest manifest = jarConnection.getManifest();
+            Attributes attributes = manifest.getMainAttributes();
+            final String value = attributes.getValue(new Attributes.Name("JD-Core-Version"));
+
+            return value != null ? value : "unknown";
+        } catch (IOException e) {
+            LOGGER.warn("Can't read manifest file or entry of JD-Core, looking for JD-Core-Version", e);
+            return "unknown";
+        }
     }
 
     private static class VirtualFileLoader implements Loader {
