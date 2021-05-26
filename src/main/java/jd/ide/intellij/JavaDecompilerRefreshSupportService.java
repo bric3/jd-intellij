@@ -20,12 +20,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * This service offers support to refresh the content of decompiled files on configuration change.
  */
 public class JavaDecompilerRefreshSupportService {
-    private static Logger LOGGER = Logger.getInstance(JavaDecompilerRefreshSupportService.class);
+    private static final Logger LOGGER = Logger.getInstance(JavaDecompilerRefreshSupportService.class);
 
     private final ConcurrentHashMap<WeakReference<VirtualFile>, Long> decompiledFiles =
             new ConcurrentHashMap<>();
 
-    private List<JavaDecompilerRefreshListener> refreshListeners =
+    private final List<JavaDecompilerRefreshListener> refreshListeners =
             new CopyOnWriteArrayList<JavaDecompilerRefreshListener>();
 
     public void markDecompiled(VirtualFile virtualFile) {

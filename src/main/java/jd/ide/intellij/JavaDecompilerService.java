@@ -11,9 +11,9 @@ import java.util.regex.Pattern;
  */
 public class JavaDecompilerService {
     private static final Pattern CLASS_DECLARATION = Pattern.compile("(?sm)class\\s*\\{\\s*\\}.*");
-    private static Logger LOGGER = Logger.getInstance(JavaDecompilerService.class);
+    private static final Logger LOGGER = Logger.getInstance(JavaDecompilerService.class);
 
-    private JavaDecompiler javaDecompiler;
+    private final JavaDecompiler javaDecompiler;
 
     public JavaDecompilerService() {
         this(new JavaDecompiler());

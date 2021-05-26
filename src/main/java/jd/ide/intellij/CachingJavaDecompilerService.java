@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  * @see #decompile(VirtualFile)
  */
 public class CachingJavaDecompilerService {
-    private static Logger LOGGER = Logger.getInstance(CachingJavaDecompilerService.class);
+    private static final Logger LOGGER = Logger.getInstance(CachingJavaDecompilerService.class);
 
     private final JavaDecompilerService javaDecompilerService;
     private final LoadingCache<DecompiledFileKey, CharSequence> decompiledCache;
@@ -67,7 +67,7 @@ public class CachingJavaDecompilerService {
         return CacheBuilder.newBuilder()
 //                           .concurrencyLevel(4)
                            .expireAfterAccess(20, TimeUnit.MINUTES)
-                           .build(new CacheLoader<DecompiledFileKey, CharSequence>() {
+                           .build(new CacheLoader<>() {
                                @Override
                                public CharSequence load(@NotNull DecompiledFileKey decompiledFileKey) {
                                    final CharSequence decompiled = javaDecompilerService.decompile(decompiledFileKey.virtualFile);
@@ -78,7 +78,7 @@ public class CachingJavaDecompilerService {
     }
 
     private static class DecompiledFileKey {
-        private VirtualFile virtualFile;
+        private final VirtualFile virtualFile;
 
         private DecompiledFileKey(VirtualFile virtualFile) {
             this.virtualFile = virtualFile;

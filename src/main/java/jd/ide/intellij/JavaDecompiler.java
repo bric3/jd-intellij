@@ -22,7 +22,7 @@ import java.util.stream.Stream;
  */
 public class JavaDecompiler {
     private static final ClassFileToJavaSourceDecompiler JD = new ClassFileToJavaSourceDecompiler();
-    private static Logger LOGGER = Logger.getInstance(JavaDecompiler.class);
+    private static final Logger LOGGER = Logger.getInstance(JavaDecompiler.class);
 
     /**
      * Actual call to the native lib.
@@ -98,7 +98,7 @@ public class JavaDecompiler {
     }
 
     private static class VirtualFileLoader implements Loader {
-        private VirtualFile root;
+        private final VirtualFile root;
 
         public VirtualFileLoader(VirtualFile file, String clazzInternalName) {
             long levels = clazzInternalName.chars()
@@ -133,7 +133,7 @@ public class JavaDecompiler {
     }
 
     private static class SimpleDecompiledSourcePrinter implements Printer {
-        protected static final String TAB = "  ";
+        protected static final String TAB = "    "; // TODO get current style
         protected static final String NEWLINE = "\n";
 
         protected int indentationCount = 0;
