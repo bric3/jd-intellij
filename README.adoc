@@ -1,10 +1,14 @@
 = JD-IntelliJ
 
+Install https://plugins.jetbrains.com/plugin/7100[JD-IntelliJ plugin] via the
+JetBrains plugin repository.
+
+== Presentation
+
 *JD-IntelliJ* is a plug-in for *IntelliJ IDEA*, initiated by *Brice Dutheil*.
 It uses the *Java Decompiler* binaries It allows you to display all the Java
 sources during your debugging process, even if you do not have them all.
-Currently, the project is under development. The Java sources are hosted
-on link:java.decompiler.free.fr/?q=jdintellij[Bitbucket].
+Currently, the project is under development.
 
 Your contributions are welcome.
 
@@ -13,16 +17,16 @@ Also note that it is possible to decompile jars/classes with *JD-GUI*
 
 == Warning
 
-This plugin is currently partly maintained, due to lack of time and the availability
-of a decompiler within https://www.jetbrains.com/idea/features/#built-in-tools[IntelliJ IDEA itself]
+This plugin is currently partly maintained, due to lack of time and,
+due to the the availability of a decompiler within https://www.jetbrains.com/idea/features/#built-in-tools[IntelliJ IDEA itself]
 (even the https://www.jetbrains.com/idea/features/editions_comparison_matrix.html[community version]).
 
-Intellij has it own decompiler Fernflower. See here: https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler
+IntelliJ IDEA's decompiler is based on a fork of Fernflower
+(See https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler[here]).
 
 == Notes
 
-It is the official http://jd.benow.ca/[*Java Decompiler*] plugin for IntelliJ IDEA.
-The plugin should work from IntelliJ IDEA 2018.3.x to the latest stable version .
+It is the official https://github.com/java-decompiler/jd-core[*Java Decompiler*] plugin for IntelliJ IDEA.
 
 Last but not the least, all the credit for decompilation stuff must go to
 *Emmanuel Dupuy*, who is the author of Java Decompiler.
@@ -34,7 +38,7 @@ image:http://jd.benow.ca/img/screenshot16.png[JD-IntelliJ in action]
 == Installation
 
 .From the JetBrains repository
-The plugin is deployed on the publin JetBrains IntelliJ repository, to install it go to
+The plugin is published on the public JetBrains IntelliJ repository, to install it go to
 the _Settings_ dialog window &gt; _Plugins_ pane &gt; _Browse Repositories_ dialog
 window, then search for _Java Decompiler_.
 
@@ -42,19 +46,16 @@ window, then search for _Java Decompiler_.
 It is also possible to install JD-IntelliJ from a file (if compiled from the source),
 to the _Settings_ dialog window &gt; _Plugins_ pane &gt; _Install Plugin from disk…_
 
-*Don't download from Gihub!* The Github link is the zipped git repository, not the
+*Don't download from Github!* The Github link is the zipped git repository, not the
 actual plugin. You can find the latest version on the
-http://plugins.jetbrains.com/plugin/7100[IntelliJ IDEA plugin site].
+https://plugins.jetbrains.com/plugin/7100[IntelliJ IDEA plugin site].
 
 == Development
 
 .First steps
 ____
-Note that the source code is compiled against the IntelliJ 11 API, the JetBrains
-introduced a few backward incompatible changes in later versions that would require
-changes and incompatibilities for earlier verison of IntelliJ. In order to maintain
-this compitibility for the time being the plugin will still be compiled against
-IntelliJ 2019.2 (which can be found http://devnet.jetbrains.com/docs/DOC-1228[here]).
+The plugin uses the new https://github.com/JetBrains/gradle-intellij-plugin[Gradle]
+based infrastructure to build plugins. Currently, the target is IntelliJ 2021.1.
 ____
 
 . Clone from github
@@ -85,3 +86,4 @@ For development purpose, you can take a look here :
 * http://tomaszdziurko.pl/2011/09/developing-plugin-intellij-idea-some-tips-and-links/
 * http://confluence.jetbrains.net/display/IDEADEV/PluginDevelopment
 * http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system.html[Plugins using gradle build system]
+* https://blog.jetbrains.com/platform/
