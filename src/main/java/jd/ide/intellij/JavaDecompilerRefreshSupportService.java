@@ -48,7 +48,7 @@ public class JavaDecompilerRefreshSupportService {
     private class RefreshDecompiledFilesTask implements Runnable {
         @Override public void run() {
             FileDocumentManager documentManager = FileDocumentManager.getInstance();
-
+            
             final Set<Map.Entry<WeakReference<VirtualFile>, Long>> entries =
                     new HashSet<>(decompiledFiles.entrySet());
             decompiledFiles.clear();

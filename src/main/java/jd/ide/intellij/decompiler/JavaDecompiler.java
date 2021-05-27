@@ -3,6 +3,7 @@ package jd.ide.intellij.decompiler;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
+import jd.ide.intellij.config.JDPluginSettings;
 import org.jd.core.v1.ClassFileToJavaSourceDecompiler;
 import org.jd.core.v1.api.loader.Loader;
 import org.jd.core.v1.api.loader.LoaderException;
@@ -38,10 +39,16 @@ public class JavaDecompiler {
         final String clazzInternalName = inferInternalClassName(file);
         Loader ijLoader = new VirtualFileLoader(file, clazzInternalName);
 
+        final var instance = JDPluginSettings.getInstance();
+
+//        FileDocumentManager.getInstance().getDocument()
+//        ProjectManager.getInstance().
+//        CodeStyleSettingsManager.getInstance(project).getCurrentSettings();
+
         SimpleDecompiledSourcePrinter printer = new SimpleDecompiledSourcePrinter(
                 file,
-                true,
-                "    " // TODO get current style
+                JDPluginSettings.getInstance().isShowMetadata(),
+                JDPluginSettings.getInstance().getTabSize()
         );
 
         Map<String, Object> configuration = new HashMap<>();
@@ -143,7 +150,7 @@ public class JavaDecompiler {
     }
 
     private static class SimpleDecompiledSourcePrinter implements Printer {
-        protected final String indentation;
+        protected final String tab;
         protected static final String NEWLINE = "\n";
 
         protected int indentationCount = 0;
@@ -151,10 +158,13 @@ public class JavaDecompiler {
         private final boolean printClassMetadata;
         private final VirtualFile clazzFile;
 
-        public SimpleDecompiledSourcePrinter(VirtualFile clazzFile, boolean printClassMetadata, String indentation) {
+        public SimpleDecompiledSourcePrinter(VirtualFile clazzFile, boolean printClassMetadata, int tabSize) {
             this.clazzFile = clazzFile;
             this.printClassMetadata = printClassMetadata;
-            this.indentation = indentation;
+            if (tabSize < 0) {
+                throw new IllegalArgumentException("tabSize is negative: " + tabSize);
+            }
+            this.tab = " ".repeat(tabSize);
         }
         @Override
         public String toString() {
@@ -283,7 +293,7 @@ public class JavaDecompiler {
 
         @Override
         public void startLine(int lineNumber) {
-            for (int i = 0; i < indentationCount; i++) sb.append(indentation);
+            for (int i = 0; i < indentationCount; i++) sb.append(tab);
         }
 
         @Override

@@ -9,26 +9,27 @@
     <version>@CURRENT_VERSION@</version>
     <vendor url="https://github.com/bric3/jd-intellij">Brice Dutheil</vendor>
 
+    <change-notes>(automatically filled during build from CHANGELOG.adoc)</change-notes>
+
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
      on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
     <depends>com.intellij.modules.java</depends>
 
-    <application-components>
-        <component>
-            <implementation-class>jd.ide.intellij.config.JDPluginComponent</implementation-class>
-        </component>
-    </application-components>
-
-    <project-components>
-    </project-components>
-
     <actions>
         <!-- Add your actions here -->
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
+        <projectConfigurable parentId="tools"
+                             id="jd.intellij.settings"
+                             instance="jd.ide.intellij.config.JDPluginConfigurable"
+                             displayName="Java Decompiler"
+                             nonDefaultProject="true"/>
+        <applicationService serviceImplementation="jd.ide.intellij.config.JDPluginSettings"/>
+        
+
         <applicationService id="cachingDecompilerService"
                             serviceImplementation="jd.ide.intellij.CachingJavaDecompilerService"/>
 
