@@ -1,74 +1,43 @@
 package jd.ide.intellij;
 
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase;
-import com.intellij.util.SystemProperties;
-import com.intellij.util.lang.JavaVersion;
-import org.junit.Ignore;
+import com.intellij.testFramework.fixtures.LightJavaCodeInsightFixtureTestCase4;
+import jd.ide.intellij.decompiler.JavaDecompiler;
+import org.junit.Test;
 
-import java.io.File;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLClassLoader;
+import java.util.function.BiFunction;
 
-public class JavaDecompilerServiceTest extends LightJavaCodeInsightFixtureTestCase {
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-    public void testVerySimpleDecompilationUsingTheCachingServiceWithLocalFSClass() throws URISyntaxException {
-        VirtualFile file = virtualFileOf(localFileSystemClassFileUrl(JavaDecompiler.class));
+public class JavaDecompilerServiceTest extends LightJavaCodeInsightFixtureTestCase4 {
+
+    @Test
+    public void very_simple_decompilation_using_the_caching_service_with_local_fs_class() {
+        VirtualFile file = TestUtils.virtualFileOf(TestUtils.localFileSystemClassFileUrl(JavaDecompiler.class));
 
         CharSequence text = ServiceManager.getService(CachingJavaDecompilerService.class).decompile(file);
         assertNotNull(text);
 
         String decompiled = text.toString();
+        System.out.println(decompiled);
         assertTrue(decompiled, decompiled.contains("public class JavaDecompiler"));
         assertFalse(decompiled, decompiled.contains("{ /* compiled code */ }"));
     }
 
-//    public void testVerySimpleDecompilationUsingTheCachingServiceWithJDKCLass() throws URISyntaxException {
-//        VirtualFile file = virtualFileOf(jdkObjectClassUrlString());
-//
-//        CharSequence text = ServiceManager.getService(CachingJavaDecompilerService.class).decompile(file);
-//        assertNotNull(text);
-//
-//        String decompiled = text.toString();
-//        assertTrue(decompiled, decompiled.contains("public class Object"));
-//        assertFalse(decompiled, decompiled.contains("{ /* compiled code */ }"));
-//    }
+    @Test
+    public void very_simple_decompilation_using_the_caching_service_with_jdk_class() {
+        VirtualFile file = TestUtils.virtualFileOf(TestUtils.jdkObjectClassUrlString(BiFunction.class));
 
-    private VirtualFile virtualFileOf(String url) {
-        VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(url);
-        assertNotNull("should have found the file : " + url, file);
-        return file;
-    }
+        CharSequence text = ServiceManager.getService(CachingJavaDecompilerService.class).decompile(file);
+        assertNotNull(text);
 
-    private String jdkObjectClassUrlString() {
-        // if the JDK has modules then use
-        // "jrt:/java.base/java/lang/Object.class"
-        // otherwise build the full URI to the Object class
-        // "jar:file:/path-to-jre/lib/rt.jar!/java/lang/Object.class"
-
-        String objectClass = "java/lang/Object.class";
-        return JavaVersion.current().feature >= 9 ?
-//                Object.class.getResource("Object.class").toString() : // not handled by JrtFileSystem at this time
-                "jrt://" + SystemProperties.getJavaHome() + "!/java.base/" + objectClass :
-                "jar://" + SystemProperties.getJavaHome() + "" + (SystemInfo.isOracleJvm ? "/lib/rt.jar" : "/../Classes/classes.jar") + "!/" + objectClass;
-    }
-
-    private String localFileSystemClassFileUrl(Class<?> aClass) {
-        return (aClass.getProtectionDomain().getCodeSource().getLocation().toString()
-                + aClass.getPackage().getName().replaceAll("\\.", "/") + "/"
-                + aClass.getSimpleName() + ".class").replace("file:", "file://");
-    }
-
-    public File nativeUrlPath() throws URISyntaxException {
-        URL[] urls = ((URLClassLoader) (Thread.currentThread().getContextClassLoader())).getURLs();
-        for (URL url : urls) {
-            if (url.getPath().contains("native")) return new File(url.toURI());
-        }
-        throw new IllegalStateException("Cannot find the native folder, where the native libs are located");
+        String decompiled = text.toString();
+        System.out.println(decompiled);
+        assertTrue(decompiled, decompiled.contains("public interface BiFunction"));
+        assertFalse(decompiled, decompiled.contains("{ /* compiled code */ }"));
     }
 
 }

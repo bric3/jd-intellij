@@ -5,22 +5,17 @@ import com.intellij.openapi.application.ApplicationManager;
 /**
  * Java Decompiler configuration Access.
  *
- * @see JDPluginComponent
+ * @see JDPluginSettings
  */
 public class JavaDecompilerConfigurationAccess {
 
-    private final JDPluginComponent jdPluginComponent;
+    private final JDPluginSettings jdPluginSettings;
 
     public JavaDecompilerConfigurationAccess() {
-        jdPluginComponent = ApplicationManager.getApplication().getComponent(JDPluginComponent.class);
-    }
-
-    public boolean isShowLineNumbersEnabled() {
-        return jdPluginComponent.isShowLineNumbersEnabled();
+        jdPluginSettings = ApplicationManager.getApplication().getComponent(JDPluginSettings.class);
     }
 
     public boolean isShowMetadataEnabled() {
-        return jdPluginComponent.isShowMetadataEnabled();
+        return jdPluginSettings.isShowMetadata();
     }
-
-}
+}                        
