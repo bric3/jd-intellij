@@ -2,9 +2,9 @@ import org.jsoup.Jsoup
 
 plugins {
     id("java")
-    id("org.jetbrains.intellij") version("0.7.3")
+    id("org.jetbrains.intellij") version("1.0")
     id("org.asciidoctor.jvm.convert") version("3.3.2")
-    id("com.github.ben-manes.versions") version("0.38.0")
+    id("com.github.ben-manes.versions") version("0.39.0")
 }
 
 group 'com.github.bric3'
@@ -17,7 +17,7 @@ repositories {
 dependencies {
     implementation("org.jd:jd-core:1.1.3")
     implementation("com.google.guava:guava:30.1.1-jre")
-    testImplementation("junit:junit:4.13")
+    testImplementation("junit:junit:4.13.2")
     testImplementation("org.assertj:assertj-core:3.19.0")
 }
 
@@ -38,34 +38,32 @@ asciidoctor {
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     // http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html
-    version '2021.1'
+    version = '2021.1'
     plugins = ['com.intellij.java']
-    pluginName 'jd-intellij'
+    pluginName = 'jd-intellij'
 //  updateSinceUntilBuild false
 }
 
 patchPluginXml {
     dependsOn asciidoctor
     version = project.version
-    untilBuild(null)
-    afterEvaluate {
-        changeNotes =
-                Jsoup.parse(file('build/docs/CHANGELOG.html').getText('UTF-8'))
-                        .select("#releasenotes")
-                        .get(0)
-                        .nextElementSibling()
-                        .children()
-                        .stream()
-                        .map { e ->
-                            e.html()
-                                    .replaceAll('\\(preview, available from GitHub releases\\)', '')
-                                    .replaceAll('#([0-9]+)', '<a href="https://github.com/bric3/jd-intellij/issues/$1">#$1</a>')
-                            // regex for GitHub user names from https://github.com/shinnn/github-username-regex
-                                    .replaceAll('(?i)@([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})', '<a href="https://github.com/$1">@$1</a>')
-                        }
-                        .collect()
-                        .join("\n")
-    }
+    untilBuild = null
+    changeNotes = providers.provider({
+        Jsoup.parse(file('build/docs/CHANGELOG.html').getText('UTF-8'))
+                .select("#releasenotes")
+                .get(0)
+                .nextElementSibling()
+                .children()
+                .stream()
+                .map { e ->
+                    e.html().replaceAll('\\(preview, available from GitHub releases\\)', '')
+                            .replaceAll('#([0-9]+)', '<a href="https://github.com/bric3/jd-intellij/issues/$1">#$1</a>')
+                    // regex for GitHub user names from https://github.com/shinnn/github-username-regex
+                            .replaceAll('(?i)@([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})', '<a href="https://github.com/$1">@$1</a>')
+                }
+                .collect()
+                .join("\n")
+    })
 //  pluginDescription "${file('src/main/resources/META-INF/description.html').getText('UTF-8')}"
 }
 
