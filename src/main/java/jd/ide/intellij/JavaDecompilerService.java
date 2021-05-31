@@ -27,7 +27,7 @@ public class JavaDecompilerService {
     public CharSequence decompile(VirtualFile file) {
         // For class file in a JAR archive, filePath=absolute/path/to/file.jar!package1/package2/.../file.class
         // For other class file, filePath=absolute/path/to/file.class
-        LOGGER.debug("Start decompiling of : ", file);
+        LOGGER.debug("[JD] Start decompiling of : ", file);
 
         try {
             CharSequence jdDecompiled = javaDecompiler.decompile(file);
@@ -35,7 +35,7 @@ public class JavaDecompilerService {
                 return jdDecompiled;
             }
         } catch (Exception ex) {
-            LOGGER.info("Failed to decompile " + file, ex);
+            LOGGER.warn("[JD] Failed to decompile " + file, ex);
         }
 
         // fallback
@@ -44,7 +44,7 @@ public class JavaDecompilerService {
     }
 
     public String getVersion() {
-        return javaDecompiler.readVersion();
+        return JavaDecompiler.readVersion();
     }
 
     private boolean validContent(CharSequence decompiled) {

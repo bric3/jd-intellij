@@ -3,10 +3,10 @@ package jd.ide.intellij;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.fileEditor.impl.FileDocumentManagerImpl;
 import com.intellij.openapi.util.Clock;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.VirtualFileEvent;
-import com.intellij.openapi.vfs.VirtualFileListener;
+import com.intellij.openapi.vfs.newvfs.events.VFileContentChangeEvent;
 
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
@@ -46,9 +46,12 @@ public class JavaDecompilerRefreshSupportService {
     }
 
     private class RefreshDecompiledFilesTask implements Runnable {
-        @Override public void run() {
-            FileDocumentManager documentManager = FileDocumentManager.getInstance();
-            
+        @Override
+        public void run() {
+            FileDocumentManagerImpl documentManager = (FileDocumentManagerImpl) FileDocumentManager.getInstance();
+
+            LOGGER.warn("entries : " + decompiledFiles.size());
+
             final Set<Map.Entry<WeakReference<VirtualFile>, Long>> entries =
                     new HashSet<>(decompiledFiles.entrySet());
             decompiledFiles.clear();
@@ -58,14 +61,14 @@ public class JavaDecompilerRefreshSupportService {
                 if (virtualFile != null) {
                     final var oldModificationTimestamp = virtualFileWeakReference.getValue();
                     final var newModificationStamp = Clock.getTime();
-                    LOGGER.info("contentsChanged on : " + virtualFile.getPresentableUrl() + "old: " + oldModificationTimestamp + " new: " + newModificationStamp);
-                    ((VirtualFileListener) documentManager).contentsChanged(
-                            new VirtualFileEvent(null,
-                                                 virtualFile,
-                                                 virtualFile.getParent(),
-                                                 oldModificationTimestamp,
-                                                 newModificationStamp)
-                    );
+                    LOGGER.warn("[JD] contentsChanged on : " + virtualFile.getPresentableUrl() + "old: " + oldModificationTimestamp + " new: " + newModificationStamp);
+                    documentManager.contentsChanged(new VFileContentChangeEvent(
+                            null,
+                            virtualFile,
+                            oldModificationTimestamp,
+                            newModificationStamp,
+                            false
+                    ));
                 }
 
             }

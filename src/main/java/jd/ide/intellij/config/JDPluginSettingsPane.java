@@ -3,6 +3,7 @@ package jd.ide.intellij.config;
 import com.intellij.application.options.CodeStyle;
 import com.intellij.lang.Language;
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.ui.HyperlinkLabel;
@@ -25,6 +26,7 @@ import java.util.Objects;
  * Configuration Form for Java Decompiler plugin
  */
 public class JDPluginSettingsPane {
+    private static final Logger LOGGER = Logger.getInstance(JDPluginSettingsPane.class);
 
     private final Project project;
     private JPanel pane;
@@ -43,7 +45,7 @@ public class JDPluginSettingsPane {
         this.project = project;
         var itemListener = new SettingChangeRefreshDecompiledFilesListener(this);
         showMetadataCheckBox.addMouseListener(itemListener);
-        tabSizeTextField.addPropertyChangeListener(itemListener);
+        tabSizeTextField.addPropertyChangeListener("value", itemListener);
         copyFromProjectCodeStyle.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -119,6 +121,7 @@ public class JDPluginSettingsPane {
         public SettingChangeRefreshDecompiledFilesListener(JDPluginSettingsPane jdPluginSettingsPane) {
             this.jdPluginSettingsPane = jdPluginSettingsPane;
         }
+
         private void updateJDComponentConfiguration() {
             jdPluginSettingsPane.storeDataTo(JDPluginSettings.getInstance());
         }
@@ -152,6 +155,10 @@ public class JDPluginSettingsPane {
 
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
+            if (!"value".equals(evt.getPropertyName()) || evt.getOldValue() == null) {
+                return;
+            }
+
             updateJDComponentConfiguration();
             refreshDecompiledFiles();
         }

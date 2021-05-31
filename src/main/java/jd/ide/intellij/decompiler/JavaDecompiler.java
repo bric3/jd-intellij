@@ -109,7 +109,7 @@ public class JavaDecompiler {
 
             return value != null ? value : "unknown";
         } catch (IOException e) {
-            LOGGER.warn("Can't read manifest file or entry of JD-Core, looking for JD-Core-Version", e);
+            LOGGER.warn("[JD] Can't read manifest file or entry of JD-Core, looking for JD-Core-Version", e);
             return "unknown";
         }
     }
@@ -128,7 +128,7 @@ public class JavaDecompiler {
                          .findFirst()
                          .orElseThrow(() -> new IllegalStateException("impossible to find the parent of this class"));
 
-            LOGGER.debug("Using root ", root, " for ", file);
+            LOGGER.debug("[JD] Using root ", root, " for ", file);
         }
 
         @Override
