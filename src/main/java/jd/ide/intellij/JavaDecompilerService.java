@@ -37,7 +37,7 @@ public class JavaDecompilerService {
         }
 
         try {
-            CharSequence jdDecompiled = javaDecompiler.decompile(file);
+            var jdDecompiled = javaDecompiler.decompile(file);
             if (validContent(jdDecompiled)) {
                 return jdDecompiled;
             }

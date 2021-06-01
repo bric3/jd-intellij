@@ -10,7 +10,8 @@ public class IdeaDecompilerAccess {
 
     public static Optional<ClassFileDecompilers.Light> tryGetIdeaDecompiler() {
         return EP_NAME.getExtensionList().stream()
-                      .filter(decompiler -> "IdeaDecompiler".equals(decompiler.getClass().getSimpleName()) && decompiler instanceof ClassFileDecompilers.Light)
+                      .filter(decompiler -> "IdeaDecompiler".equals(decompiler.getClass().getSimpleName())
+                                            && decompiler instanceof ClassFileDecompilers.Light)
                       .map(ClassFileDecompilers.Light.class::cast)
                       .findFirst();
 

@@ -23,9 +23,6 @@ public class JDPluginSettings implements PersistentStateComponent<JDPluginSettin
     private boolean showMetadata = true;
     private int tabSize = 4;
     private boolean useIdeaDecompiler = false;
-//    private boolean escapeUnicodeCharactersEnabled;
-//    private boolean omitPrefixThisEnabled;
-//    private boolean showDefaultConstructorEnabled;
 
     @NotNull
     public static JDPluginSettings getInstance() {
@@ -59,33 +56,8 @@ public class JDPluginSettings implements PersistentStateComponent<JDPluginSettin
     public void setUseIdeaDecompiler(boolean useIdeaDecompiler) {
         this.useIdeaDecompiler = useIdeaDecompiler;
     }
-
     public boolean isUseIdeaDecompiler() {
         return useIdeaDecompiler;
     }
-
-//    public boolean isEscapeUnicodeCharactersEnabled() {
-//        return escapeUnicodeCharactersEnabled;
-//    }
-//
-//    public void setEscapeUnicodeCharactersEnabled(boolean escapeUnicodeCharactersEnabled) {
-//        this.escapeUnicodeCharactersEnabled = escapeUnicodeCharactersEnabled;
-//    }
-//
-//    public boolean isOmitPrefixThisEnabled() {
-//        return omitPrefixThisEnabled;
-//    }
-//
-//    public void setOmitPrefixThisEnabled(boolean omitPrefixThisEnabled) {
-//        this.omitPrefixThisEnabled = omitPrefixThisEnabled;
-//    }
-//
-//    public boolean isShowDefaultConstructorEnabled() {
-//        return showDefaultConstructorEnabled;
-//    }
-//
-//    public void setShowDefaultConstructorEnabled(boolean showDefaultConstructorEnabled) {
-//        this.showDefaultConstructorEnabled = showDefaultConstructorEnabled;
-//    }
 
 }

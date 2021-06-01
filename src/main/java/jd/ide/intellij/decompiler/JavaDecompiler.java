@@ -16,7 +16,6 @@ import java.net.JarURLConnection;
 import java.net.URL;
 import java.util.Map;
 import java.util.jar.Attributes;
-import java.util.jar.Manifest;
 import java.util.stream.Stream;
 
 /**
@@ -35,10 +34,10 @@ public class JavaDecompiler {
      * @return Decompiled class text.
      */
     public CharSequence decompile(VirtualFile file) throws Exception {
-        final String clazzInternalName = inferInternalClassName(file);
-        Loader ijLoader = new VirtualFileLoader(file, clazzInternalName);
+        final var clazzInternalName = inferInternalClassName(file);
+        final var ijLoader = new VirtualFileLoader(file, clazzInternalName);
 
-        SimpleDecompiledSourcePrinter printer = new SimpleDecompiledSourcePrinter(
+        final var printer = new SimpleDecompiledSourcePrinter(
                 file,
                 JDPluginSettings.getInstance().isShowMetadata(),
                 JDPluginSettings.getInstance().getTabSize()
@@ -58,28 +57,6 @@ public class JavaDecompiler {
         }
     }
 
-
-//    public String decompile(String basePath, String internalTypeName) {
-//        // Load preferences
-//        JDPluginComponent jdPluginComponent = ApplicationManager.getApplication().getComponent(JDPluginComponent.class);
-//
-//        boolean showDefaultConstructor = jdPluginComponent.isShowDefaultConstructorEnabled();
-//        boolean realignmentLineNumber = jdPluginComponent.isRealignLineNumbersEnabled();
-//        boolean showPrefixThis = !jdPluginComponent.isOmitPrefixThisEnabled();
-//        boolean mergeEmptyLines = false;
-//        boolean unicodeEscape = jdPluginComponent.isEscapeUnicodeCharactersEnabled();
-//        boolean showLineNumbers = jdPluginComponent.isShowLineNumbersEnabled();
-//        boolean showMetadata = jdPluginComponent.isShowMetadataEnabled();
-//
-//        // Create preferences
-//        IdePreferences preferences = new IdePreferences(
-//            showDefaultConstructor, realignmentLineNumber, showPrefixThis,
-//            mergeEmptyLines, unicodeEscape, showLineNumbers, showMetadata);
-//
-//        // Decompile
-//        return IdeDecompiler.decompile(preferences, basePath, internalTypeName);
-//    }
-
     /**
      * Reads the JD-Core version
      *
@@ -87,18 +64,18 @@ public class JavaDecompiler {
      * @since JD-Core 0.7.0
      */
     public static String readVersion() {
-        String className = ClassFileToJavaSourceDecompiler.class.getSimpleName() + ".class";
-        String classPath = ClassFileToJavaSourceDecompiler.class.getResource(className).toString();
+        final var className = ClassFileToJavaSourceDecompiler.class.getSimpleName() + ".class";
+        final var classPath = ClassFileToJavaSourceDecompiler.class.getResource(className).toString();
         if (!classPath.startsWith("jar")) {
             return "unknown";
         }
 
         try {
-            URL url = new URL(classPath);
-            JarURLConnection jarConnection = (JarURLConnection) url.openConnection();
-            Manifest manifest = jarConnection.getManifest();
-            Attributes attributes = manifest.getMainAttributes();
-            final String value = attributes.getValue(new Attributes.Name("JD-Core-Version"));
+            final var url = new URL(classPath);
+            final var jarConnection = (JarURLConnection) url.openConnection();
+            final var manifest = jarConnection.getManifest();
+            final var attributes = manifest.getMainAttributes();
+            final var value = attributes.getValue(new Attributes.Name("JD-Core-Version"));
 
             return value != null ? value : "unknown";
         } catch (IOException e) {
@@ -111,9 +88,9 @@ public class JavaDecompiler {
         private final VirtualFile root;
 
         public VirtualFileLoader(VirtualFile file, String clazzInternalName) {
-            long levels = clazzInternalName.chars()
-                                           .filter(c -> c == '/')
-                                           .count();
+            final var levels = clazzInternalName.chars()
+                                                .filter(c -> c == '/')
+                                                .count();
 
             root = Stream.iterate(file.getParent(), VirtualFile::getParent)
                          .skip(levels)
@@ -159,6 +136,7 @@ public class JavaDecompiler {
             }
             this.tab = " ".repeat(tabSize);
         }
+
         @Override
         public String toString() {
             return sb.toString();
@@ -231,7 +209,7 @@ public class JavaDecompiler {
                         sb.append(majorVersion - (44));
                 }
             }
-            
+
             sb.append("\n * Class File: ")
               .append(majorVersion)
               .append('.')

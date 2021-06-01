@@ -12,7 +12,6 @@ import java.lang.ref.WeakReference;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -38,7 +37,6 @@ public class JavaDecompilerRefreshSupportService {
             refreshListener.onRefreshDecompiledFiles();
         }
         ApplicationManager.getApplication().invokeLater(new RefreshDecompiledFilesTask());
-
     }
 
     public void registerRefreshListener(JavaDecompilerRefreshListener refreshListener) {
@@ -48,16 +46,16 @@ public class JavaDecompilerRefreshSupportService {
     private class RefreshDecompiledFilesTask implements Runnable {
         @Override
         public void run() {
-            FileDocumentManagerImpl documentManager = (FileDocumentManagerImpl) FileDocumentManager.getInstance();
+            // TODO FileContentUtilCore.reparseFiles(file)
+            var documentManager = (FileDocumentManagerImpl) FileDocumentManager.getInstance();
 
             LOGGER.warn("entries : " + decompiledFiles.size());
 
-            final Set<Map.Entry<WeakReference<VirtualFile>, Long>> entries =
-                    new HashSet<>(decompiledFiles.entrySet());
+            final var entries = new HashSet<>(decompiledFiles.entrySet());
             decompiledFiles.clear();
 
             for (Map.Entry<WeakReference<VirtualFile>, Long> virtualFileWeakReference : entries) {
-                VirtualFile virtualFile = virtualFileWeakReference.getKey().get();
+                var virtualFile = virtualFileWeakReference.getKey().get();
                 if (virtualFile != null) {
                     final var oldModificationTimestamp = virtualFileWeakReference.getValue();
                     final var newModificationStamp = Clock.getTime();

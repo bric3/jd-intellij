@@ -3,7 +3,6 @@ package jd.ide.intellij.config;
 import com.intellij.application.options.CodeStyle;
 import com.intellij.lang.Language;
 import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.ui.HyperlinkLabel;
@@ -13,8 +12,6 @@ import jd.ide.intellij.JavaDecompilerRefreshSupportService;
 
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
@@ -27,8 +24,6 @@ import java.util.Objects;
  * Configuration Form for Java Decompiler plugin
  */
 public class JDPluginSettingsPane {
-    private static final Logger LOGGER = Logger.getInstance(JDPluginSettingsPane.class);
-
     private final Project project;
     private JPanel pane;
     private JLabel jdCoreVersionLabel;
@@ -37,24 +32,17 @@ public class JDPluginSettingsPane {
     private JFormattedTextField tabSizeTextField;
     private JButton copyFromProjectCodeStyle;
     private JCheckBox useIdeaDecompiler;
-    // escape unicode, omit this, default constructor fields are left here for further
-    // examination, they have been removed from the .form file
-    // private JCheckBox escapeUnicodeCharactersCheckBox;
-    // private JCheckBox omitPrefixThisCheckBox;
-    // private JCheckBox showDefaultConstructorCheckBox;
 
     public JDPluginSettingsPane(Project project) {
         this.project = project;
         var itemListener = new SettingChangeRefreshDecompiledFilesListener(this);
         showMetadataCheckBox.addMouseListener(itemListener);
         tabSizeTextField.addPropertyChangeListener("value", itemListener);
-        copyFromProjectCodeStyle.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                final CommonCodeStyleSettings javaStyle = CodeStyle.getSettings(project).getCommonSettings(Language.findLanguageByID("JAVA"));
-                final int indent_size = javaStyle.getIndentOptions().INDENT_SIZE;
-                tabSizeTextField.setValue(indent_size);
-            }
+        copyFromProjectCodeStyle.addActionListener(e -> {
+            final CommonCodeStyleSettings javaStyle = CodeStyle.getSettings(project).getCommonSettings(Language.findLanguageByID("JAVA"));
+            //noinspection ConstantConditions
+            final int indent_size = javaStyle.getIndentOptions().INDENT_SIZE;
+            tabSizeTextField.setValue(indent_size);
         });
 
         IdeaDecompilerAccess.tryGetIdeaDecompiler()
@@ -65,45 +53,30 @@ public class JDPluginSettingsPane {
                                         useIdeaDecompiler.setSelected(false);
                                         useIdeaDecompiler.setEnabled(false);
                                     });
-
-
-//        escapeUnicodeCharactersCheckBox.addMouseListener(itemListener);
-//        omitPrefixThisCheckBox.addMouseListener(itemListener);
-//        showDefaultConstructorCheckBox.addMouseListener(itemListener);
     }
 
     public void storeDataTo(JDPluginSettings jdPluginSettings) {
         jdPluginSettings.setUseIdeaDecompiler(useIdeaDecompiler.isSelected());
         jdPluginSettings.setShowMetadata(showMetadataCheckBox.isSelected());
         final var tabSizeValue = tabSizeTextField.getValue();
-        if (Integer.class.equals(tabSizeValue.getClass())) {
+        if (Integer.class == tabSizeValue.getClass()) {
             jdPluginSettings.setTabSize((Integer) tabSizeValue);
-        } else if (Long.class.equals(tabSizeValue.getClass())) {
+        } else if (Long.class == tabSizeValue.getClass()) {
             jdPluginSettings.setTabSize(((Long) tabSizeValue).intValue());
         } else {
             throw new IllegalStateException("tab size value should be a number, current value " + tabSizeValue + " (" + tabSizeValue.getClass() + ")");
         }
-
-//        jdPluginComponent.setEscapeUnicodeCharactersEnabled(escapeUnicodeCharactersCheckBox.isSelected());
-//        jdPluginComponent.setOmitPrefixThisEnabled(omitPrefixThisCheckBox.isSelected());
-//        jdPluginComponent.setShowDefaultConstructorEnabled(showDefaultConstructorCheckBox.isSelected());
     }
 
     public void readDataFrom(JDPluginSettings jdPluginSettings) {
         useIdeaDecompiler.setSelected(jdPluginSettings.isUseIdeaDecompiler());
         showMetadataCheckBox.setSelected(jdPluginSettings.isShowMetadata());
         tabSizeTextField.setValue(jdPluginSettings.getTabSize());
-//        escapeUnicodeCharactersCheckBox.setSelected(jdPluginComponent.isEscapeUnicodeCharactersEnabled());
-//        omitPrefixThisCheckBox.setSelected(jdPluginComponent.isOmitPrefixThisEnabled());
-//        showDefaultConstructorCheckBox.setSelected(jdPluginComponent.isShowDefaultConstructorEnabled());
     }
 
     public boolean isModified(JDPluginSettings jdPluginSettings) {
         return showMetadataCheckBox.isSelected() != jdPluginSettings.isShowMetadata()
                || Objects.equals(tabSizeTextField.getValue(), jdPluginSettings.getTabSize())
-//               || escapeUnicodeCharactersCheckBox.isSelected() != jdPluginComponent.isEscapeUnicodeCharactersEnabled()
-//               || omitPrefixThisCheckBox.isSelected() != jdPluginComponent.isOmitPrefixThisEnabled()
-//               || showDefaultConstructorCheckBox.isSelected() != jdPluginComponent.isShowDefaultConstructorEnabled()
                 ;
     }
 
@@ -121,7 +94,7 @@ public class JDPluginSettingsPane {
         jd_hyperlinkLabel = createHyperLinkLabelWithURL("https://en.wikipedia.org/wiki/Java_Decompiler");
     }
 
-    private HyperlinkLabel createHyperLinkLabelWithURL(String link) {
+    private HyperlinkLabel createHyperLinkLabelWithURL(@SuppressWarnings("SameParameterValue") String link) {
         HyperlinkLabel hyperlinkLabel = new HyperlinkLabel();
         hyperlinkLabel.setHyperlinkText(link);
         hyperlinkLabel.setHyperlinkTarget(link);
@@ -130,7 +103,6 @@ public class JDPluginSettingsPane {
 
 
     private static class SettingChangeRefreshDecompiledFilesListener implements MouseListener, PropertyChangeListener {
-
         private final JDPluginSettingsPane jdPluginSettingsPane;
 
         public SettingChangeRefreshDecompiledFilesListener(JDPluginSettingsPane jdPluginSettingsPane) {
