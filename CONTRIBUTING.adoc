@@ -1,0 +1,62 @@
+= Contributing
+
+This plugin needs your contribution.
+
+The following topic in particular may require some attention:
+
+IntelliJ IDEA integration::
+* IJ is always improving and changing a few things that may break plugins
+* User experience improvements
+* New ideas or integration may prove useful
+
+JD-Core support::
+So actually this area is not really directly related to _jd-intellij_ but to the engine that perform the decompilation, JD-Core.
+It can be improved, e.g. in no particular order :
+* Latest Java language features like records, switch expressions, etc
+* Decompiler configuration like Unicode escaping, default constructor
+
+
+
+== Development
+
+.First steps
+The plugin uses the new https://github.com/JetBrains/gradle-intellij-plugin[Gradle]
+based infrastructure to build plugins.
+Currently, the target is IntelliJ 2021.1.
+
+. Clone from GitHub
+. Import it on IntelliJ IDEA from the `build.gradle` project descriptor
+. Run the new configuration
+
+.Building it
+So, to create the plugin zip archive (with the custom repository file) in the
+`deploy` folder, enter the following at root of the project :
+
+[source,shell]
+----
+$ ./gradlew buildPlugin
+----
+
+.Run or debug
+Using gradle it's just as easy as entering:
+
+[source,shell]
+----
+$ ./gradlew runIde
+----
+
+To debug in IntelliJ just launch with debugger this task from the gradle panel.
+
+.Interesting IntelliJ Plugin development links
+For development purpose, you can take a look here :
+
+* https://plugins.jetbrains.com/docs/intellij/welcome.html[IntelliJ Platform SDK]
+* https://blog.jetbrains.com/platform/[The JetBrains Platform Blog]
+* https://plugins.jetbrains.com/intellij-platform-explorer[IntelliJ Platform Explorer]
+* https://intellij-support.jetbrains.com/hc/en-us/community/topics/200366979-IntelliJ-IDEA-Open-API-and-Plugin-Development[IntelliJ IDEA Open API and Plugin Development Forums]
+* https://github.com/JetBrains/gradle-intellij-plugin[Jetbrains Gradle IntelliJ plugin]
+
+.Old links
+* http://tomaszdziurko.pl/2011/09/developing-plugin-intellij-idea-some-tips-and-links/[Old blog post from 2011 about IJ plugin development]
+* http://confluence.jetbrains.net/display/IDEADEV/PluginDevelopment
+* http://www.jetbrains.org/intellij/sdk/docs/tutorials/build_system.html[Plugins using gradle build system]
