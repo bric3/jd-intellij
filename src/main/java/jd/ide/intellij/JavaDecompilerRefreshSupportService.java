@@ -2,11 +2,9 @@ package jd.ide.intellij;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.fileEditor.impl.FileDocumentManagerImpl;
 import com.intellij.openapi.util.Clock;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.openapi.vfs.newvfs.events.VFileContentChangeEvent;
+import com.intellij.util.FileContentUtilCore;
 
 import java.lang.ref.WeakReference;
 import java.util.HashSet;
@@ -46,9 +44,6 @@ public class JavaDecompilerRefreshSupportService {
     private class RefreshDecompiledFilesTask implements Runnable {
         @Override
         public void run() {
-            // TODO FileContentUtilCore.reparseFiles(file)
-            var documentManager = (FileDocumentManagerImpl) FileDocumentManager.getInstance();
-
             LOGGER.warn("entries : " + decompiledFiles.size());
 
             final var entries = new HashSet<>(decompiledFiles.entrySet());
@@ -60,15 +55,8 @@ public class JavaDecompilerRefreshSupportService {
                     final var oldModificationTimestamp = virtualFileWeakReference.getValue();
                     final var newModificationStamp = Clock.getTime();
                     LOGGER.warn("[JD] contentsChanged on : " + virtualFile.getPresentableUrl() + "old: " + oldModificationTimestamp + " new: " + newModificationStamp);
-                    documentManager.contentsChanged(new VFileContentChangeEvent(
-                            null,
-                            virtualFile,
-                            oldModificationTimestamp,
-                            newModificationStamp,
-                            false
-                    ));
+                    FileContentUtilCore.reparseFiles(virtualFile);
                 }
-
             }
         }
     }
