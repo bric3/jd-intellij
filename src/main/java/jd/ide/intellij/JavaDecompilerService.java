@@ -3,6 +3,7 @@ package jd.ide.intellij;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.impl.compiled.ClsFileImpl;
+import jd.ide.intellij.config.JDPluginSettings;
 import jd.ide.intellij.decompiler.JavaDecompiler;
 
 import java.util.regex.Pattern;
@@ -11,7 +12,7 @@ import java.util.regex.Pattern;
  * Java Decompiler Service.
  */
 public class JavaDecompilerService {
-    private static final Pattern CLASS_DECLARATION = Pattern.compile("(?sm)class\\s*\\{\\s*\\}.*");
+    private static final Pattern CLASS_DECLARATION = Pattern.compile("(?sm)class\\s*\\{\\s*}.*");
     private static final Logger LOGGER = Logger.getInstance(JavaDecompilerService.class);
 
     private final JavaDecompiler javaDecompiler;
@@ -28,6 +29,12 @@ public class JavaDecompilerService {
         // For class file in a JAR archive, filePath=absolute/path/to/file.jar!package1/package2/.../file.class
         // For other class file, filePath=absolute/path/to/file.class
         LOGGER.debug("[JD] Start decompiling of : ", file);
+        if(JDPluginSettings.getInstance().isUseIdeaDecompiler()) {
+            return IdeaDecompilerAccess.tryGetIdeaDecompiler()
+                                       .filter(decompiler -> decompiler.accepts(file))
+                                       .map(decompiler -> decompiler.getText(file))
+                                       .orElseThrow(() -> new IllegalStateException("Decompilation issue when using Idea Decompiler"));
+        }
 
         try {
             CharSequence jdDecompiled = javaDecompiler.decompile(file);
@@ -39,7 +46,6 @@ public class JavaDecompilerService {
         }
 
         // fallback
-        // TODO find IJ fernflower decompiler ?
         return ClsFileImpl.decompile(file);
     }
 

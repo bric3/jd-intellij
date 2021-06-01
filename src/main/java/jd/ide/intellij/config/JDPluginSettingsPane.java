@@ -8,6 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.ui.HyperlinkLabel;
 import jd.ide.intellij.CachingJavaDecompilerService;
+import jd.ide.intellij.IdeaDecompilerAccess;
 import jd.ide.intellij.JavaDecompilerRefreshSupportService;
 
 import javax.swing.*;
@@ -35,6 +36,7 @@ public class JDPluginSettingsPane {
     private JCheckBox showMetadataCheckBox;
     private JFormattedTextField tabSizeTextField;
     private JButton copyFromProjectCodeStyle;
+    private JCheckBox useIdeaDecompiler;
     // escape unicode, omit this, default constructor fields are left here for further
     // examination, they have been removed from the .form file
     // private JCheckBox escapeUnicodeCharactersCheckBox;
@@ -54,12 +56,24 @@ public class JDPluginSettingsPane {
                 tabSizeTextField.setValue(indent_size);
             }
         });
+
+        IdeaDecompilerAccess.tryGetIdeaDecompiler()
+                            .ifPresentOrElse(
+                                    d -> {
+                                        useIdeaDecompiler.addMouseListener(itemListener);
+                                    }, () -> {
+                                        useIdeaDecompiler.setSelected(false);
+                                        useIdeaDecompiler.setEnabled(false);
+                                    });
+
+
 //        escapeUnicodeCharactersCheckBox.addMouseListener(itemListener);
 //        omitPrefixThisCheckBox.addMouseListener(itemListener);
 //        showDefaultConstructorCheckBox.addMouseListener(itemListener);
     }
 
     public void storeDataTo(JDPluginSettings jdPluginSettings) {
+        jdPluginSettings.setUseIdeaDecompiler(useIdeaDecompiler.isSelected());
         jdPluginSettings.setShowMetadata(showMetadataCheckBox.isSelected());
         final var tabSizeValue = tabSizeTextField.getValue();
         if (Integer.class.equals(tabSizeValue.getClass())) {
@@ -76,6 +90,7 @@ public class JDPluginSettingsPane {
     }
 
     public void readDataFrom(JDPluginSettings jdPluginSettings) {
+        useIdeaDecompiler.setSelected(jdPluginSettings.isUseIdeaDecompiler());
         showMetadataCheckBox.setSelected(jdPluginSettings.isShowMetadata());
         tabSizeTextField.setValue(jdPluginSettings.getTabSize());
 //        escapeUnicodeCharactersCheckBox.setSelected(jdPluginComponent.isEscapeUnicodeCharactersEnabled());

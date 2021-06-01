@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.JarURLConnection;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
@@ -39,22 +38,16 @@ public class JavaDecompiler {
         final String clazzInternalName = inferInternalClassName(file);
         Loader ijLoader = new VirtualFileLoader(file, clazzInternalName);
 
-        final var instance = JDPluginSettings.getInstance();
-
-//        FileDocumentManager.getInstance().getDocument()
-//        ProjectManager.getInstance().
-//        CodeStyleSettingsManager.getInstance(project).getCurrentSettings();
-
         SimpleDecompiledSourcePrinter printer = new SimpleDecompiledSourcePrinter(
                 file,
                 JDPluginSettings.getInstance().isShowMetadata(),
                 JDPluginSettings.getInstance().getTabSize()
         );
 
-        Map<String, Object> configuration = new HashMap<>();
-        configuration.put("realignLineNumbers", true);
-
-        JD.decompile(ijLoader, printer, clazzInternalName, configuration);
+        JD.decompile(ijLoader,
+                     printer,
+                     clazzInternalName,
+                     Map.of("realignLineNumbers", true));
 
         return printer.toString();
     }

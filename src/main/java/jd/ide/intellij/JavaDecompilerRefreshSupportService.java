@@ -26,7 +26,7 @@ public class JavaDecompilerRefreshSupportService {
             new ConcurrentHashMap<>();
 
     private final List<JavaDecompilerRefreshListener> refreshListeners =
-            new CopyOnWriteArrayList<JavaDecompilerRefreshListener>();
+            new CopyOnWriteArrayList<>();
 
     public void markDecompiled(VirtualFile virtualFile) {
         decompiledFiles.put(new WeakReference<>(virtualFile), Clock.getTime());

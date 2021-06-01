@@ -22,6 +22,7 @@ import org.jetbrains.annotations.NotNull;
 public class JDPluginSettings implements PersistentStateComponent<JDPluginSettings> {
     private boolean showMetadata = true;
     private int tabSize = 4;
+    private boolean useIdeaDecompiler = false;
 //    private boolean escapeUnicodeCharactersEnabled;
 //    private boolean omitPrefixThisEnabled;
 //    private boolean showDefaultConstructorEnabled;
@@ -51,9 +52,16 @@ public class JDPluginSettings implements PersistentStateComponent<JDPluginSettin
     public int getTabSize() {
         return tabSize;
     }
-
     public void setTabSize(int tabSize) {
         this.tabSize = tabSize;
+    }
+
+    public void setUseIdeaDecompiler(boolean useIdeaDecompiler) {
+        this.useIdeaDecompiler = useIdeaDecompiler;
+    }
+
+    public boolean isUseIdeaDecompiler() {
+        return useIdeaDecompiler;
     }
 
 //    public boolean isEscapeUnicodeCharactersEnabled() {
