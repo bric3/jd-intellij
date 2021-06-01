@@ -1,5 +1,5 @@
 <idea-plugin>
-    <name>Java Decompiler IntelliJ Plugin</name>
+    <name>Java Decompiler</name>
     <description><![CDATA[
         JD-IntelliJ is a plug-in for the IntelliJ IDEA platform.
         It allows you to display all the Java sources during your debugging process, even if you do not have them all.
@@ -18,7 +18,7 @@
     <depends>com.intellij.modules.java</depends>
 
     <actions>
-        <!-- Add your actions here -->
+        <!-- Actions here -->
     </actions>
 
     <extensions defaultExtensionNs="com.intellij">
@@ -40,4 +40,8 @@
 
         <!--<iconProvider implementation="jd.ide.intellij.JavaDecompilerIconProvider"/>-->
     </extensions>
+
+    <applicationListeners>
+        <listener class="jd.ide.intellij.DynamicListener" topic="com.intellij.ide.plugins.DynamicPluginListener"/>
+    </applicationListeners>
 </idea-plugin>
