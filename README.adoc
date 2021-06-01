@@ -1,28 +1,25 @@
 = JD-IntelliJ
 
-Install https://plugins.jetbrains.com/plugin/7100[JD-IntelliJ plugin] via the
-JetBrains plugin repository.
+Install https://plugins.jetbrains.com/plugin/7100[JD-IntelliJ plugin] via the JetBrains plugin repository.
+
+image:screenshot.png[JD-IntelliJ in action]
 
 == Presentation
 
 *JD-IntelliJ* is a plug-in for *IntelliJ IDEA*, initiated by *Brice Dutheil*.
-It uses the *Java Decompiler* binaries It allows you to display all the Java
-sources during your debugging process, even if you do not have them all.
+It uses the *Java Decompiler* binaries It allows you to display all the Java sources during your debugging process, even if you do not have them all.
 Currently, the project is under development.
 
 Your contributions are welcome.
 
-Also note that it is possible to decompile jars/classes with *JD-GUI*
-(can be found on the official site).
+Also note that it is possible to decompile jars/classes with *JD-GUI* (can be found on the official site).
 
 == Warning
 
-This plugin is currently partly maintained, due to lack of time and,
-due to the the availability of a decompiler within https://www.jetbrains.com/idea/features/#built-in-tools[IntelliJ IDEA itself]
+This plugin is currently partly maintained, due to lack of time and, due to the availability of a decompiler within https://www.jetbrains.com/idea/features/#built-in-tools[IntelliJ IDEA itself]
 (even the https://www.jetbrains.com/idea/features/editions_comparison_matrix.html[community version]).
 
-IntelliJ IDEA's decompiler is based on a fork of Fernflower
-(See https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler[here]).
+IntelliJ IDEA's decompiler is based on a fork of Fernflower (See https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler[here]).
 
 == Notes
 
@@ -30,10 +27,6 @@ It is the official https://github.com/java-decompiler/jd-core[*Java Decompiler*]
 
 Last but not the least, all the credit for decompilation stuff must go to
 *Emmanuel Dupuy*, who is the author of Java Decompiler.
-
-== Screenshots
-
-image:http://jd.benow.ca/img/screenshot16.png[JD-IntelliJ in action]
 
 == Installation
 
@@ -47,7 +40,7 @@ It is also possible to install JD-IntelliJ from a file (if compiled from the sou
 to the _Settings_ dialog window &gt; _Plugins_ pane &gt; _Install Plugin from disk…_
 
 *Don't download from Github!* The Github link is the zipped git repository, not the
-actual plugin. You can find the latest version on the
+actual plugin.You can find the latest version on the
 https://plugins.jetbrains.com/plugin/7100[IntelliJ IDEA plugin site].
 
 == Development
