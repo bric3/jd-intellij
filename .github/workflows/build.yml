@@ -29,8 +29,8 @@ jobs:
         uses: gradle/wrapper-validation-action@v1.0.3
 
   build:
-    needs: gradleValidation
     name: Build plugin
+    needs: gradleValidation
     runs-on: ubuntu-latest
 
     steps:
@@ -66,8 +66,8 @@ jobs:
 
 
   verify:
-    needs: build
     name: Verify Plugin
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
