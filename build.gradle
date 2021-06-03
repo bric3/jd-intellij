@@ -67,6 +67,10 @@ patchPluginXml {
 //  pluginDescription "${file('src/main/resources/META-INF/description.html').getText('UTF-8')}"
 }
 
+runPluginVerifier {
+    ideVersions = project.pluginVerifierIdeVersions.tokenize(',')
+}
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(11))
