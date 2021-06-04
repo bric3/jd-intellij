@@ -1,16 +1,19 @@
 import org.jsoup.Jsoup
+import pl.allegro.tech.build.axion.release.domain.TagNameSerializer
 
 plugins {
     id("java")
     id("org.jetbrains.intellij") version("1.0")
     id("org.asciidoctor.jvm.convert") version("3.3.2")
     id("com.github.ben-manes.versions") version("0.39.0")
+    id("pl.allegro.tech.build.axion-release") version("1.13.2")
+    id("org.barfuin.gradle.taskinfo") version ("1.1.1")
 }
 
 group 'com.github.bric3'
-version '0.8.0-SNAPSHOT'
 
 repositories {
+    //noinspection JCenterRepository
     jcenter()  // for jd-core
 }
 
@@ -46,7 +49,7 @@ intellij {
 
 patchPluginXml {
     dependsOn asciidoctor
-    version = project.version
+    version = providers.provider({ scmVersion.version })
     untilBuild = null
     changeNotes = providers.provider({
         Jsoup.parse(file('build/docs/CHANGELOG.html').getText('UTF-8'))
@@ -67,6 +70,15 @@ patchPluginXml {
 //  pluginDescription "${file('src/main/resources/META-INF/description.html').getText('UTF-8')}"
 }
 
+runPluginVerifier {
+    ideVersions = project.pluginVerifierIdeVersions.tokenize(',')
+}
+
+publishPlugin {
+    token = System.getenv('PUBLISH_TOKEN')
+    channels = ['eap']
+}
+
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(11))
@@ -75,4 +87,23 @@ java {
 
 tasks.withType(JavaCompile) {
     options.release.set(11)
+}
+
+scmVersion {
+    nextVersion {
+        suffix = 'alpha'
+        separator = '-'
+    }
+
+    tag {
+        deserialize = { rules, position, tagName ->
+            TagNameSerializer.DEFAULT.deserializer.call(
+                    rules,
+                    position,
+                    tagName.matches("v\\d.\\d") ? "$tagName.0" : tagName
+            )
+        }
+    }
+
+    versionIncrementer('incrementPatch')
 }
