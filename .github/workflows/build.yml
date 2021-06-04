@@ -63,12 +63,12 @@ jobs:
       - name: Upload artifact for next job
         uses: actions/upload-artifact@v2
         with:
-          name: Jd-intellij-plugin-artifact
+          name: jd-intellij-plugin-artifact
           path: ./build/distributions/${{ needs.build.outputs.artifact }}
 
 
   verify:
-    name: Verify Plugin
+    name: Plugin compatibility verification
     needs: build
     runs-on: ubuntu-latest
 
