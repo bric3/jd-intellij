@@ -31,7 +31,7 @@ test {
 }
 
 asciidoctor {
-    sourceDir file('.')
+    // note revnumber is value is taken from project.version
     sources {
         include 'CHANGELOG.adoc'
     }
@@ -61,7 +61,7 @@ patchPluginXml {
                 .map { e ->
                     e.html().replaceAll('\\(preview, available from GitHub releases\\)', '')
                             .replaceAll('#([0-9]+)', '<a href="https://github.com/bric3/jd-intellij/issues/$1">#$1</a>')
-                    // regex for GitHub user names from https://github.com/shinnn/github-username-regex
+                            // regex for GitHub user names from https://github.com/shinnn/github-username-regex
                             .replaceAll('(?i)@([a-z\\d](?:[a-z\\d]|-(?=[a-z\\d])){0,38})', '<a href="https://github.com/$1">@$1</a>')
                 }
                 .collect()
@@ -106,4 +106,10 @@ scmVersion {
     }
 
     versionIncrementer('incrementPatch')
+
+    afterEvaluate {
+        // assign the scm version to the project version once the
+        // scmVersion plugin is configured
+        project.version = scmVersion.version
+    }
 }
