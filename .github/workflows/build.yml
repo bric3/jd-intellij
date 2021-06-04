@@ -60,11 +60,12 @@ jobs:
       - name: Build Java Decompiler Plugin with Gradle
         run: ./gradlew check verifyPlugin buildPlugin
 
-      - name: Upload artifact for next job
-        uses: actions/upload-artifact@v2
-        with:
-          name: jd-intellij-plugin-artifact
-          path: ./build/distributions/${{ needs.build.outputs.artifact }}
+  # commented as non-needed for the current state of this workflow
+  #      - name: Upload artifact for next job
+  #        uses: actions/upload-artifact@v2
+  #        with:
+  #          name: jd-intellij-plugin-artifact
+  #          path: ./build/distributions/${{ needs.build.outputs.artifact }}
 
 
   verify:
