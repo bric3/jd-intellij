@@ -1,3 +1,5 @@
+image::https://github.com/bric3/jd-intellij/actions/workflows/build.yml/badge.svg[link="https://github.com/bric3/jd-intellij/actions/workflows/build.yml", alt="Build plugin status"]
+
 = JD-IntelliJ
 
 Install https://plugins.jetbrains.com/plugin/7100[JD-IntelliJ plugin] via the JetBrains plugin repository.
