@@ -1,46 +1,30 @@
+= JD-IntelliJ
+
 image::https://github.com/bric3/jd-intellij/actions/workflows/build.yml/badge.svg[link="https://github.com/bric3/jd-intellij/actions/workflows/build.yml", alt="Build plugin status"]
 
-= JD-IntelliJ
+*JD-IntelliJ* is a Java Decompiler for *IntelliJ IDEA*
 
 Install https://plugins.jetbrains.com/plugin/7100[JD-IntelliJ plugin] via the JetBrains plugin repository.
 
 image:screenshot.png[JD-IntelliJ in action]
 
-== Presentation
+https://github.com/java-decompiler/jd-core[JD-Core] is the engine that powers the decompilation.
 
-*JD-IntelliJ* is a plug-in for *IntelliJ IDEA*, initiated by *Brice Dutheil*.
-It uses the *Java Decompiler* binaries It allows you to display all the Java sources during your debugging process, even if you do not have them all.
-Currently, the project is under development.
-
-Your contributions are welcome.
-
-Also note that it is possible to decompile jars/classes with *JD-GUI* (can be found on the official site).
-
-== Warning
-
-This plugin is currently partly maintained, due to lack of time and, due to the availability of a decompiler within https://www.jetbrains.com/idea/features/#built-in-tools[IntelliJ IDEA itself]
-(even the https://www.jetbrains.com/idea/features/editions_comparison_matrix.html[community version]).
-
-IntelliJ IDEA's decompiler is based on a fork of Fernflower (See https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler[here]).
-
-== Notes
-
-It is the official https://github.com/java-decompiler/jd-core[*Java Decompiler*] plugin for IntelliJ IDEA.
-
-Last but not the least, all the credit for decompilation stuff must go to
-*Emmanuel Dupuy*, who is the author of Java Decompiler.
 
 == Installation
 
-.From the JetBrains repository
-The plugin is published on the public JetBrains IntelliJ repository, to install it go to
-the _Settings_ dialog window &gt; _Plugins_ pane &gt; _Browse Repositories_ dialog
-window, then search for _Java Decompiler_.
+The plugin is available on the https://plugins.jetbrains.com/plugin/7100[JetBrains IntelliJ IDEA Marketplace], to install it go to the _Settings_ dialog window &gt; _Plugins_ pane &gt;
+_Browse Repositories_ dialog window, then search for _Java Decompiler_.
 
-.From the zip archive
-It is also possible to install JD-IntelliJ from a file (if compiled from the source),
-to the _Settings_ dialog window &gt; _Plugins_ pane &gt; _Install Plugin from disk…_
+_If you are an early adopter you might want to try the EAPs channel, simply add the following `https://plugins.jetbrains.com/plugins/list?channel=eap&pluginId=7100` plugin repository URL_
 
-*Don't download from Github!* The Github link is the zipped git repository, not the
-actual plugin.You can find the latest version on the
-https://plugins.jetbrains.com/plugin/7100[IntelliJ IDEA plugin site].
+== Warning
+
+This plugin is maintained as a best effort, if you find bug it's likely this project, or https://github.com/java-decompiler/jd-core[JD-Core] would welcome your contributions.
+
+There's several reasons:
+
+- lack of spare time (kids family, other hobbies, other...),
+- IJ now ships with a fairly decent decompiler within https://www.jetbrains.com/idea/features/#built-in-tools[IntelliJ IDEA itself]
+(even the https://www.jetbrains.com/idea/features/editions_comparison_matrix.html[community version]).
+It is based on a fork of Fernflower (See https://github.com/JetBrains/intellij-community/tree/master/plugins/java-decompiler[here]).
