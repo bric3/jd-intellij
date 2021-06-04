@@ -42,6 +42,8 @@ jobs:
 
       - name: Fetch sources
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
       - name: Restore gradle cache
         uses: actions/cache@v2
@@ -49,7 +51,7 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
 
-      - name: Restore Gradle wrapper cache
+      - name: Restore gradle wrapper cache
         uses: actions/cache@v2
         with:
           path: ~/.gradle/wrapper
@@ -78,6 +80,8 @@ jobs:
 
       - name: Fetch Sources
         uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.release.tag_name }}
 
       - name: Restore gradle cache
         uses: actions/cache@v2
@@ -85,7 +89,7 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-caches-${{ hashFiles('**/*.gradle', '**/*.gradle.kts', 'gradle.properties') }}
 
-      - name: Restore Gradle wrapper cache
+      - name: Restore gradle wrapper cache
         uses: actions/cache@v2
         with:
           path: ~/.gradle/wrapper
