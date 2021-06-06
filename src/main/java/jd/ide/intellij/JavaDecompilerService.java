@@ -6,6 +6,10 @@ import com.intellij.psi.impl.compiled.ClsFileImpl;
 import jd.ide.intellij.config.JDPluginSettings;
 import jd.ide.intellij.decompiler.JavaDecompiler;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.regex.Pattern;
 
 /**
@@ -38,6 +42,9 @@ public class JavaDecompilerService {
 
         try {
             var jdDecompiled = javaDecompiler.decompile(file);
+
+//            dumpDecompiledContent_for_InvalidMirrorException(file, jdDecompiled);
+
             if (validContent(jdDecompiled)) {
                 return jdDecompiled;
             }
@@ -47,6 +54,16 @@ public class JavaDecompilerService {
 
         // fallback
         return ClsFileImpl.decompile(file);
+    }
+
+    @SuppressWarnings("unused")
+    private void dumpDecompiledContent_for_InvalidMirrorException(VirtualFile file, CharSequence jdDecompiled) throws IOException {
+        Files.writeString(Path.of("/Users/brice/opensource/jd-intellij", file.getNameWithoutExtension() + ".jd.java"),
+                          jdDecompiled,
+                          StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+        Files.writeString(Path.of("/Users/brice/opensource/jd-intellij", file.getNameWithoutExtension() + ".cls.java"),
+                          ClsFileImpl.decompile(file),
+                          StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
     public String getVersion() {

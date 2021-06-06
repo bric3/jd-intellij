@@ -5,8 +5,12 @@
         Open a Java class file to see the decompiled code.
 
         It is based on the famous <a href="https://github.com/java-decompiler/jd-gui">JD-GUI</a>'s
-        core library <a href="https://github.com/java-decompiler/jd-core/pulls">JD-Core</a>.
-    ]]></description>
+        core library <a href="https://github.com/java-decompiler/jd-core">JD-Core</a>.
+
+        <em>Note: Differences in the decompiled class structure, like the omission of default constructors in JD,
+            may confuse IntelliJ IDEA and provoke <code>PluginException</code> / <code>InvalidMirrorException</code>.
+            Unfortunately some of these error cannot be fixed on JD-Core side</em>
+        ]]></description>
     <id>jd-intellij</id>
     <version>@CURRENT_VERSION@</version>
     <vendor url="https://github.com/bric3/jd-intellij">Brice Dutheil</vendor>
