@@ -43,13 +43,14 @@ intellij {
     version = '2021.1'
     plugins = ['com.intellij.java']
     pluginName = 'jd-intellij'
-//  updateSinceUntilBuild false
+//    updateSinceUntilBuild = false
+//    sameSinceUntilBuild = true    // eg: since-build="211.6693" until-build="211.6693.*"
 }
 
 patchPluginXml {
     dependsOn asciidoctor
     version = providers.provider({ scmVersion.version })
-    untilBuild = null
+    untilBuild = providers.provider({ null }) // removes until-build in plugin.xml
     changeNotes = providers.provider({
         Jsoup.parse(file('build/docs/CHANGELOG.html'), 'UTF-8')
                 .select("#releasenotes")

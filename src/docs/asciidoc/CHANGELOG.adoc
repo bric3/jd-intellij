@@ -7,6 +7,10 @@ ifndef::revnumber[:revnumber: Work in progress]
 // revnumber is the current project version
 === {revnumber}
 
+- Don't restrict IDE compatibility.
+
+=== 0.8.0
+
 - Switch the build to gradle
 - Support IJ 2021.1
 - Upgrade support to JD-Core 1.1.3 (Support up to Java 12)
