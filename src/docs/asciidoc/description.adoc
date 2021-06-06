@@ -1,0 +1,11 @@
+
+[[description]]
+== Description
+
+**JD-IntelliJ** is a Java decompiler for the IntelliJ IDEA.
+Open a Java class file to see the decompiled code.
+
+It is based on the famous https://github.com/java-decompiler/jd-gui[JD-GUI]'s core library https://github.com/java-decompiler/jd-core[JD-Core].
+
+_Note: Differences in the decompiled class structure, like the omission of default constructors in JD, may confuse IntelliJ IDEA and provoke `PluginException` / `InvalidMirrorException`.
+Unfortunately some of these errors cannot be fixed on JD-Core side._

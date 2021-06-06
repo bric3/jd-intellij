@@ -33,6 +33,7 @@ asciidoctor {
     // note revnumber is value is taken from project.version
     sources {
         include 'CHANGELOG.adoc'
+        include 'description.adoc'
     }
     outputDir file('build/docs')
 }
@@ -68,6 +69,17 @@ patchPluginXml {
                 .join("\n")
     })
 //  pluginDescription "${file('src/main/resources/META-INF/description.html').getText('UTF-8')}"
+    pluginDescription = providers.provider({
+        Jsoup.parse(file('build/docs/description.html'), 'UTF-8')
+                .select("#description")
+                .get(0)
+                .nextElementSibling()
+                .children()
+                .stream()
+                .collect()
+                .join("\n")
+
+    })
 }
 
 runPluginVerifier {
