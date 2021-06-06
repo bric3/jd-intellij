@@ -7,7 +7,6 @@ plugins {
     id("org.asciidoctor.jvm.convert") version("3.3.2")
     id("com.github.ben-manes.versions") version("0.39.0")
     id("pl.allegro.tech.build.axion-release") version("1.13.2")
-    id("org.barfuin.gradle.taskinfo") version ("1.1.1")
 }
 
 group 'com.github.bric3'
@@ -52,7 +51,7 @@ patchPluginXml {
     version = providers.provider({ scmVersion.version })
     untilBuild = null
     changeNotes = providers.provider({
-        Jsoup.parse(file('build/docs/CHANGELOG.html').getText('UTF-8'))
+        Jsoup.parse(file('build/docs/CHANGELOG.html'), 'UTF-8')
                 .select("#releasenotes")
                 .get(0)
                 .nextElementSibling()
